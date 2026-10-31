@@ -111,12 +111,12 @@
         </section>
 <section class="seccion catalogo" id="catalogo">
 
-    <div class="categorias-catalogo">
-        <a href="#daypass">Day Pass</a>
-        <a href="#tours">Tours</a>
-        <a href="#actividades">Actividades</a>
-    </div>
-
+<div class="categorias-catalogo">
+    <a href="#" data-categoria="daypass">Day Pass</a>
+    <a href="#" data-categoria="tours">Tours</a>
+    <a href="#" data-categoria="actividades">Actividades</a>
+</div>
+    
     <div class="contenedor">
 
 <span class="etiqueta">DAY PASS · TOURS · ACTIVIDADES</span>
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
         boton.addEventListener("click", function (evento) {
             evento.preventDefault();
 
-            const categoria = boton.getAttribute("href").replace("#", "");
+            const categoria = boton.getAttribute("data-categoria");
 
             productos.forEach(function (producto) {
 
