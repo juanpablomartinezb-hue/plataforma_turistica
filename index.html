@@ -237,8 +237,7 @@ destinosMenu.forEach(function (enlace) {
 
     enlace.addEventListener("click", function (evento) {
         evento.preventDefault();
-        alert("Clic detectado en: " + enlace.textContent);
-
+        
         const destino = enlace.getAttribute("data-destino");
         const categoria = enlace.getAttribute("data-categoria");
 
