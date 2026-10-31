@@ -600,3 +600,262 @@ footer small {
 .menu-desplegable:hover .submenu {
     display: block;
 }
+
+/* ========================================
+   FICHA DE PRODUCTO EXPLORA
+======================================== */
+
+.detalle-producto {
+    padding: 35px 0 70px;
+    background: #ffffff;
+}
+
+.ruta {
+    color: #87949b;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.producto-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.producto-encabezado h1 {
+    color: #163d50;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.ubicacion-producto {
+    color: #788891;
+    font-size: 14px;
+}
+
+.calificacion-producto {
+    color: #788891;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* GALERÍA */
+
+.galeria-producto {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.galeria-principal,
+.galeria-miniaturas {
+    min-width: 0;
+}
+
+.foto-principal {
+    height: 390px;
+    margin-bottom: 0;
+    border-radius: 12px;
+}
+
+.galeria-miniaturas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+}
+
+.foto-miniatura {
+    min-height: 120px;
+    background: #eaf2f3;
+    border-radius: 10px;
+}
+
+/* CONTENIDO Y RESERVACIÓN */
+
+.detalle-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    gap: 45px;
+    align-items: start;
+}
+
+.informacion-producto {
+    min-width: 0;
+}
+
+.navegacion-detalle {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    border-bottom: 1px solid #e8edef;
+    padding-bottom: 17px;
+    margin-bottom: 35px;
+}
+
+.navegacion-detalle a {
+    color: #526773;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navegacion-detalle a:hover {
+    color: #0d9f98;
+}
+
+.informacion-producto section {
+    margin-bottom: 38px;
+}
+
+.informacion-producto h2 {
+    color: #163d50;
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.informacion-producto h3 {
+    color: #163d50;
+    font-size: 17px;
+    margin: 22px 0 10px;
+}
+
+.informacion-producto p,
+.informacion-producto li {
+    color: #687983;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.informacion-producto ul {
+    padding-left: 22px;
+}
+
+.mapa-producto {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2f7f7;
+    color: #84939d;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 20px;
+}
+
+/* PANEL DE RESERVACIÓN */
+
+.reserva-producto {
+    position: sticky;
+    top: 25px;
+    padding: 25px;
+    border: 1px solid #e5ebed;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(18, 59, 80, 0.08);
+}
+
+.reserva-producto > span {
+    color: #788891;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.precio-detalle {
+    color: #0d9f98;
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+.reserva-producto small {
+    color: #87949b;
+    font-size: 12px;
+}
+
+.separador {
+    height: 1px;
+    background: #e8edef;
+    margin: 22px 0;
+}
+
+.reserva-producto h3 {
+    color: #163d50;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.reserva-producto p {
+    color: #788891;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.boton-reserva {
+    width: 100%;
+    border: none;
+    border-radius: 7px;
+    padding: 14px;
+    background: #dce6e8;
+    color: #71818c;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ADAPTACIÓN PARA TABLET Y CELULAR */
+
+@media (max-width: 800px) {
+
+    .detalle-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .reserva-producto {
+        position: static;
+    }
+
+    .galeria-producto {
+        grid-template-columns: 1fr;
+    }
+
+    .foto-principal {
+        height: 320px;
+    }
+
+    .galeria-miniaturas {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 100px;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .producto-encabezado {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .foto-principal {
+        height: 240px;
+    }
+
+    .galeria-miniaturas {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 90px);
+    }
+
+    .navegacion-detalle {
+        gap: 15px;
+    }
+
+    .navegacion-detalle a {
+        font-size: 12px;
+    }
+
+}
