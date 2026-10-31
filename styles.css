@@ -249,7 +249,31 @@ nav a:hover {
 .experiencia {
     padding: 35px;
 }
+.experiencia {
+    position: relative;
+}
 
+.experiencia::before {
+    content: "";
+    display: block;
+    height: 190px;
+    margin: -35px -35px 25px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 14px 14px 0 0;
+}
+
+.experiencia:nth-child(1)::before {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)),
+        url("https://images.pexels.com/photos/6840005/pexels-photo-6840005.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
+
+.experiencia:nth-child(2)::before {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)),
+        url("https://images.pexels.com/photos/19926773/pexels-photo-19926773/free-photo-of-a-boat-is-docked-on-the-beach-near-a-beach.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
 .icono {
     font-size: 35px;
     color: #0da59d;
