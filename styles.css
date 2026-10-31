@@ -1,1 +1,376 @@
-body { font-family: Arial, sans-serif; margin: 40 px; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #263746;
+    background: #ffffff;
+    line-height: 1.6;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1180px;
+    margin: auto;
+}
+
+/* ENCABEZADO */
+
+.encabezado {
+    background: #ffffff;
+    padding: 20px 0;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+}
+
+.navegacion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    color: #123b50;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #10a9a0;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #425563;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #10a9a0;
+}
+
+.acceso {
+    background: #0d9f98;
+    color: white;
+    text-decoration: none;
+    padding: 11px 19px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* PORTADA */
+
+.portada {
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    background:
+        linear-gradient(90deg, rgba(8, 39, 55, 0.92), rgba(8, 39, 55, 0.35)),
+        linear-gradient(135deg, #087f91, #19b7aa, #80d6c6);
+    color: white;
+    padding: 80px 5%;
+}
+
+.contenido-portada {
+    max-width: 850px;
+    margin: auto;
+    width: 100%;
+}
+
+.etiqueta {
+    display: inline-block;
+    color: #0eaaa0;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.portada .etiqueta {
+    color: #a7f1e5;
+}
+
+.portada h1 {
+    font-size: clamp(38px, 6vw, 62px);
+    line-height: 1.12;
+    max-width: 750px;
+    margin-bottom: 20px;
+}
+
+.portada p {
+    max-width: 600px;
+    font-size: 18px;
+    color: #edfafa;
+    margin-bottom: 35px;
+}
+
+/* BUSCADOR VISUAL */
+
+.buscador {
+    background: white;
+    color: #263746;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    max-width: 780px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.buscador div {
+    flex: 1;
+    padding: 5px 15px;
+    border-right: 1px solid #e3e9ed;
+}
+
+.buscador small {
+    display: block;
+    color: #84939d;
+    font-size: 12px;
+}
+
+.buscador strong {
+    font-size: 14px;
+}
+
+.buscador a {
+    background: #0da59d;
+    color: white;
+    text-decoration: none;
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* SECCIONES */
+
+.seccion {
+    padding: 85px 0;
+}
+
+.seccion h2 {
+    font-size: 35px;
+    color: #163d50;
+    margin-bottom: 10px;
+}
+
+.introduccion {
+    color: #71818c;
+    margin-bottom: 35px;
+}
+
+/* TARJETAS */
+
+.rejilla {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.tarjeta {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(18, 59, 80, 0.08);
+}
+
+.destino {
+    padding-bottom: 22px;
+}
+
+.imagen {
+    height: 210px;
+    background-size: cover;
+    background-position: center;
+}
+
+.cancun {
+    background: linear-gradient(135deg, #087c9a, #68d5d0);
+}
+
+.playa {
+    background: linear-gradient(135deg, #e2a85b, #f1d7a1);
+}
+
+.cabos {
+    background: linear-gradient(135deg, #b56d46, #e5b17b);
+}
+
+.destino h3,
+.destino p {
+    margin-left: 22px;
+    margin-right: 22px;
+}
+
+.destino h3 {
+    margin-top: 17px;
+    color: #163d50;
+    font-size: 20px;
+}
+
+.destino p {
+    margin-top: 5px;
+    color: #788891;
+    font-size: 14px;
+}
+
+/* EXPERIENCIAS */
+
+.experiencias {
+    background: #f2f8f8;
+}
+
+.dos-columnas {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.experiencia {
+    padding: 35px;
+}
+
+.icono {
+    font-size: 35px;
+    color: #0da59d;
+    margin-bottom: 12px;
+}
+
+.experiencia h3 {
+    color: #163d50;
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.experiencia p {
+    color: #71818c;
+}
+
+/* AGENCIAS */
+
+.agencias {
+    text-align: center;
+    background: #123b50;
+    color: white;
+}
+
+.agencias h2 {
+    color: white;
+}
+
+.agencias p {
+    max-width: 650px;
+    margin: 15px auto 25px;
+    color: #d3e4e8;
+}
+
+.agencias .etiqueta {
+    color: #8be0d4;
+}
+
+.aviso {
+    display: inline-block;
+    background: #0da59d;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* PIE DE PÁGINA */
+
+footer {
+    background: #0b2c3c;
+    color: white;
+    text-align: center;
+    padding: 35px 0;
+}
+
+footer strong {
+    font-size: 23px;
+    letter-spacing: 1px;
+}
+
+footer p {
+    color: #c1d5dc;
+    margin: 5px 0;
+}
+
+footer small {
+    color: #8da9b4;
+}
+
+/* ADAPTACIÓN A CELULARES */
+
+@media (max-width: 800px) {
+
+    .navegacion {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .rejilla {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .buscador {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .rejilla,
+    .dos-columnas {
+        grid-template-columns: 1fr;
+    }
+
+    .portada {
+        padding: 65px 5%;
+    }
+
+    .portada h1 {
+        font-size: 38px;
+    }
+
+    .buscador {
+        display: block;
+    }
+
+    .buscador div {
+        border-right: none;
+        border-bottom: 1px solid #e3e9ed;
+        padding: 12px;
+    }
+
+    .buscador a {
+        display: block;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .seccion h2 {
+        font-size: 29px;
+    }
+}
