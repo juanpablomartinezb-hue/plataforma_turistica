@@ -673,8 +673,12 @@ footer small {
 .menu-desplegable {
     position: relative;
     display: inline-block;
+    z-index: 10001;
 }
 
+.menu-desplegable:hover {
+    z-index: 10002;
+}
 .submenu {
     display: none;
     position: absolute;
