@@ -401,6 +401,7 @@ footer small {
         text-align: center;
         margin-top: 12px;
     }
+
 /* CATÁLOGO DE EXPERIENCIAS */
 
 .catalogo {
@@ -514,9 +515,5 @@ footer small {
 
     .producto-info {
         padding: 20px;
-    }
-}
-    .seccion h2 {
-        font-size: 29px;
     }
 }
