@@ -204,6 +204,45 @@
             <small>Proyecto en desarrollo.</small>
         </div>
     </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const botones = document.querySelectorAll(".categorias-catalogo a");
+    const productos = document.querySelectorAll(".producto");
+
+    botones.forEach(function (boton) {
+
+        boton.addEventListener("click", function (evento) {
+            evento.preventDefault();
+
+            const categoria = boton.getAttribute("href").replace("#", "");
+
+            productos.forEach(function (producto) {
+
+                const categorias = producto.getAttribute("data-categorias").split(" ");
+
+                if (categorias.includes(categoria)) {
+                    producto.style.display = "block";
+                } else {
+                    producto.style.display = "none";
+                }
+
+            });
+
+            botones.forEach(function (b) {
+                b.style.background = "white";
+                b.style.color = "#163d50";
+            });
+
+            boton.style.background = "#0d9f98";
+            boton.style.color = "white";
+
+        });
+
+    });
+
+});
+</script>
 
 </body>
 </html>
