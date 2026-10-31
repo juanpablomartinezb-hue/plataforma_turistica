@@ -225,6 +225,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const botones = document.querySelectorAll(".categorias-catalogo a");
     const productos = document.querySelectorAll(".producto");
+    const destinosMenu = document.querySelectorAll(
+    ".submenu a[data-destino][data-categoria]"
+);
+
+destinosMenu.forEach(function (enlace) {
+
+    enlace.addEventListener("click", function (evento) {
+        evento.preventDefault();
+
+        const destino = enlace.getAttribute("data-destino");
+        const categoria = enlace.getAttribute("data-categoria");
+
+        productos.forEach(function (producto) {
+
+            const categorias = producto.getAttribute("data-categorias").split(" ");
+            const destinoProducto = producto.getAttribute("data-destino");
+
+            if (categorias.includes(categoria) && destinoProducto === destino) {
+                producto.style.display = "block";
+            } else {
+                producto.style.display = "none";
+            }
+
+        });
+
+        const primerProducto = document.querySelector(
+            '.producto[style*="display: block"]'
+        );
+
+        if (primerProducto) {
+            primerProducto.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+
+    });
+
+});
 
     botones.forEach(function (boton) {
 
