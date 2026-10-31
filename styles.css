@@ -690,20 +690,15 @@ footer small {
 }
 
 .submenu a {
-    position: relative;
-    z-index: 10000;
-    cursor: pointer;
-}
-}
-
-.submenu a {
     display: block;
     padding: 12px 18px;
     color: #163d50;
     text-decoration: none;
     white-space: nowrap;
+    position: relative;
+    z-index: 10000;
+    cursor: pointer;
 }
-
 .submenu a:hover {
     background: #e8f7f6;
     color: #0d9f98;
