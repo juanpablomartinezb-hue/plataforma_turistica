@@ -401,7 +401,121 @@ footer small {
         text-align: center;
         margin-top: 12px;
     }
+/* CATÁLOGO DE EXPERIENCIAS */
 
+.catalogo {
+    background: #ffffff;
+}
+
+.productos {
+    align-items: stretch;
+}
+
+.producto {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(18, 59, 80, 0.10);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 35px rgba(18, 59, 80, 0.16);
+}
+
+.producto-foto {
+    width: 100%;
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+}
+
+.producto-uno {
+    background-image: url("https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
+
+.producto-dos {
+    background-image: url("https://images.pexels.com/photos/163236/luxury-yacht-boat-speed-water-163236.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
+
+.producto-tres {
+    background-image: url("https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
+
+.producto-info {
+    padding: 23px;
+}
+
+.tipo-producto {
+    display: inline-block;
+    color: #0da59d;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.producto-info h3 {
+    color: #163d50;
+    font-size: 19px;
+    margin-bottom: 7px;
+    line-height: 1.35;
+}
+
+.producto-info p {
+    color: #788891;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.precio {
+    border-top: 1px solid #edf1f2;
+    padding-top: 17px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.precio small {
+    color: #788891;
+    font-size: 12px;
+}
+
+.precio strong {
+    color: #0d9f98;
+    font-size: 23px;
+}
+
+.boton-producto {
+    display: block;
+    margin-top: 20px;
+    background: #123b50;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.nota-precios {
+    text-align: center;
+    color: #89979e;
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+@media (max-width: 550px) {
+    .producto-foto {
+        height: 210px;
+    }
+
+    .producto-info {
+        padding: 20px;
+    }
+}
     .seccion h2 {
         font-size: 29px;
     }
