@@ -222,12 +222,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const categorias = producto.getAttribute("data-categorias").split(" ");
 
-                if (categorias.includes(categoria)) {
-                    producto.style.display = "block";
-                } else {
-                    producto.style.display = "none";
-                }
-
+                if (categoria === "todos" || categorias.includes(categoria)) {
+    producto.style.display = "block";
+} else {
+    producto.style.display = "none";
+}
             });
 
             botones.forEach(function (b) {
