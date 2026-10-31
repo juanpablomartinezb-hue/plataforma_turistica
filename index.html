@@ -1,11 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Nuestra Plataforma Turística</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explora | Experiencias Turísticas</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <h1>Nuestra Plataforma Turística</h1>
-    <p>Probando GitHub para guardar avances sin pagar.</p>
+
+    <header class="encabezado">
+        <div class="contenedor navegacion">
+            <div class="logo">EXPLORA<span>.</span></div>
+
+            <nav>
+                <a href="#destinos">Destinos</a>
+                <a href="#daypass">Day Pass</a>
+                <a href="#tours">Tours y actividades</a>
+                <a href="#agencias">Agencias</a>
+            </nav>
+
+            <a class="acceso" href="#agencias">Acceso agencias</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="portada">
+            <div class="contenido-portada">
+                <span class="etiqueta">DESCUBRE · DISFRUTA · VIAJA</span>
+
+                <h1>Tu próxima gran experiencia comienza aquí.</h1>
+
+                <p>
+                    Descubre hoteles, playas, Day Pass, tours y actividades
+                    en los destinos más increíbles de México.
+                </p>
+
+                <div class="buscador">
+                    <div>
+                        <small>¿A dónde quieres ir?</small>
+                        <strong>Elige tu destino</strong>
+                    </div>
+
+                    <div>
+                        <small>¿Qué buscas?</small>
+                        <strong>Day Pass o experiencias</strong>
+                    </div>
+
+                    <a href="#destinos">Explorar</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion" id="destinos">
+            <div class="contenedor">
+                <span class="etiqueta">LUGARES INCREÍBLES</span>
+                <h2>Destinos que te esperan</h2>
+                <p class="introduccion">
+                    Encuentra tu próximo destino y vive algo extraordinario.
+                </p>
+
+                <div class="rejilla">
+                    <article class="tarjeta destino">
+                        <div class="imagen cancun"></div>
+                        <h3>Cancún</h3>
+                        <p>Playas, hoteles y experiencias en el Caribe mexicano.</p>
+                    </article>
+
+                    <article class="tarjeta destino">
+                        <div class="imagen playa"></div>
+                        <h3>Playa del Carmen</h3>
+                        <p>Disfruta la Riviera Maya y sus increíbles atractivos.</p>
+                    </article>
+
+                    <article class="tarjeta destino">
+                        <div class="imagen cabos"></div>
+                        <h3>Los Cabos</h3>
+                        <p>Descubre paisajes, playas y experiencias únicas.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion experiencias" id="daypass">
+            <div class="contenedor">
+                <span class="etiqueta">VIVE EL MOMENTO</span>
+                <h2>Experiencias para disfrutar</h2>
+
+                <div class="rejilla dos-columnas">
+                    <article class="tarjeta experiencia">
+                        <div class="icono">☀</div>
+                        <h3>Day Pass</h3>
+                        <p>
+                            Disfruta un día de alberca, playa, gastronomía
+                            y servicios en hoteles y clubes de playa.
+                        </p>
+                    </article>
+
+                    <article class="tarjeta experiencia" id="tours">
+                        <div class="icono">✦</div>
+                        <h3>Tours y actividades</h3>
+                        <p>
+                            Explora la naturaleza, vive aventuras y descubre
+                            nuevas formas de disfrutar cada destino.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion agencias" id="agencias">
+            <div class="contenedor">
+                <span class="etiqueta">ÁREA PROFESIONAL</span>
+                <h2>¿Eres agente de viajes?</h2>
+                <p>
+                    Estamos construyendo un espacio diseñado para agencias
+                    y profesionales del turismo, con herramientas para
+                    consultar productos y gestionar reservaciones.
+                </p>
+                <span class="aviso">Portal para agencias próximamente</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="contenedor">
+            <strong>EXPLORA.</strong>
+            <p>Descubre México. Vive nuevas experiencias.</p>
+            <small>Proyecto en desarrollo.</small>
+        </div>
+    </footer>
+
 </body>
 </html>
