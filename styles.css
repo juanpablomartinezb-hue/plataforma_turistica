@@ -202,17 +202,22 @@ nav a:hover {
 }
 
 .cancun {
-    background: linear-gradient(135deg, #087c9a, #68d5d0);
+    background-image:
+        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)),
+        url('https://images.pexels.com/photos/17061348/pexels-photo-17061348.jpeg?cs=srgb&dl=pexels-angel-valladares-242487480-17061348.jpg&fm=jpg');
 }
 
 .playa {
-    background: linear-gradient(135deg, #e2a85b, #f1d7a1);
+    background-image:
+        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)),
+        url('https://images.pexels.com/photos/20306170/pexels-photo-20306170.jpeg?cs=srgb&dl=pexels-hugoteconecta-641939723-20306170.jpg&fm=jpg');
 }
 
 .cabos {
-    background: linear-gradient(135deg, #b56d46, #e5b17b);
+    background-image:
+        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)),
+        url('https://images.pexels.com/photos/11128188/pexels-photo-11128188.jpeg?cs=srgb&dl=pexels-salvador-ortegarrieta-177081925-11128188.jpg&fm=jpg');
 }
-
 .destino h3,
 .destino p {
     margin-left: 22px;
