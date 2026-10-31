@@ -230,10 +230,16 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 const catalogo = document.querySelector(".catalogo");
 
-catalogo.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-});
+const primerProducto = document.querySelector(
+    '.producto[style*="display: block"]'
+);
+
+if (primerProducto) {
+    primerProducto.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}           
             botones.forEach(function (b) {
                 b.style.background = "white";
                 b.style.color = "#163d50";
