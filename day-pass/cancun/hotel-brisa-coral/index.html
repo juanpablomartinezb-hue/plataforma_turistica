@@ -219,6 +219,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
 
+if (!contenedorMiniaturas) {
+    console.error("No se encontró el contenedor de miniaturas");
+    return;
+}
     fotosGaleria.forEach(function(foto, indice) {
         const miniatura = document.createElement("div");
 
