@@ -731,6 +731,8 @@ footer small {
 
 .navegacion-detalle a:hover {
     color: #0d9f98;
+    border-bottom: 3px solid #0d9f98;
+    padding-bottom: 8px;
 }
 
 .navegacion-detalle a:hover {
