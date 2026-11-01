@@ -859,3 +859,9 @@ footer small {
     }
 
 }
+
+/* FOTOGRAFÍA HOTEL BRISA CORAL */
+
+.hotel-brisa .foto-principal {
+    background-image: url("https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
