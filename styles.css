@@ -735,8 +735,10 @@ footer small {
     padding-bottom: 8px;
 }
 
-.navegacion-detalle a:hover {
-    color: #0d9f98;
+@media (hover: hover) and (pointer: fine) {
+    .navegacion-detalle a:hover {
+        border-bottom: 3px solid #0d9f98;
+    }
 }
 
 /* SECCIONES DE INFORMACIÓN */
