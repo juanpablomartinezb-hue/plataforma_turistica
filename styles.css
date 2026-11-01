@@ -616,26 +616,41 @@ footer small {
     margin-bottom: 25px;
 }
 
+/* ENCABEZADO DEL PRODUCTO */
+
 .producto-encabezado {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     gap: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #e8edef;
 }
 
 .producto-encabezado h1 {
     color: #163d50;
-    font-size: clamp(28px, 4vw, 38px);
-    line-height: 1.2;
-    margin-bottom: 10px;
+    font-size: clamp(30px, 4vw, 40px);
+    font-weight: 750;
+    line-height: 1.15;
+    margin: 12px 0 10px;
 }
 
 .ubicacion-producto {
     color: #788891;
-    font-size: 14px;
+    font-size: 15px;
+    margin: 0;
 }
 
+.calificacion-producto {
+    color: #526773;
+    background: #f2f7f7;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
 .calificacion-producto {
     color: #788891;
     font-size: 13px;
