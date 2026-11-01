@@ -58,17 +58,25 @@
         <div class="foto-principal" onclick="abrirGaleria(0)"></div>
     </div>
 
-    <div class="galeria-miniaturas">
+    <div id="galeria-miniaturas" class="galeria-miniaturas"></div>
 
-        <div class="foto-miniatura miniatura-brisa-1" onclick="abrirGaleria(1)"></div>
+</section>
 
-        <div class="foto-miniatura miniatura-brisa-2" onclick="abrirGaleria(2)"></div>
+<!-- VISOR DE FOTOGRAFÍAS -->
 
-        <div class="foto-miniatura miniatura-brisa-3" onclick="abrirGaleria(3)"></div>
+<div id="visor-galeria" class="visor-galeria">
 
-        <div class="foto-miniatura miniatura-brisa-4" onclick="abrirGaleria(4)"></div>
+    <button class="cerrar-galeria" onclick="cerrarGaleria()">×</button>
 
-    </div>
+    <button class="flecha-galeria anterior" onclick="cambiarFoto(-1)">&#10094;</button>
+
+    <img id="imagen-ampliada" src="" alt="Fotografía ampliada del hotel">
+
+    <button class="flecha-galeria siguiente" onclick="cambiarFoto(1)">&#10095;</button>
+
+    <div id="contador-galeria" class="contador-galeria"></div>
+
+</div>
 
 </section>
 
@@ -218,13 +226,26 @@
 <script>
 const fotosGaleria = [
     "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200"
 ];
 
 let fotoActual = 0;
+
+const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
+
+fotosGaleria.forEach(function(foto, indice) {
+    const miniatura = document.createElement("div");
+
+    miniatura.className = "foto-miniatura";
+    miniatura.style.backgroundImage = 'url("' + foto + '")';
+    miniatura.onclick = function() {
+        abrirGaleria(indice);
+    };
+
+    contenedorMiniaturas.appendChild(miniatura);
+});
 
 function abrirGaleria(indice) {
     fotoActual = indice;
@@ -257,8 +278,7 @@ document.addEventListener("keydown", function(evento) {
     if (evento.key === "ArrowRight") cambiarFoto(1);
     if (evento.key === "ArrowLeft") cambiarFoto(-1);
 });
-</script>
-    
+</script>    
 </body>
 </html>
 
