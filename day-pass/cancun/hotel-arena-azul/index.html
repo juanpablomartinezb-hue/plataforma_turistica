@@ -73,8 +73,7 @@
     <div id="contador-galeria" class="contador-galeria"></div>
 
 </div>
-            </section>
-
+  
             <div class="detalle-layout">
 
                 <section class="informacion-producto">
@@ -196,6 +195,7 @@
     </footer>
 
     <script>
+        <script>
 const fotosGaleria = [
     "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -205,28 +205,6 @@ const fotosGaleria = [
 ];
 
 let fotoActual = 0;
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
-
-    if (!contenedorMiniaturas) {
-        console.error("No se encontró el contenedor de miniaturas");
-        return;
-    }
-
-    fotosGaleria.slice(0, 2).forEach(function(foto, indice) {
-    const miniatura = document.createElement("div");
-
-    miniatura.className = "foto-miniatura";
-    miniatura.style.backgroundImage = 'url("' + foto + '")';
-
-    miniatura.onclick = function() {
-        abrirGaleria(indice);
-    };
-
-    contenedorMiniaturas.appendChild(miniatura);
-});
 
 function abrirGaleria(indice) {
     fotoActual = indice;
@@ -250,6 +228,37 @@ function actualizarGaleria() {
         (fotoActual + 1) + " / " + fotosGaleria.length;
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+
+    const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
+
+    if (!contenedorMiniaturas) return;
+
+    fotosGaleria.slice(0, 2).forEach(function(foto, indice) {
+        const miniatura = document.createElement("div");
+
+        miniatura.className = "foto-miniatura";
+        miniatura.style.backgroundImage = 'url("' + foto + '")';
+
+        miniatura.onclick = function() {
+            abrirGaleria(indice);
+        };
+
+        if (indice === 1 && fotosGaleria.length > 2) {
+            const indicador = document.createElement("span");
+
+            indicador.textContent = "+" + (fotosGaleria.length - 2) + " fotos";
+            indicador.style.cssText = "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
+
+            miniatura.style.position = "relative";
+            miniatura.appendChild(indicador);
+        }
+
+        contenedorMiniaturas.appendChild(miniatura);
+    });
+
+});
+
 document.addEventListener("keydown", function(evento) {
     const visor = document.getElementById("visor-galeria");
 
@@ -259,6 +268,7 @@ document.addEventListener("keydown", function(evento) {
     if (evento.key === "ArrowRight") cambiarFoto(1);
     if (evento.key === "ArrowLeft") cambiarFoto(-1);
 });
+</script>
 </script>
 
 </body>
