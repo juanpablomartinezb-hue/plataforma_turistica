@@ -225,16 +225,6 @@ document.addEventListener("DOMContentLoaded", function() {
         abrirGaleria(indice);
     };
 
-    if (indice === 1 && fotosGaleria.length > 2) {
-        const indicador = document.createElement("span");
-
-        indicador.textContent = "+" + (fotosGaleria.length - 2) + " fotos";
-        indicador.style.cssText = "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
-
-        miniatura.style.position = "relative";
-        miniatura.appendChild(indicador);
-    }
-
     contenedorMiniaturas.appendChild(miniatura);
 });
 
