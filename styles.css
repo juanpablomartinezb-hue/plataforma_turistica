@@ -958,3 +958,21 @@ footer small {
 .foto-miniatura {
     cursor: pointer;
 }
+
+/* GALERÍA HOTEL ARENA AZUL */
+
+.miniatura-arena-1 {
+    background-image: url("https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
+
+.miniatura-arena-2 {
+    background-image: url("https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
+
+.miniatura-arena-3 {
+    background-image: url("https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
+
+.miniatura-arena-4 {
+    background-image: url("https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
