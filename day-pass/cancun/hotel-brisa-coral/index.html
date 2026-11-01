@@ -233,18 +233,22 @@ const fotosGaleria = [
 
 let fotoActual = 0;
 
-const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
+document.addEventListener("DOMContentLoaded", function() {
 
-fotosGaleria.forEach(function(foto, indice) {
-    const miniatura = document.createElement("div");
+    const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
 
-    miniatura.className = "foto-miniatura";
-    miniatura.style.backgroundImage = 'url("' + foto + '")';
-    miniatura.onclick = function() {
-        abrirGaleria(indice);
-    };
+    fotosGaleria.forEach(function(foto, indice) {
+        const miniatura = document.createElement("div");
 
-    contenedorMiniaturas.appendChild(miniatura);
+        miniatura.className = "foto-miniatura";
+        miniatura.style.backgroundImage = 'url("' + foto + '")';
+        miniatura.onclick = function() {
+            abrirGaleria(indice);
+        };
+
+        contenedorMiniaturas.appendChild(miniatura);
+    });
+
 });
 
 function abrirGaleria(indice) {
