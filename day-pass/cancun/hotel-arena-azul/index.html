@@ -194,7 +194,8 @@
             <small>Proyecto en desarrollo.</small>
         </div>
     </footer>
-<script>
+
+    <script>
 const fotosGaleria = [
     "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -204,6 +205,30 @@ const fotosGaleria = [
 ];
 
 let fotoActual = 0;
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
+
+    if (!contenedorMiniaturas) {
+        console.error("No se encontró el contenedor de miniaturas");
+        return;
+    }
+
+    fotosGaleria.forEach(function(foto, indice) {
+        const miniatura = document.createElement("div");
+
+        miniatura.className = "foto-miniatura";
+        miniatura.style.backgroundImage = 'url("' + foto + '")';
+
+        miniatura.onclick = function() {
+            abrirGaleria(indice);
+        };
+
+        contenedorMiniaturas.appendChild(miniatura);
+    });
+
+});
 
 function abrirGaleria(indice) {
     fotoActual = indice;
@@ -237,5 +262,6 @@ document.addEventListener("keydown", function(evento) {
     if (evento.key === "ArrowLeft") cambiarFoto(-1);
 });
 </script>
+
 </body>
 </html>
