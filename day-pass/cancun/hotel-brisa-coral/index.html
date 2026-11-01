@@ -223,7 +223,7 @@ if (!contenedorMiniaturas) {
     console.error("No se encontró el contenedor de miniaturas");
     return;
 }
-    fotosGaleria.forEach(function(foto, indice) {
+    fotosGaleria.slice(0, 2).forEach(function(foto, indice) {
         const miniatura = document.createElement("div");
 
         miniatura.className = "foto-miniatura";
