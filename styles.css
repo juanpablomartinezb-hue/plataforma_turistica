@@ -725,6 +725,12 @@ footer small {
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.25s ease;
+}
+
+.navegacion-detalle a:hover {
+    color: #0d9f98;
 }
 
 .navegacion-detalle a:hover {
