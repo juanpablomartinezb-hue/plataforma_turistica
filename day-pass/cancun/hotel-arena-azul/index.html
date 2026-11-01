@@ -215,19 +215,27 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    fotosGaleria.forEach(function(foto, indice) {
-        const miniatura = document.createElement("div");
+    fotosGaleria.slice(0, 2).forEach(function(foto, indice) {
+    const miniatura = document.createElement("div");
 
-        miniatura.className = "foto-miniatura";
-        miniatura.style.backgroundImage = 'url("' + foto + '")';
+    miniatura.className = "foto-miniatura";
+    miniatura.style.backgroundImage = 'url("' + foto + '")';
 
-        miniatura.onclick = function() {
-            abrirGaleria(indice);
-        };
+    miniatura.onclick = function() {
+        abrirGaleria(indice);
+    };
 
-        contenedorMiniaturas.appendChild(miniatura);
-    });
+    if (indice === 1 && fotosGaleria.length > 2) {
+        const indicador = document.createElement("span");
 
+        indicador.textContent = "+" + (fotosGaleria.length - 2) + " fotos";
+        indicador.style.cssText = "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
+
+        miniatura.style.position = "relative";
+        miniatura.appendChild(indicador);
+    }
+
+    contenedorMiniaturas.appendChild(miniatura);
 });
 
 function abrirGaleria(indice) {
