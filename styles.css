@@ -768,15 +768,21 @@ footer small {
     padding: 20px;
 }
 
-/* PANEL DE RESERVACIÓN */
+/* TARJETA DE RESERVACIÓN */
 
 .reserva-producto {
     position: sticky;
     top: 25px;
-    padding: 25px;
+    padding: 28px;
+    background: #ffffff;
     border: 1px solid #e5ebed;
-    border-radius: 12px;
-    box-shadow: 0 8px 28px rgba(18, 59, 80, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(18, 59, 80, 0.10);
+    transition: box-shadow 0.3s ease;
+}
+
+.reserva-producto:hover {
+    box-shadow: 0 16px 40px rgba(18, 59, 80, 0.14);
 }
 
 .reserva-producto > span {
