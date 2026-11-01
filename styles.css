@@ -871,3 +871,20 @@ footer small {
 .hotel-arena .foto-principal {
     background-image: url("https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
+/* GALERÍA HOTEL BRISA CORAL */
+
+.miniatura-brisa-1 {
+    background-image: url("https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
+
+.miniatura-brisa-2 {
+    background-image: url("https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
+
+.miniatura-brisa-3 {
+    background-image: url("https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
+
+.miniatura-brisa-4 {
+    background-image: url("https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=600");
+}
