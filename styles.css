@@ -761,14 +761,15 @@ footer small {
     font-size: 17px;
     margin: 22px 0 10px;
 }
+/* TEXTOS DESCRIPTIVOS */
 
 .informacion-producto p,
 .informacion-producto li {
-    color: #687983;
-    font-size: 15px;
-    line-height: 1.8;
+    color: #586d78;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.1px;
 }
-
 .informacion-producto ul {
     padding-left: 22px;
 }
