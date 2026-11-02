@@ -772,6 +772,12 @@ footer small {
 }
 .informacion-producto ul {
     padding-left: 22px;
+    margin-top: 12px;
+}
+
+.informacion-producto li {
+    padding-left: 5px;
+    margin-bottom: 8px;
 }
 
 .mapa-producto {
