@@ -780,16 +780,21 @@ footer small {
     margin-bottom: 8px;
 }
 
+/* MAPA DE UBICACIÓN */
+
 .mapa-producto {
-    min-height: 180px;
+    min-height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f2f7f7;
-    color: #84939d;
-    border-radius: 10px;
-    margin-top: 15px;
-    padding: 20px;
+    background: #f0f6f6;
+    color: #718590;
+    border: 1px solid #e3ebec;
+    border-radius: 14px;
+    margin-top: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(18, 59, 80, 0.05);
+    text-align: center;
 }
 
 /* TARJETA DE RESERVACIÓN */
