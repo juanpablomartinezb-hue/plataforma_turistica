@@ -1037,3 +1037,22 @@ footer small {
 .miniatura-arena-4 {
     background-image: url("https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=600");
 }
+
+/* OPINIONES DE CLIENTES */
+
+#opiniones {
+    background: #f8fbfb;
+    border: 1px solid #e8edef;
+    border-radius: 14px;
+    padding: 25px;
+}
+
+#opiniones h2 {
+    margin-bottom: 15px;
+}
+
+#opiniones p {
+    color: #687983;
+    font-size: 15px;
+    line-height: 1.7;
+}
