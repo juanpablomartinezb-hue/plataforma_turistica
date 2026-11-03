@@ -1056,3 +1056,26 @@ footer small {
     font-size: 15px;
     line-height: 1.7;
 }
+/* ENLACE PARA VOLVER AL CATÁLOGO */
+
+.volver-catalogo {
+    margin: 0 0 25px;
+}
+
+.volver-catalogo a {
+    display: inline-flex;
+    align-items: center;
+    color: #0d8f89;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px 16px;
+    background: #f0f7f7;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.volver-catalogo a:hover {
+    color: #ffffff;
+    background: #0d9f98;
+}
