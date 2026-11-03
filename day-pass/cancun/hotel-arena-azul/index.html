@@ -233,6 +233,12 @@ function actualizarGaleria() {
 document.addEventListener("DOMContentLoaded", function() {
 
     const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
+        const fotoPrincipal = document.querySelector(".foto-principal");
+
+    if (fotoPrincipal && fotosGaleria.length > 0) {
+        fotoPrincipal.style.backgroundImage =
+            'url("' + fotosGaleria[0] + '")';
+    }
 
     if (!contenedorMiniaturas) return;
 
