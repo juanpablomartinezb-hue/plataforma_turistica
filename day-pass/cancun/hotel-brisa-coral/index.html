@@ -248,17 +248,32 @@ document.addEventListener("DOMContentLoaded", function() {
         if (indice === cantidadMiniaturas - 1 && fotosGaleria.length > 2) {
             const indicador = document.createElement("span");
 
-            indicador.textContent = "+" + (fotosGaleria.length - cantidadMiniaturas) + " fotos";
+            indicador.textContent =
+                "+" + (fotosGaleria.length - cantidadMiniaturas) + " fotos";
 
-            indicador.style.cssText = "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
+            indicador.style.cssText =
+                "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
 
             miniatura.style.position = "relative";
             miniatura.appendChild(indicador);
         }
 
         contenedorMiniaturas.appendChild(miniatura);
+    });
+
+    document.addEventListener("keydown", function(evento) {
+        const visor = document.getElementById("visor-galeria");
+
+        if (!visor || !visor.classList.contains("activo")) return;
+
+        if (evento.key === "Escape") cerrarGaleria();
+        if (evento.key === "ArrowRight") cambiarFoto(1);
+        if (evento.key === "ArrowLeft") cambiarFoto(-1);
+    });
 
 });
+
+function abrirGaleria(indice) {
     fotoActual = indice;
     actualizarGaleria();
     document.getElementById("visor-galeria").classList.add("activo");
@@ -279,16 +294,6 @@ function actualizarGaleria() {
     document.getElementById("contador-galeria").textContent =
         (fotoActual + 1) + " / " + fotosGaleria.length;
 }
-
-document.addEventListener("keydown", function(evento) {
-    const visor = document.getElementById("visor-galeria");
-
-    if (!visor.classList.contains("activo")) return;
-
-    if (evento.key === "Escape") cerrarGaleria();
-    if (evento.key === "ArrowRight") cambiarFoto(1);
-    if (evento.key === "ArrowLeft") cambiarFoto(-1);
-});
 </script>    
 </body>
 </html>
