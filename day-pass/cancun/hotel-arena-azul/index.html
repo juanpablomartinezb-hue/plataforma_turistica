@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
             abrirGaleria(indice);
         };
 
-        if (indice === 1 && fotosGaleria.length > 2) {
+        if (indice === Math.min(2, fotosGaleria.length) - 1 && fotosGaleria.length > 2) {
             const indicador = document.createElement("span");
 
             indicador.textContent = "+" + (fotosGaleria.length - 2) + " fotos";
