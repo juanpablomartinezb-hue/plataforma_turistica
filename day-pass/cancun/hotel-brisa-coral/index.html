@@ -223,39 +223,43 @@ document.addEventListener("DOMContentLoaded", function() {
     const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
     const fotoPrincipal = document.querySelector(".foto-principal");
 
-if (fotoPrincipal && fotosGaleria.length > 0) {
-    fotoPrincipal.style.backgroundImage =
-        'url("' + fotosGaleria[0] + '")';
-}
+    if (fotoPrincipal && fotosGaleria.length > 0) {
+        fotoPrincipal.style.backgroundImage =
+            'url("' + fotosGaleria[0] + '")';
+    }
 
-if (!contenedorMiniaturas) {
-    console.error("No se encontró el contenedor de miniaturas");
-    return;
-}
-    fotosGaleria.slice(0, 2).forEach(function(foto, indice) {
+    if (!contenedorMiniaturas) {
+        console.error("No se encontró el contenedor de miniaturas");
+        return;
+    }
+
+    const cantidadMiniaturas = Math.min(2, fotosGaleria.length);
+
+    fotosGaleria.slice(0, cantidadMiniaturas).forEach(function(foto, indice) {
+
         const miniatura = document.createElement("div");
 
         miniatura.className = "foto-miniatura";
         miniatura.style.backgroundImage = 'url("' + foto + '")';
+
         miniatura.onclick = function() {
-    abrirGaleria(indice);
-};
+            abrirGaleria(indice);
+        };
 
-if (indice === 1 && fotosGaleria.length > 2) {
-    const indicador = document.createElement("span");
+        if (indice === cantidadMiniaturas - 1 && fotosGaleria.length > 2) {
+            const indicador = document.createElement("span");
 
-    indicador.textContent = "+" + (fotosGaleria.length - 2) + " fotos";
-    indicador.style.cssText = "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
+            indicador.textContent = "+" + (fotosGaleria.length - cantidadMiniaturas) + " fotos";
 
-    miniatura.style.position = "relative";
-    miniatura.appendChild(indicador);
-}
+            indicador.style.cssText = "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
 
-contenedorMiniaturas.appendChild(miniatura);
-        
+            miniatura.style.position = "relative";
+            miniatura.appendChild(indicador);
+        }
+
+        contenedorMiniaturas.appendChild(miniatura);
+
 });
-
-function abrirGaleria(indice) {
     fotoActual = indice;
     actualizarGaleria();
     document.getElementById("visor-galeria").classList.add("activo");
