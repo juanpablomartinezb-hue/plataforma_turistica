@@ -89,6 +89,66 @@
 
     </main>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const fotosGaleria = [
+        "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
+        "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
+        "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
+        "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg",
+        "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg"
+    ];
+
+    const miniaturas = document.getElementById("galeria-miniaturas");
+    const visor = document.getElementById("visor-fotos");
+    const imagenVisor = document.getElementById("imagen-visor");
+    const cerrarVisor = document.getElementById("cerrar-visor");
+    const anterior = document.getElementById("foto-anterior");
+    const siguiente = document.getElementById("foto-siguiente");
+
+    let fotoActual = 0;
+
+    fotosGaleria.slice(0, 2).forEach(function (foto, indice) {
+
+        const miniatura = document.createElement("div");
+        miniatura.className = "foto-miniatura";
+        miniatura.style.backgroundImage = `url('${foto}')`;
+
+        if (indice === 1) {
+            miniatura.setAttribute("data-extra", "+3 fotos");
+        }
+
+        miniatura.addEventListener("click", function () {
+            fotoActual = indice;
+            mostrarFoto();
+            visor.style.display = "flex";
+        });
+
+        miniaturas.appendChild(miniatura);
+    });
+
+    function mostrarFoto() {
+        imagenVisor.src = fotosGaleria[fotoActual];
+    }
+
+    cerrarVisor.addEventListener("click", function () {
+        visor.style.display = "none";
+    });
+
+    anterior.addEventListener("click", function () {
+        fotoActual = (fotoActual - 1 + fotosGaleria.length) % fotosGaleria.length;
+        mostrarFoto();
+    });
+
+    siguiente.addEventListener("click", function () {
+        fotoActual = (fotoActual + 1) % fotosGaleria.length;
+        mostrarFoto();
+    });
+
+});
+</script>
+
 </body>
 
 </html>
