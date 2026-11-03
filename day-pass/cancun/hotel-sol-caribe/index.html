@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,146 +13,243 @@
 
 <body>
 
-   <main class="detalle-producto hotel-sol-caribe">
+    <main class="detalle-producto hotel-sol-caribe">
 
-    <div class="contenedor">
+        <div class="contenedor">
 
-        <div class="volver-catalogo">
-
-                 <a href="../index.html">← Ver todos los hoteles de Cancún</a>
-        </div>
-
-        <section class="producto-encabezado">
-
-            <div>
-                <span class="tipo-producto">DAY PASS</span>
-
-                <h1>Hotel Sol Caribe Cancún</h1>
-
-                <p class="ubicacion-producto">
-                    Cancún, Quintana Roo
-                </p>
+            <div class="volver-catalogo">
+                <a href="../index.html">← Ver todos los hoteles de Cancún</a>
             </div>
 
-            <div class="calificacion-producto">
-                Producto de demostración
-            </div>
-
-        </section>
-        <!-- GALERÍA DE FOTOGRAFÍAS -->
-
-        <section class="galeria-producto">
-
-            <div class="foto-principal"
-                 style="background-image: url('https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg');">
-            </div>
-
-            <div class="galeria-miniaturas" id="galeria-miniaturas">
-            </div>
-
-        </section>
-        
-        <!-- VISOR DE FOTOGRAFÍAS -->
-
-<div class="visor-fotos" id="visor-fotos">
-    <button class="cerrar-visor" id="cerrar-visor">×</button>
-    <button class="foto-anterior" id="foto-anterior">‹</button>
-    <img id="imagen-visor" src="" alt="Fotografía del hotel">
-    <button class="foto-siguiente" id="foto-siguiente">›</button>
-</div>
-        
-        <section class="informacion-producto">
-
-            <h2>Disfruta un Day Pass en Cancún</h2>
-
-            <p>
-                Esta ficha es un producto de demostración de la plataforma.
-                Próximamente encontrarás aquí información detallada del hotel,
-                servicios, fotografías y condiciones del Day Pass.
+            <p class="ruta">
+                <a href="../../../index.html">Inicio</a> /
+                <a href="../index.html">Day Pass</a> /
+                Cancún / Hotel Sol Caribe
             </p>
 
-            <section id="servicios">
-                <h2>Servicios incluidos</h2>
-                <p>Información pendiente de confirmación.</p>
+            <section class="producto-encabezado">
+
+                <div>
+                    <span class="tipo-producto">DAY PASS</span>
+                    <h1>Hotel Sol Caribe Cancún</h1>
+
+                    <p class="ubicacion-producto">
+                        Cancún, Quintana Roo, México
+                    </p>
+                </div>
+
+                <div class="calificacion-producto">
+                    Producto de demostración
+                </div>
+
             </section>
 
-            <section id="ubicacion">
-                <h2>Ubicación</h2>
-                <p>Cancún, Quintana Roo.</p>
+            <!-- GALERÍA FOTOGRÁFICA -->
+
+            <section class="galeria-producto">
+
+                <div class="galeria-principal">
+                    <div class="foto-principal"
+                         onclick="abrirGaleria(0)">
+                    </div>
+                </div>
+
+                <div id="galeria-miniaturas"
+                     class="galeria-miniaturas">
+                </div>
+
             </section>
 
-            <section id="opiniones">
-                <h2>Opiniones de nuestros clientes</h2>
-                <p>
-                    Las opiniones verificadas de clientes se mostrarán
-                    cuando la plataforma tenga habilitado ese servicio.
-                </p>
-            </section>
+            <!-- VISOR DE FOTOGRAFÍAS -->
 
-        </section>
+            <div id="visor-galeria" class="visor-galeria">
+
+                <button class="cerrar-galeria"
+                        onclick="cerrarGaleria()">×</button>
+
+                <button class="flecha-galeria anterior"
+                        onclick="cambiarFoto(-1)">&#10094;</button>
+
+                <img id="imagen-ampliada"
+                     src=""
+                     alt="Fotografía ilustrativa">
+
+                <button class="flecha-galeria siguiente"
+                        onclick="cambiarFoto(1)">&#10095;</button>
+
+                <div id="contador-galeria"
+                     class="contador-galeria"></div>
+
+            </div>
+
+            <!-- INFORMACIÓN Y RESERVACIÓN -->
+
+            <div class="detalle-layout">
+
+                <section class="informacion-producto">
+
+                    <nav class="navegacion-detalle">
+                        <a href="#descripcion">Descripción</a>
+                        <a href="#servicios">Servicios</a>
+                        <a href="#ubicacion">Ubicación</a>
+                        <a href="#opiniones">Opiniones</a>
+                    </nav>
+
+                    <section id="descripcion">
+                        <h2>Disfruta un Day Pass en Cancún</h2>
+
+                        <p>
+                            Esta ficha es un producto de demostración.
+                            Próximamente encontrarás información detallada
+                            del hotel, fotografías y condiciones del Day Pass.
+                        </p>
+                    </section>
+
+                    <section id="servicios">
+                        <h2>Servicios incluidos</h2>
+                        <p>Información pendiente de confirmación.</p>
+                    </section>
+
+                    <section id="ubicacion">
+                        <h2>Ubicación</h2>
+                        <p>Cancún, Quintana Roo, México.</p>
+
+                        <div class="mapa-producto">
+                            Mapa de ubicación próximamente
+                        </div>
+                    </section>
+
+                    <section id="opiniones">
+                        <h2>Opiniones de nuestros clientes</h2>
+
+                        <p>
+                            Las opiniones verificadas de clientes
+                            se mostrarán cuando la plataforma tenga
+                            habilitado ese servicio.
+                        </p>
+                    </section>
+
+                </section>
+
+                <aside class="reserva-producto">
+
+                    <span>PRECIO DE DEMOSTRACIÓN</span>
+
+                    <div class="precio-detalle">
+                        No disponible
+                    </div>
+
+                    <small>
+                        Producto ficticio · Sin tarifa comercial
+                    </small>
+
+                    <div class="separador"></div>
+
+                    <h3>Reserva tu Day Pass</h3>
+
+                    <p>
+                        Este producto es una demostración.
+                        Actualmente no cuenta con reservaciones.
+                    </p>
+
+                    <button class="boton-reserva" disabled>
+                        No disponible para reservar
+                    </button>
+
+                </aside>
+
+            </div>
+
         </div>
+
     </main>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+    <footer>
+        <div class="contenedor">
+            <strong>EXPLORA.</strong>
+            <p>Descubre México. Vive nuevas experiencias.</p>
+            <small>Proyecto en desarrollo.</small>
+        </div>
+    </footer>
 
-    const fotosGaleria = [
-        "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
-        "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
-        "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
-        "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg",
-        "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg"
-    ];
+    <script>
 
-    const miniaturas = document.getElementById("galeria-miniaturas");
-    const visor = document.getElementById("visor-fotos");
-    const imagenVisor = document.getElementById("imagen-visor");
-    const cerrarVisor = document.getElementById("cerrar-visor");
-    const anterior = document.getElementById("foto-anterior");
-    const siguiente = document.getElementById("foto-siguiente");
+        const fotosGaleria = [
+            "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        ];
 
-    let fotoActual = 0;
+        let fotoActual = 0;
 
-    fotosGaleria.slice(0, 2).forEach(function (foto, indice) {
+        document.addEventListener("DOMContentLoaded", function() {
 
-        const miniatura = document.createElement("div");
-        miniatura.className = "foto-miniatura";
-        miniatura.style.backgroundImage = `url('${foto}')`;
+            const principal = document.querySelector(".foto-principal");
+            const miniaturas = document.getElementById("galeria-miniaturas");
 
-        if (indice === 1) {
-            miniatura.setAttribute("data-extra", "+3 fotos");
-        }
+            principal.style.backgroundImage =
+                'url("' + fotosGaleria[0] + '")';
 
-        miniatura.addEventListener("click", function () {
-            fotoActual = indice;
-            mostrarFoto();
-            visor.style.display = "flex";
+            fotosGaleria.slice(0, 2).forEach(function(foto, indice) {
+
+                const miniatura = document.createElement("div");
+                miniatura.className = "foto-miniatura";
+                miniatura.style.backgroundImage = 'url("' + foto + '")';
+
+                if (indice === 1) {
+                    miniatura.setAttribute("data-extra", "+3 fotos");
+                }
+
+                miniatura.onclick = function() {
+                    abrirGaleria(indice);
+                };
+
+                miniaturas.appendChild(miniatura);
+
+            });
+
         });
 
-        miniaturas.appendChild(miniatura);
-    });
+        function abrirGaleria(indice) {
+            fotoActual = indice;
+            actualizarGaleria();
+            document.getElementById("visor-galeria").classList.add("activo");
+        }
 
-    function mostrarFoto() {
-        imagenVisor.src = fotosGaleria[fotoActual];
-    }
+        function cerrarGaleria() {
+            document.getElementById("visor-galeria").classList.remove("activo");
+        }
 
-    cerrarVisor.addEventListener("click", function () {
-        visor.style.display = "none";
-    });
+        function cambiarFoto(direccion) {
+            fotoActual =
+                (fotoActual + direccion + fotosGaleria.length) % fotosGaleria.length;
 
-    anterior.addEventListener("click", function () {
-        fotoActual = (fotoActual - 1 + fotosGaleria.length) % fotosGaleria.length;
-        mostrarFoto();
-    });
+            actualizarGaleria();
+        }
 
-    siguiente.addEventListener("click", function () {
-        fotoActual = (fotoActual + 1) % fotosGaleria.length;
-        mostrarFoto();
-    });
+        function actualizarGaleria() {
+            document.getElementById("imagen-ampliada").src =
+                fotosGaleria[fotoActual];
 
-});
-</script>
+            document.getElementById("contador-galeria").textContent =
+                (fotoActual + 1) + " / " + fotosGaleria.length;
+        }
+
+        document.addEventListener("keydown", function(evento) {
+
+            const visor = document.getElementById("visor-galeria");
+
+            if (!visor.classList.contains("activo")) return;
+
+            if (evento.key === "Escape") cerrarGaleria();
+            if (evento.key === "ArrowRight") cambiarFoto(1);
+            if (evento.key === "ArrowLeft") cambiarFoto(-1);
+
+        });
+
+    </script>
 
 </body>
-
 </html>
