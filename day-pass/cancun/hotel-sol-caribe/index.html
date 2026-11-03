@@ -185,41 +185,37 @@
         let fotoActual = 0;
 
         document.addEventListener("DOMContentLoaded", function() {
+            
+const cantidadMiniaturas = Math.min(2, fotosGaleria.length);
 
-            const principal = document.querySelector(".foto-principal");
-            const miniaturas = document.getElementById("galeria-miniaturas");
+fotosGaleria.slice(0, cantidadMiniaturas).forEach(function(foto, indice) {
 
-            principal.style.backgroundImage =
-                'url("' + fotosGaleria[0] + '")';
+    const miniatura = document.createElement("div");
 
-            fotosGaleria.slice(0, 2).forEach(function(foto, indice) {
+    miniatura.className = "foto-miniatura";
+    miniatura.style.backgroundImage = 'url("' + foto + '")';
 
-                const miniatura = document.createElement("div");
-                miniatura.className = "foto-miniatura";
-                miniatura.style.backgroundImage = 'url("' + foto + '")';
+    miniatura.onclick = function() {
+        abrirGaleria(indice);
+    };
 
-               if (indice === Math.min(2, fotosGaleria.length) - 1 && fotosGaleria.length > 2) {
+    if (indice === cantidadMiniaturas - 1 && fotosGaleria.length > 2) {
 
-    const indicador = document.createElement("span");
+        const indicador = document.createElement("span");
 
-    indicador.textContent =
-        "+" + (fotosGaleria.length - 2) + " fotos";
+        indicador.textContent =
+            "+" + (fotosGaleria.length - cantidadMiniaturas) + " fotos";
 
-    indicador.style.cssText =
-        "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
+        indicador.style.cssText =
+            "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
 
-    miniatura.style.position = "relative";
-    miniatura.appendChild(indicador);
-}
+        miniatura.style.position = "relative";
+        miniatura.appendChild(indicador);
+    }
 
-                miniatura.onclick = function() {
-                    abrirGaleria(indice);
-                };
+    miniaturas.appendChild(miniatura);
 
-                miniaturas.appendChild(miniatura);
-
-            });
-
+});
         });
 
         function abrirGaleria(indice) {
