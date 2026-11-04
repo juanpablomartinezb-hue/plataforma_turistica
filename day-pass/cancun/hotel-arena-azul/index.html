@@ -253,7 +253,7 @@ fotosGaleria.slice(0, cantidadMiniaturas).forEach(function(foto, indice) {
             abrirGaleria(indice);
         };
 
-        if (indice === Math.min(2, fotosGaleria.length) - 1 && fotosGaleria.length > 2) {
+        if (indice === cantidadMiniaturas - 1 && fotosGaleria.length > cantidadMiniaturas) {
             const indicador = document.createElement("span");
 
             indicador.textContent =
