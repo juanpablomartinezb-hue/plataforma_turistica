@@ -175,14 +175,14 @@
     <script>
 
         const fotosGaleria = [
-            "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200",
-            "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200",
-            "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=1200",
-            "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
-            "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200"
-        ];
+    "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200"
+];
 
-        let fotoActual = 0;
+let fotoActual = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -230,43 +230,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
     });
 
-        function abrirGaleria(indice) {
-            fotoActual = indice;
-            actualizarGaleria();
-            document.getElementById("visor-galeria").classList.add("activo");
-        }
+});
 
-        function cerrarGaleria() {
-            document.getElementById("visor-galeria").classList.remove("activo");
-        }
+function abrirGaleria(indice) {
+    fotoActual = indice;
+    actualizarGaleria();
+    document.getElementById("visor-galeria").classList.add("activo");
+}
 
-        function cambiarFoto(direccion) {
-            fotoActual =
-                (fotoActual + direccion + fotosGaleria.length) % fotosGaleria.length;
+function cerrarGaleria() {
+    document.getElementById("visor-galeria").classList.remove("activo");
+}
 
-            actualizarGaleria();
-        }
+function cambiarFoto(direccion) {
+    fotoActual =
+        (fotoActual + direccion + fotosGaleria.length) % fotosGaleria.length;
 
-        function actualizarGaleria() {
-            document.getElementById("imagen-ampliada").src =
-                fotosGaleria[fotoActual];
+    actualizarGaleria();
+}
 
-            document.getElementById("contador-galeria").textContent =
-                (fotoActual + 1) + " / " + fotosGaleria.length;
-        }
+function actualizarGaleria() {
+    document.getElementById("imagen-ampliada").src =
+        fotosGaleria[fotoActual];
 
-        document.addEventListener("keydown", function(evento) {
+    document.getElementById("contador-galeria").textContent =
+        (fotoActual + 1) + " / " + fotosGaleria.length;
+}
 
-            const visor = document.getElementById("visor-galeria");
+document.addEventListener("keydown", function(evento) {
 
-            if (!visor.classList.contains("activo")) return;
+    const visor = document.getElementById("visor-galeria");
 
-            if (evento.key === "Escape") cerrarGaleria();
-            if (evento.key === "ArrowRight") cambiarFoto(1);
-            if (evento.key === "ArrowLeft") cambiarFoto(-1);
+    if (!visor || !visor.classList.contains("activo")) return;
 
-        });
+    if (evento.key === "Escape") cerrarGaleria();
+    if (evento.key === "ArrowRight") cambiarFoto(1);
+    if (evento.key === "ArrowLeft") cambiarFoto(-1);
 
+});
     </script>
 
 </body>
