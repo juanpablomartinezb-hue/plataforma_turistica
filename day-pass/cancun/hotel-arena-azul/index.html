@@ -241,7 +241,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (!contenedorMiniaturas) return;
 
-    fotosGaleria.slice(0, Math.min(2, fotosGaleria.length)).forEach(function(foto, indice) {
+    const cantidadMiniaturas = Math.min(2, fotosGaleria.length);
+
+fotosGaleria.slice(0, cantidadMiniaturas).forEach(function(foto, indice) {
         const miniatura = document.createElement("div");
 
         miniatura.className = "foto-miniatura";
