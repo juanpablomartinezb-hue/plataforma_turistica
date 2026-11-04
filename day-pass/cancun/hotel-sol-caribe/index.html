@@ -1,25 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Hotel Sol Caribe Cancún | Day Pass</title>
+    <title>Day Pass Hotel Sol Caribe Cancún | EXPLORA</title>
+
+    <meta name="description" content="Conoce el Day Pass del Hotel Sol Caribe Cancún. Consulta las características de esta propuesta de demostración.">
 
     <link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body>
 
-    <main class="detalle-producto hotel-sol-caribe">
+    <header class="encabezado">
+        <div class="contenedor navegacion">
+            <div class="logo">EXPLORA<span>.</span></div>
+            <a class="acceso" href="../../../index.html">Volver al inicio</a>
+        </div>
+    </header>
+
+    <main class="detalle-producto hotel-arena">
+        <div class="volver-catalogo">
+    <a href="../index.html">← Ver todos los hoteles de Cancún</a>
+</div>
 
         <div class="contenedor">
-
-            <div class="volver-catalogo">
-                <a href="../index.html">← Ver todos los hoteles de Cancún</a>
-            </div>
 
             <p class="ruta">
                 <a href="../../../index.html">Inicio</a> /
@@ -31,6 +37,7 @@
 
                 <div>
                     <span class="tipo-producto">DAY PASS</span>
+
                     <h1>Hotel Sol Caribe Cancún</h1>
 
                     <p class="ubicacion-producto">
@@ -39,13 +46,12 @@
                 </div>
 
                 <div class="calificacion-producto">
-                    Producto de demostración
+                    ★ Próximamente
                 </div>
 
             </section>
 
-            <!-- GALERÍA FOTOGRÁFICA -->
-<section class="galeria-producto">
+            <section class="galeria-producto">
 
     <div class="galeria-principal">
         <div class="foto-principal" onclick="abrirGaleria(0)"></div>
@@ -55,7 +61,7 @@
 
 </section>
 
-            <!-- VISOR DE FOTOGRAFÍAS -->
+<!-- VISOR DE FOTOGRAFÍAS -->
 
 <div id="visor-galeria" class="visor-galeria">
 
@@ -70,52 +76,82 @@
     <div id="contador-galeria" class="contador-galeria"></div>
 
 </div>
-
-            <!-- INFORMACIÓN Y RESERVACIÓN -->
-
+  
             <div class="detalle-layout">
 
                 <section class="informacion-producto">
 
                     <nav class="navegacion-detalle">
                         <a href="#descripcion">Descripción</a>
-                        <a href="#servicios">Servicios</a>
+                        <a href="#paquetes">Paquetes</a>
                         <a href="#ubicacion">Ubicación</a>
                         <a href="#opiniones">Opiniones</a>
                     </nav>
 
                     <section id="descripcion">
-                        <h2>Disfruta un Day Pass en Cancún</h2>
+
+                        <h2>Descripción general</h2>
 
                         <p>
-                            Esta ficha es un producto de demostración.
-                            Próximamente encontrarás información detallada
-                            del hotel, fotografías y condiciones del Day Pass.
+                            El Hotel Sol Caribe Cancún es un establecimiento
+                            ficticio creado como ejemplo para mostrar la
+                            estructura comercial de EXPLORA.
                         </p>
+
                     </section>
 
-                    <section id="servicios">
-                        <h2>Servicios incluidos</h2>
-                        <p>Información pendiente de confirmación.</p>
+                    <section id="paquetes">
+
+                        <h2>Paquetes disponibles</h2>
+
+                        <p>
+                            Aquí se mostrarán las modalidades de Day Pass,
+                            horarios, condiciones y tarifas cuando exista
+                            una oferta comercial confirmada.
+                        </p>
+
+                    </section>
+
+                    <section class="servicios-producto">
+
+                        <h2>¿Qué incluye?</h2>
+
+                        <ul>
+                            <li>Ejemplo de acceso a instalaciones.</li>
+                            <li>Ejemplo de uso de alberca.</li>
+                            <li>Ejemplo de acceso a áreas de descanso.</li>
+                        </ul>
+
+                        <h3>¿Qué no incluye?</h3>
+
+                        <ul>
+                            <li>Servicios adicionales no especificados.</li>
+                            <li>Consumos y actividades adicionales.</li>
+                        </ul>
+
                     </section>
 
                     <section id="ubicacion">
+
                         <h2>Ubicación</h2>
+
                         <p>Cancún, Quintana Roo, México.</p>
 
                         <div class="mapa-producto">
                             Mapa de ubicación próximamente
                         </div>
+
                     </section>
 
                     <section id="opiniones">
+
                         <h2>Opiniones de nuestros clientes</h2>
 
                         <p>
-                            Las opiniones verificadas de clientes
-                            se mostrarán cuando la plataforma tenga
-                            habilitado ese servicio.
+                            Las opiniones verificadas de clientes se mostrarán
+                            cuando la plataforma tenga habilitado ese servicio.
                         </p>
+
                     </section>
 
                 </section>
@@ -125,11 +161,11 @@
                     <span>PRECIO DE DEMOSTRACIÓN</span>
 
                     <div class="precio-detalle">
-                        No disponible
+                        $999 MXN
                     </div>
 
                     <small>
-                        Producto ficticio · Sin tarifa comercial
+                        Tarifa ficticia · No representa una oferta real
                     </small>
 
                     <div class="separador"></div>
@@ -162,64 +198,14 @@
     </footer>
 
     <script>
-
-        const fotosGaleria = [
+const fotosGaleria = [
+    "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200"
 ];
 
 let fotoActual = 0;
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
-    const fotoPrincipal = document.querySelector(".foto-principal");
-
-    if (fotoPrincipal && fotosGaleria.length > 0) {
-        fotoPrincipal.style.backgroundImage =
-            'url("' + fotosGaleria[0] + '")';
-    }
-
-    if (!contenedorMiniaturas) {
-        console.error("No se encontró el contenedor de miniaturas");
-        return;
-    }
-
-    const cantidadMiniaturas = Math.min(2, fotosGaleria.length);
-
-    fotosGaleria.slice(0, cantidadMiniaturas).forEach(function(foto, indice) {
-
-        const miniatura = document.createElement("div");
-
-        miniatura.className = "foto-miniatura";
-        miniatura.style.backgroundImage = 'url("' + foto + '")';
-
-        miniatura.onclick = function() {
-            abrirGaleria(indice);
-        };
-
-        if (indice === cantidadMiniaturas - 1 && fotosGaleria.length > 2) {
-
-            const indicador = document.createElement("span");
-
-            indicador.textContent =
-                "+" + (fotosGaleria.length - cantidadMiniaturas) + " fotos";
-
-            indicador.style.cssText =
-                "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
-
-            miniatura.style.position = "relative";
-            miniatura.appendChild(indicador);
-        }
-
-        contenedorMiniaturas.appendChild(miniatura);
-
-    });
-
-});
 
 function abrirGaleria(indice) {
     fotoActual = indice;
@@ -232,22 +218,58 @@ function cerrarGaleria() {
 }
 
 function cambiarFoto(direccion) {
-    fotoActual =
-        (fotoActual + direccion + fotosGaleria.length) % fotosGaleria.length;
-
+    fotoActual = (fotoActual + direccion + fotosGaleria.length) % fotosGaleria.length;
     actualizarGaleria();
 }
 
 function actualizarGaleria() {
-    document.getElementById("imagen-ampliada").src =
-        fotosGaleria[fotoActual];
+    document.getElementById("imagen-ampliada").src = fotosGaleria[fotoActual];
 
     document.getElementById("contador-galeria").textContent =
         (fotoActual + 1) + " / " + fotosGaleria.length;
 }
 
-document.addEventListener("keydown", function(evento) {
+document.addEventListener("DOMContentLoaded", function() {
 
+    const contenedorMiniaturas = document.getElementById("galeria-miniaturas");
+        const fotoPrincipal = document.querySelector(".foto-principal");
+
+    if (fotoPrincipal && fotosGaleria.length > 0) {
+        fotoPrincipal.style.backgroundImage =
+            'url("' + fotosGaleria[0] + '")';
+    }
+
+    if (!contenedorMiniaturas) return;
+
+    const cantidadMiniaturas = Math.min(2, fotosGaleria.length);
+
+fotosGaleria.slice(0, cantidadMiniaturas).forEach(function(foto, indice) {
+        const miniatura = document.createElement("div");
+
+        miniatura.className = "foto-miniatura";
+        miniatura.style.backgroundImage = 'url("' + foto + '")';
+
+        miniatura.onclick = function() {
+            abrirGaleria(indice);
+        };
+
+        if (indice === cantidadMiniaturas - 1 && fotosGaleria.length > cantidadMiniaturas) {
+            const indicador = document.createElement("span");
+
+            indicador.textContent =
+    "+" + (fotosGaleria.length - cantidadMiniaturas) + " fotos";
+            indicador.style.cssText = "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
+
+            miniatura.style.position = "relative";
+            miniatura.appendChild(indicador);
+        }
+
+        contenedorMiniaturas.appendChild(miniatura);
+    });
+
+});
+
+document.addEventListener("keydown", function(evento) {
     const visor = document.getElementById("visor-galeria");
 
     if (!visor || !visor.classList.contains("activo")) return;
@@ -255,9 +277,8 @@ document.addEventListener("keydown", function(evento) {
     if (evento.key === "Escape") cerrarGaleria();
     if (evento.key === "ArrowRight") cambiarFoto(1);
     if (evento.key === "ArrowLeft") cambiarFoto(-1);
-
 });
-    </script>
+</script>
 
 </body>
 </html>
