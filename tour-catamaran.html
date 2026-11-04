@@ -1,10 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Paseo en Catamarán en Riviera Maya | EXPLORA</title>
+
     <meta name="description" content="Descubre un paseo en catamarán en Riviera Maya. Consulta información, servicios y precios con EXPLORA.">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -17,7 +22,8 @@
         </div>
     </header>
 
-    <main class="detalle-producto">
+    <main class="detalle-producto tour-catamaran">
+
         <div class="contenedor">
 
             <p class="ruta">Inicio / Tours / Riviera Maya</p>
@@ -30,7 +36,23 @@
                 Riviera Maya, Quintana Roo, México
             </p>
 
-            <div class="foto-principal foto-catamaran"></div>
+            <!-- GALERÍA DE FOTOGRAFÍAS -->
+
+            <section class="galeria-producto">
+
+                <div class="galeria-principal">
+                    <div class="foto-principal foto-catamaran"
+                         onclick="abrirGaleria(0)">
+                    </div>
+                </div>
+
+                <div id="galeria-miniaturas"
+                     class="galeria-miniaturas">
+                </div>
+
+            </section>
+
+            <!-- INFORMACIÓN DEL TOUR -->
 
             <div class="detalle-columnas">
 
@@ -93,8 +115,33 @@
                 </aside>
 
             </div>
+
         </div>
+
     </main>
+
+    <!-- VISOR AMPLIADO DE FOTOGRAFÍAS -->
+
+    <div id="visor-galeria" class="visor-galeria">
+
+        <button class="cerrar-galeria"
+                onclick="cerrarGaleria()">×</button>
+
+        <button class="flecha-galeria anterior"
+                onclick="cambiarFoto(-1)">&#10094;</button>
+
+        <img id="imagen-ampliada"
+             src=""
+             alt="Fotografía ampliada del paseo en catamarán">
+
+        <button class="flecha-galeria siguiente"
+                onclick="cambiarFoto(1)">&#10095;</button>
+
+        <div id="contador-galeria"
+             class="contador-galeria">
+        </div>
+
+    </div>
 
     <footer>
         <div class="contenedor">
@@ -103,6 +150,141 @@
             <small>Proyecto en desarrollo.</small>
         </div>
     </footer>
+
+    <!-- FUNCIONAMIENTO DE LA GALERÍA -->
+
+    <script>
+
+        const fotosGaleria = [
+
+            "https://images.pexels.com/photos/163236/luxury-yacht-boat-speed-water-163236.jpeg?auto=compress&cs=tinysrgb&w=1200",
+
+            "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200",
+
+            "https://images.pexels.com/photos/1449773/pexels-photo-1449773.jpeg?auto=compress&cs=tinysrgb&w=1200",
+
+            "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&cs=tinysrgb&w=1200"
+
+        ];
+
+        let fotoActual = 0;
+
+        function abrirGaleria(indice) {
+
+            fotoActual = indice;
+
+            actualizarGaleria();
+
+            document.getElementById("visor-galeria")
+                .classList.add("activo");
+
+        }
+
+        function cerrarGaleria() {
+
+            document.getElementById("visor-galeria")
+                .classList.remove("activo");
+
+        }
+
+        function cambiarFoto(direccion) {
+
+            fotoActual += direccion;
+
+            if (fotoActual < 0) {
+                fotoActual = fotosGaleria.length - 1;
+            }
+
+            if (fotoActual >= fotosGaleria.length) {
+                fotoActual = 0;
+            }
+
+            actualizarGaleria();
+
+        }
+
+        function actualizarGaleria() {
+
+            document.getElementById("imagen-ampliada").src =
+                fotosGaleria[fotoActual];
+
+            document.getElementById("contador-galeria").textContent =
+                (fotoActual + 1) + " / " + fotosGaleria.length;
+
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const fotoPrincipal = document.querySelector(".foto-principal");
+
+            fotoPrincipal.style.backgroundImage =
+                "url('" + fotosGaleria[0] + "')";
+
+            const contenedorMiniaturas =
+                document.getElementById("galeria-miniaturas");
+
+            const cantidadMiniaturas = 2;
+
+            for (let i = 1; i <= cantidadMiniaturas; i++) {
+
+                const miniatura = document.createElement("div");
+
+                miniatura.className = "foto-miniatura";
+
+                miniatura.style.backgroundImage =
+                    "url('" + fotosGaleria[i] + "')";
+
+                miniatura.style.position = "relative";
+                miniatura.style.overflow = "hidden";
+
+                miniatura.onclick = function () {
+                    abrirGaleria(i);
+                };
+
+                if (i === cantidadMiniaturas &&
+                    fotosGaleria.length > cantidadMiniaturas + 1) {
+
+                    const indicador = document.createElement("div");
+
+                    indicador.textContent =
+                        "+" + (fotosGaleria.length - cantidadMiniaturas - 1) + " fotos";
+
+                    indicador.style.cssText =
+                        "position:absolute;bottom:0;left:0;width:100%;padding:12px 5px;background:rgba(0,0,0,0.6);color:white;text-align:center;font-size:15px;font-weight:bold;border-radius:0 0 10px 10px;";
+
+                    miniatura.appendChild(indicador);
+
+                }
+
+                contenedorMiniaturas.appendChild(miniatura);
+
+            }
+
+        });
+
+        document.addEventListener("keydown", function (evento) {
+
+            const visor = document.getElementById("visor-galeria");
+
+            if (!visor.classList.contains("activo")) {
+                return;
+            }
+
+            if (evento.key === "Escape") {
+                cerrarGaleria();
+            }
+
+            if (evento.key === "ArrowRight") {
+                cambiarFoto(1);
+            }
+
+            if (evento.key === "ArrowLeft") {
+                cambiarFoto(-1);
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>
