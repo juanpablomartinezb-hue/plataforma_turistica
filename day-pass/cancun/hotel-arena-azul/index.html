@@ -272,7 +272,7 @@ fotosGaleria.slice(0, cantidadMiniaturas).forEach(function(foto, indice) {
 document.addEventListener("keydown", function(evento) {
     const visor = document.getElementById("visor-galeria");
 
-    if (!visor.classList.contains("activo")) return;
+    if (!visor || !visor.classList.contains("activo")) return;
 
     if (evento.key === "Escape") cerrarGaleria();
     if (evento.key === "ArrowRight") cambiarFoto(1);
