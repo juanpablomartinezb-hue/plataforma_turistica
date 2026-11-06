@@ -332,12 +332,12 @@
                 abrirGaleria(indice);
             });
 
-            if (indice === 2 && fotos.length > 3) {
+            if (indice === 1 && fotos.length > 3) {
 
                 const indicador = document.createElement("span");
 
                 indicador.textContent =
-                    "+" + (fotos.length - 3) + " fotos";
+                    "+" + (fotos.length - 2) + " fotos";
 
                 indicador.style.cssText =
                     "position:absolute;bottom:0;left:0;width:100%;" +
