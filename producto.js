@@ -317,7 +317,7 @@
             });
         }
 
-        fotos.slice(0, 3).forEach(function (foto, indice) {
+        fotos.slice(1, 3).forEach(function (foto, indice) {
 
             const miniatura = document.createElement("div");
 
