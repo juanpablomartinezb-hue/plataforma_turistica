@@ -151,14 +151,13 @@
                         </section>
 
                         <section id="ubicacion">
-                            <h2>Ubicación</h2>
-                            <p>${escaparHTML(producto.ubicacion)}</p>
+    <h2>Ubicación</h2>
+    <p>${escaparHTML(producto.ubicacion || "Ubicación por confirmar")}</p>
 
-                            <div class="mapa-producto">
-                                Ubicación próximamente
-                            </div>
-                        </section>
-
+    <div class="mapa-producto">
+        Mapa de ubicación próximamente
+    </div>
+</section>
                         <section id="opiniones">
                             <h2>Opiniones</h2>
                             <p>
