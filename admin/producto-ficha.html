@@ -430,10 +430,11 @@ function agregarHorario(){
       horariosAgregados.splice(indice, 1);
     }
 
-    if(horariosAgregados.length === 0){
-      listaHorarios.innerHTML = '<p class="note">Todavía no hay horarios agregados.</p>';
-    }
-  });
+    const mensajeInicial = listaHorarios.querySelector('p.note');
+
+if(mensajeInicial){
+  mensajeInicial.remove();
+}
 
   if(horariosAgregados.length === 0){
     listaHorarios.innerHTML = '';
