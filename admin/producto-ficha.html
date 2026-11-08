@@ -231,19 +231,30 @@ th{background:#f4f6f9}
 </div>
 </div>
 </main>
-  // Generar horarios cada 30 minutos
+<script>
+let actual=0;
+const pestañas=document.querySelectorAll('.tab');
+const botones=document.querySelectorAll('.tabs button');
+
+function mostrar(n){
+  actual=n;
+  pestañas.forEach((p,i)=>p.classList.toggle('active',i===n));
+  botones.forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+
+function mostrarAnterior(){mostrar(Math.max(0,actual-1))}
+function mostrarSiguiente(){mostrar(Math.min(pestañas.length-1,actual+1))}
+
+// Generar horarios cada 30 minutos
 const seccionHorarios = document.querySelectorAll('.tab')[2];
 const selectoresHora = seccionHorarios.querySelectorAll('select');
-
 const horaInicio = selectoresHora[0];
 const horaFin = selectoresHora[1];
 
 function generarHoras() {
   for (let h = 0; h < 24; h++) {
     for (let m of [0, 30]) {
-      const hora = String(h).padStart(2, '0') + ':' +
-                   String(m).padStart(2, '0');
-
+      const hora = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
       horaInicio.add(new Option(hora, hora));
     }
   }
@@ -251,12 +262,9 @@ function generarHoras() {
 
 function actualizarHorasFin() {
   horaFin.innerHTML = '<option value="">Seleccionar</option>';
-
   for (let h = 0; h < 24; h++) {
     for (let m of [0, 30]) {
-      const hora = String(h).padStart(2, '0') + ':' +
-                   String(m).padStart(2, '0');
-
+      const hora = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
       if (hora > horaInicio.value) {
         horaFin.add(new Option(hora, hora));
       }
@@ -266,6 +274,7 @@ function actualizarHorasFin() {
 
 generarHoras();
 horaInicio.addEventListener('change', actualizarHorasFin);
+</script>
   <script>
 let actual=0;
 const pestañas=document.querySelectorAll('.tab');
