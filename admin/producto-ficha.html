@@ -231,6 +231,41 @@ th{background:#f4f6f9}
 </div>
 </div>
 </main>
+  // Generar horarios cada 30 minutos
+const seccionHorarios = document.querySelectorAll('.tab')[2];
+const selectoresHora = seccionHorarios.querySelectorAll('select');
+
+const horaInicio = selectoresHora[0];
+const horaFin = selectoresHora[1];
+
+function generarHoras() {
+  for (let h = 0; h < 24; h++) {
+    for (let m of [0, 30]) {
+      const hora = String(h).padStart(2, '0') + ':' +
+                   String(m).padStart(2, '0');
+
+      horaInicio.add(new Option(hora, hora));
+    }
+  }
+}
+
+function actualizarHorasFin() {
+  horaFin.innerHTML = '<option value="">Seleccionar</option>';
+
+  for (let h = 0; h < 24; h++) {
+    for (let m of [0, 30]) {
+      const hora = String(h).padStart(2, '0') + ':' +
+                   String(m).padStart(2, '0');
+
+      if (hora > horaInicio.value) {
+        horaFin.add(new Option(hora, hora));
+      }
+    }
+  }
+}
+
+generarHoras();
+horaInicio.addEventListener('change', actualizarHorasFin);
 <script>
 let actual=0;
 const pestañas=document.querySelectorAll('.tab');
