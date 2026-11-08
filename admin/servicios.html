@@ -4,10 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Servicios | EXPLORA</title>
+<title>Servicios | Administrador</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#24313d}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#263746}
 .layout{display:flex;min-height:100vh}
 aside{width:245px;background:#172b3a;color:white;padding:28px 18px;flex-shrink:0}
 .logo{font-size:25px;font-weight:bold;margin:0 0 38px 10px}
@@ -15,25 +15,51 @@ aside{width:245px;background:#172b3a;color:white;padding:28px 18px;flex-shrink:0
 nav a{display:block;color:#dce5eb;text-decoration:none;padding:12px 10px;border-radius:7px;margin:4px 0;font-size:14px}
 nav a.active,nav a:hover{background:#29485c;color:white}
 main{flex:1;min-width:0}
-header{background:white;padding:20px 32px;border-bottom:1px solid #e5e9ed;display:flex;justify-content:space-between}
+header{background:white;padding:20px 32px;border-bottom:1px solid #e5e9ed;display:flex;justify-content:space-between;align-items:center}
 header span{color:#74818c;font-size:13px}
-.content{padding:35px}
+.content{padding:32px;max-width:1450px;margin:auto}
+h1{font-size:27px;margin:0 0 8px}
+h2{font-size:19px;margin:0 0 20px}
+h3{font-size:15px;margin:0 0 17px}
+.subtitle{color:#71808c;margin:0 0 26px;font-size:14px}
 .top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-h1{font-size:27px;margin:0 0 9px}
-.intro{color:#71808c;margin:0 0 28px}
-.primary{background:#1d526e;color:white;border:0;border-radius:7px;padding:13px 19px;font-size:14px;cursor:pointer}
+button{cursor:pointer;font-size:13px;border:0;border-radius:7px;padding:12px 17px}
+.primary{background:#1d526e;color:white}
 .primary:hover{background:#163e54}
-.filters{background:white;padding:18px;border:1px solid #e5e9ed;border-radius:10px;display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
-input,select{padding:12px;border:1px solid #dce2e7;border-radius:7px;font-size:14px;background:white}
-input{flex:1;min-width:200px}
-.table-wrap{background:white;border:1px solid #e5e9ed;border-radius:10px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:650px}
-th,td{text-align:left;padding:17px 19px;border-bottom:1px solid #edf0f2;font-size:13px}
-th{color:#71808c;background:#fafbfc;font-weight:600}
+.secondary{background:white;border:1px solid #dce2e7;color:#405462}
+.danger{background:#fff1f0;color:#a33d35}
+.filters{background:white;padding:17px;border:1px solid #e5e9ed;border-radius:10px;display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #dce2e7;border-radius:7px;font:14px Arial;background:white;color:#263746}
+textarea{min-height:105px;resize:vertical;line-height:1.5}
+label{display:block;font-size:12px;font-weight:600;color:#526675;margin-bottom:7px}
+.field{min-width:0}
+.field small{display:block;color:#85919a;font-size:11px;margin-top:6px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:white;border:1px solid #e5e9ed;border-radius:10px;padding:24px;margin-bottom:19px}
+.section-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #edf0f2;padding-bottom:14px;margin-bottom:20px}
+.section-head h2{margin:0}
+.required{color:#bd5149}
+.checkline{display:flex;align-items:flex-start;gap:10px;margin:17px 0;color:#526675;font-size:13px;line-height:1.5}
+.checkline input{width:auto;margin-top:2px}
+.checkline label{font-size:13px;font-weight:400;margin:0}
+.help{font-size:12px;color:#82909a;line-height:1.5;margin-top:6px}
+.actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:18px 0 35px}
+.actions-right{display:flex;gap:10px}
 .empty{text-align:center;padding:55px 20px;color:#71808c;line-height:1.7}
 .empty strong{display:block;color:#344653;font-size:17px;margin-bottom:8px}
-.note{font-size:12px;color:#84919a;margin-top:15px}
-@media(max-width:700px){.layout{display:block}aside{width:100%}.content{padding:22px 16px}header{padding:18px}}
+.table-wrap{background:white;border:1px solid #e5e9ed;border-radius:10px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{text-align:left;padding:16px 18px;border-bottom:1px solid #edf0f2;font-size:13px}
+th{color:#71808c;background:#fafbfc}
+.badge{display:inline-block;background:#edf2f5;color:#526675;padding:5px 9px;border-radius:20px;font-size:11px}
+.notice{background:#f1f6f8;border:1px solid #dce8ed;padding:13px;border-radius:7px;color:#526675;font-size:12px;line-height:1.5;margin-bottom:18px}
+.view{display:none}
+.view.active{display:block}
+.map-placeholder{height:190px;background:#edf2f4;border:1px solid #dce2e7;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#71808c;font-size:13px;padding:20px}
+@media(max-width:850px){.grid.three,.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.layout{display:block}aside{width:100%}.content{padding:20px 14px}header{padding:18px}.grid,.grid.three,.grid.four{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -60,27 +86,30 @@ th{color:#71808c;background:#fafbfc;font-weight:600}
 <main>
 <header>
 <strong>Panel de administración</strong>
-<span>Catálogo de servicios</span>
+<span id="header-label">Catálogo de servicios</span>
 </header>
 
 <div class="content">
+
+<!-- LISTADO -->
+<section id="list-view" class="view active">
 <div class="top">
 <div>
 <h1>Servicios</h1>
-<p class="intro">Administra todos los servicios turísticos de la plataforma.</p>
+<p class="subtitle">Administra los servicios turísticos de la plataforma.</p>
 </div>
-<button class="primary" onclick="alert('En el siguiente paso construiremos el formulario para crear servicios.')">+ Nuevo servicio</button>
+<button class="primary" onclick="showForm()">+ Nuevo servicio</button>
 </div>
 
 <div class="filters">
-<input type="search" placeholder="Buscar por nombre de servicio...">
-<select>
+<input style="flex:1;min-width:200px" type="search" placeholder="Buscar servicio por nombre...">
+<select style="min-width:170px;width:auto">
 <option>Todos los tipos</option>
 <option>Day Pass</option>
 <option>Tour</option>
 <option>Actividad</option>
 </select>
-<select>
+<select style="min-width:170px;width:auto">
 <option>Todos los estados</option>
 <option>Borrador</option>
 <option>Activo</option>
@@ -92,32 +121,221 @@ th{color:#71808c;background:#fafbfc;font-weight:600}
 
 <div class="table-wrap">
 <table>
-<thead>
-<tr>
-<th>Servicio</th>
-<th>Tipo</th>
-<th>Destino</th>
-<th>Estado</th>
-<th>Acciones</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="5">
-<div class="empty">
-<strong>Tu catálogo está listo para comenzar</strong>
-Aquí aparecerán los servicios que registremos en la plataforma.
-<br>No hay información de prueba ni registros ficticios.
-</div>
-</td>
-</tr>
-</tbody>
+<thead><tr><th>Servicio</th><th>Tipo</th><th>Destino</th><th>Estado</th><th>Acciones</th></tr></thead>
+<tbody><tr><td colspan="5"><div class="empty"><strong>Tu catálogo está listo para comenzar</strong>Aquí aparecerán los servicios que registremos.<br>No hay registros ficticios.</div></td></tr></tbody>
 </table>
 </div>
-<p class="note">Esta es la primera versión visual del módulo. La información se conectará a Supabase en la siguiente etapa.</p>
+</section>
+
+<!-- FORMULARIO -->
+<section id="form-view" class="view">
+<div class="top">
+<div>
+<h1>Nuevo servicio</h1>
+<p class="subtitle">Registra la información principal del proveedor o servicio turístico.</p>
+</div>
+<button class="secondary" onclick="showList()">← Volver al listado</button>
+</div>
+
+<div class="notice">
+Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Actividades. Los apartados comerciales y operativos se administrarán en sus secciones correspondientes.
+</div>
+
+<!-- IDENTIDAD -->
+<div class="card">
+<div class="section-head"><h2>1. Identidad y clasificación</h2><span class="badge">Información general</span></div>
+<div class="grid">
+<div class="field">
+<label>Nombre del servicio <span class="required">*</span></label>
+<input id="nombre" placeholder="Nombre comercial">
+</div>
+<div class="field">
+<label>Nombre legal / Razón social</label>
+<input placeholder="Razón social del proveedor">
+</div>
+<div class="field">
+<label>Tipo de servicio <span class="required">*</span></label>
+<select id="tipo">
+<option value="">Seleccionar tipo</option>
+<option>Hotel</option>
+<option>Beach Club</option>
+<option>Day Pass</option>
+<option>Tour</option>
+<option>Actividad</option>
+</select>
+<small>Determina la naturaleza del proveedor o servicio.</small>
+</div>
+<div class="field">
+<label>Categoría comercial</label>
+<select>
+<option value="">Seleccionar categoría</option>
+<option>Day Pass</option>
+<option>Tours</option>
+<option>Actividades</option>
+</select>
+</div>
+<div class="field">
+<label>Destino principal <span class="required">*</span></label>
+<select>
+<option value="">Seleccionar destino</option>
+<option>Cancún</option>
+<option>Playa del Carmen</option>
+<option>Puerto Morelos</option>
+<option>Riviera Maya</option>
+<option>Tulum</option>
+<option>Isla Mujeres</option>
+<option>Puerto Vallarta</option>
+<option>Riviera Nayarit</option>
+<option>Punta Mita</option>
+<option>Los Cabos</option>
+</select>
+</div>
+<div class="field">
+<label>Segundo destino (opcional)</label>
+<select>
+<option value="">Sin segundo destino</option>
+<option>Cancún</option>
+<option>Playa del Carmen</option>
+<option>Puerto Morelos</option>
+<option>Riviera Maya</option>
+<option>Tulum</option>
+<option>Isla Mujeres</option>
+<option>Puerto Vallarta</option>
+<option>Riviera Nayarit</option>
+<option>Punta Mita</option>
+<option>Los Cabos</option>
+</select>
+</div>
+<div class="field">
+<label>Cadena / Grupo</label>
+<input placeholder="Nombre de la cadena, si aplica">
+</div>
+<div class="field">
+<label>Clasificación (estrellas)</label>
+<select>
+<option value="">No aplica</option>
+<option>1 estrella</option>
+<option>2 estrellas</option>
+<option>3 estrellas</option>
+<option>4 estrellas</option>
+<option>5 estrellas</option>
+</select>
+</div>
+<div class="field">
+<label>Slug / URL</label>
+<input placeholder="Se generará automáticamente">
+<small>Identificador para la dirección web del servicio.</small>
+</div>
+</div>
+<div class="checkline"><input type="checkbox" id="visibleB2C" checked><label for="visibleB2C">Visible en el catálogo público B2C.</label></div>
+<div class="checkline"><input type="checkbox" id="visibleB2B" checked><label for="visibleB2B">Visible para agencias en el portal B2B.</label></div>
+</div>
+
+<!-- DESCRIPCIONES -->
+<div class="card">
+<div class="section-head"><h2>2. Descripción y contenido</h2></div>
+<div class="grid">
+<div class="field">
+<label>Descripción corta (máximo 500 caracteres)</label>
+<textarea maxlength="500" placeholder="Texto breve para tarjetas y listados públicos..."></textarea>
+</div>
+<div class="field">
+<label>Descripción corta (inglés)</label>
+<textarea maxlength="500" placeholder="Short description in English..."></textarea>
+<small>Si se deja vacía, podremos utilizar el contenido en español como respaldo.</small>
+</div>
+<div class="field">
+<label>Descripción larga (español)</label>
+<textarea style="min-height:180px" placeholder="Describe el servicio, instalaciones, características y lo que encontrará el visitante..."></textarea>
+</div>
+<div class="field">
+<label>Descripción larga (inglés)</label>
+<textarea style="min-height:180px" placeholder="Full description in English..."></textarea>
+</div>
+</div>
+</div>
+
+<!-- SEO -->
+<div class="card">
+<div class="section-head"><h2>3. Posicionamiento SEO</h2></div>
+<div class="grid">
+<div class="field"><label>SEO Title (español)</label><input placeholder="Título para buscadores"></div>
+<div class="field"><label>SEO Description (español)</label><textarea placeholder="Descripción para resultados de búsqueda..."></textarea></div>
+<div class="field"><label>SEO Title (inglés)</label><input placeholder="Page title in English"></div>
+<div class="field"><label>SEO Description (inglés)</label><textarea placeholder="Search engine description in English..."></textarea></div>
+</div>
+</div>
+
+<!-- CONTACTO -->
+<div class="card">
+<div class="section-head"><h2>4. Contacto del proveedor</h2></div>
+<div class="grid">
+<div class="field"><label>Correo principal</label><input type="email" placeholder="reservaciones@proveedor.com"></div>
+<div class="field"><label>Teléfono</label><input type="tel" placeholder="Número de contacto"></div>
+<div class="field"><label>WhatsApp</label><input type="tel" placeholder="Número de WhatsApp"></div>
+<div class="field"><label>Correos alternos</label><textarea placeholder="ventas@proveedor.com, reservas@proveedor.com"></textarea><small>Podremos admitir varios correos de contacto.</small></div>
+<div class="field" style="grid-column:1/-1"><label>Dirección completa</label><textarea placeholder="Calle, número, colonia, código postal, ciudad y estado..."></textarea></div>
+</div>
+</div>
+
+<!-- UBICACION -->
+<div class="card">
+<div class="section-head"><h2>5. Ubicación geográfica</h2></div>
+<div class="grid">
+<div class="field"><label>Latitud</label><input type="number" step="any" placeholder="Ej. 21.1619"></div>
+<div class="field"><label>Longitud</label><input type="number" step="any" placeholder="Ej. -86.8515"></div>
+</div>
+<div style="margin-top:18px" class="map-placeholder">
+<div>La ubicación del servicio se mostrará aquí.<br><small>En una siguiente etapa integraremos el mapa interactivo y el ajuste del marcador.</small></div>
+</div>
+</div>
+
+<!-- ESTADO -->
+<div class="card">
+<div class="section-head"><h2>6. Estado del servicio</h2></div>
+<div class="grid">
+<div class="field">
+<label>Estado inicial</label>
+<select>
+<option>Borrador</option>
+<option>Activo</option>
+<option>Oculto</option>
+<option>Pausado</option>
+<option>Archivado</option>
+</select>
+</div>
+<div class="field">
+<label>Motivo de pausa (si aplica)</label>
+<input placeholder="Temporada, mantenimiento, etc.">
+</div>
+</div>
+</div>
+
+<div class="actions">
+<button class="secondary" onclick="showList()">Cancelar</button>
+<div class="actions-right">
+<button class="secondary" onclick="alert('La función de guardar borrador se conectará a Supabase.')">Guardar borrador</button>
+<button class="primary" onclick="alert('La conexión de guardado se implementará en la siguiente etapa.')">Guardar servicio</button>
+</div>
+</div>
+</section>
 </div>
 </main>
 </div>
+
+<script>
+function showForm(){
+ document.getElementById('list-view').classList.remove('active');
+ document.getElementById('form-view').classList.add('active');
+ document.getElementById('header-label').textContent='Alta de servicio';
+ window.scrollTo(0,0);
+}
+function showList(){
+ document.getElementById('form-view').classList.remove('active');
+ document.getElementById('list-view').classList.add('active');
+ document.getElementById('header-label').textContent='Catálogo de servicios';
+ window.scrollTo(0,0);
+}
+</script>
 </body>
 </html>
-
