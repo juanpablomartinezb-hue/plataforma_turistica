@@ -243,40 +243,52 @@ Cada horario tendrá su propio cupo para cada día de la semana.
 </div>
 </div>
 </main>
-<script>
-let actual=0;
-const pestañas=document.querySelectorAll('.tab');
-const botones=document.querySelectorAll('.tabs button');
 
-function mostrar(n){
-  actual=n;
-  pestañas.forEach((p,i)=>p.classList.toggle('active',i===n));
-  botones.forEach((b,i)=>b.classList.toggle('active',i===n));
+<script>
+let actual = 0;
+
+const pestanas = document.querySelectorAll('.tab');
+const botones = document.querySelectorAll('.tabs button');
+
+function mostrar(n) {
+  actual = n;
+  pestanas.forEach((p, i) => p.classList.toggle('active', i === n));
+  botones.forEach((b, i) => b.classList.toggle('active', i === n));
 }
 
-function mostrarAnterior(){mostrar(Math.max(0,actual-1))}
-function mostrarSiguiente(){mostrar(Math.min(pestañas.length-1,actual+1))}
+function mostrarAnterior() {
+  mostrar(Math.max(0, actual - 1));
+}
 
-// Generar horarios cada 30 minutos
-const seccionHorarios = document.querySelectorAll('.tab')[2];
+function mostrarSiguiente() {
+  mostrar(Math.min(pestanas.length - 1, actual + 1));
+}
+
+// Selectores de inicio y término
+const seccionHorarios = pestanas[2];
 const selectoresHora = seccionHorarios.querySelectorAll('select');
+
 const horaInicio = selectoresHora[1];
 const horaFin = selectoresHora[2];
 
-function generarHoras() {
+function generarHoras(select) {
   for (let h = 0; h < 24; h++) {
     for (let m of [0, 30]) {
-      const hora = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
-      horaInicio.add(new Option(hora, hora));
+      const hora = String(h).padStart(2, '0') + ':' +
+                   String(m).padStart(2, '0');
+      select.add(new Option(hora, hora));
     }
   }
 }
 
 function actualizarHorasFin() {
   horaFin.innerHTML = '<option value="">Seleccionar</option>';
+
   for (let h = 0; h < 24; h++) {
     for (let m of [0, 30]) {
-      const hora = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+      const hora = String(h).padStart(2, '0') + ':' +
+                   String(m).padStart(2, '0');
+
       if (hora > horaInicio.value) {
         horaFin.add(new Option(hora, hora));
       }
@@ -284,11 +296,77 @@ function actualizarHorasFin() {
   }
 }
 
-generarHoras();
+generarHoras(horaInicio);
 actualizarHorasFin();
 horaInicio.addEventListener('change', actualizarHorasFin);
+
+// Horarios múltiples e inventario
+const selectorNuevoHorario = document.getElementById('nuevoHorario');
+const contenedorHorarios = document.getElementById('listaHorarios');
+const horariosAgregados = [];
+
+generarHoras(selectorNuevoHorario);
+
+function agregarHorario() {
+  const hora = selectorNuevoHorario.value;
+
+  if (!hora) {
+    alert('Selecciona un horario.');
+    return;
+  }
+
+  if (horariosAgregados.includes(hora)) {
+    alert('Este horario ya fue agregado.');
+    return;
+  }
+
+  horariosAgregados.push(hora);
+
+  const dias = [
+    'Lunes', 'Martes', 'Miércoles', 'Jueves',
+    'Viernes', 'Sábado', 'Domingo'
+  ];
+
+  const tabla = document.createElement('div');
+  tabla.style.marginTop = '20px';
+  tabla.style.border = '1px solid #d5dce5';
+  tabla.style.borderRadius = '8px';
+  tabla.style.padding = '12px';
+
+  tabla.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h3>Horario de entrada: ${hora}</h3>
+      <button type="button" class="secondary">Eliminar horario</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Día</th>
+          <th>Disponible</th>
+          <th>Cupo asignado</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${dias.map(dia => `
+          <tr>
+            <td>${dia}</td>
+            <td><input type="checkbox" checked></td>
+            <td><input type="number" min="0" placeholder="Ej. 20"></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+
+  tabla.querySelector('button').addEventListener('click', () => {
+    horariosAgregados.splice(horariosAgregados.indexOf(hora), 1);
+    tabla.remove();
+  });
+
+  contenedorHorarios.appendChild(tabla);
+  selectorNuevoHorario.value = '';
+}
 </script>
-  <script>
 let actual=0;
 const pestañas=document.querySelectorAll('.tab');
 const botones=document.querySelectorAll('.tabs button');
