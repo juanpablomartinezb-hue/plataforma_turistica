@@ -382,6 +382,115 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
         Las imágenes se optimizarán automáticamente para web, con formatos modernos, nombres adecuados para SEO y carga optimizada. No utilizaremos las fotografías originales pesadas directamente en la página pública.
     </div>
 </div>
+    <!-- CATEGORIAS DE EDAD -->
+<div class="card">
+    <div class="section-head">
+        <h2>9. Categorías de edades</h2>
+        <span class="badge">Configuración de pasajeros</span>
+    </div>
+
+    <p>Define las categorías que utilizará este servicio para calcular sus tarifas.</p>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Edad mínima</th>
+                    <th>Edad máxima</th>
+                    <th>Tipo de cobro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Adulto</td>
+                    <td><input type="number" min="0" value="12"></td>
+                    <td><input type="number" min="0" value="99"></td>
+                    <td>Con tarifa</td>
+                </tr>
+                <tr>
+                    <td>Junior</td>
+                    <td><input type="number" min="0" value="6"></td>
+                    <td><input type="number" min="0" value="11"></td>
+                    <td>Con tarifa</td>
+                </tr>
+                <tr>
+                    <td>Menor</td>
+                    <td><input type="number" min="0" value="0"></td>
+                    <td><input type="number" min="0" value="5"></td>
+                    <td>Sin costo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <small>Los rangos son ejemplos iniciales. Cada servicio podrá definir sus propias edades, evitando que los rangos se encimen.</small>
+</div>
+
+<!-- PAQUETES -->
+<div class="card">
+    <div class="section-head">
+        <h2>10. Paquetes y modalidades</h2>
+        <span class="badge">Oferta comercial</span>
+    </div>
+
+    <p>Un servicio podrá ofrecer varios paquetes. Por ejemplo, Day Pass, Sunset Pass o diferentes paquetes dentro del mismo hotel.</p>
+
+    <div class="package-item">
+        <div class="grid">
+            <div class="field">
+                <label>Nombre del paquete</label>
+                <input type="text" placeholder="Ej. Day Pass Todo Incluido">
+            </div>
+            <div class="field">
+                <label>Modalidad</label>
+                <select>
+                    <option>Day Pass</option>
+                    <option>Sunset Pass</option>
+                    <option>Night Pass</option>
+                    <option>Tour</option>
+                    <option>Actividad</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Horario</label>
+                <input type="text" placeholder="Ej. 10:00 a 18:00">
+            </div>
+            <div class="field">
+                <label>Capacidad máxima</label>
+                <input type="number" min="1" placeholder="Ej. 100">
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Descripción del paquete</label>
+            <textarea rows="3" placeholder="Describe qué ofrece este paquete..."></textarea>
+        </div>
+
+        <div class="grid">
+            <div class="field">
+                <label>Anticipación mínima para reservar (horas)</label>
+                <input type="number" min="0" placeholder="Ej. 24">
+            </div>
+            <div class="field">
+                <label>Estado</label>
+                <select>
+                    <option>Activo</option>
+                    <option>Inactivo</option>
+                    <option>Borrador</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn-secondary" onclick="alert('La función para agregar paquetes se habilitará al conectar Supabase.')">
+        + Agregar otro paquete
+    </button>
+
+    <div class="notice" style="margin-top:18px;margin-bottom:0">
+        Cada paquete tendrá sus propias tarifas, horarios, capacidad y disponibilidad. No duplicaremos la ficha del hotel para crear diferentes paquetes.
+    </div>
+</div>
 <div class="actions">
 <button class="secondary" onclick="showList()">Cancelar</button>
 <div class="actions-right">
