@@ -341,6 +341,7 @@ function cambiarTipoProducto(){
   horariosAgregados.length=0;
 }
 
+
 function agregarHorario(){
   const inicio = horaInicio.value;
   const fin = horaFin.value;
@@ -422,6 +423,14 @@ function agregarHorario(){
     </table>
   `;
 
+  const mensajeInicial = listaHorarios.querySelector('p.note');
+  if(mensajeInicial){
+    mensajeInicial.remove();
+  }
+
+  horariosAgregados.push(clave);
+  listaHorarios.appendChild(card);
+
   card.querySelector('button').addEventListener('click', () => {
     card.remove();
 
@@ -430,18 +439,10 @@ function agregarHorario(){
       horariosAgregados.splice(indice, 1);
     }
 
-    const mensajeInicial = listaHorarios.querySelector('p.note');
-
-if(mensajeInicial){
-  mensajeInicial.remove();
-}
-
-  if(horariosAgregados.length === 0){
-    listaHorarios.innerHTML = '';
-  }
-
-  horariosAgregados.push(clave);
-  listaHorarios.appendChild(card);
+    if(horariosAgregados.length === 0){
+      listaHorarios.innerHTML = '<p class="note">Todavía no hay horarios agregados. Selecciona hora de inicio y término para agregar el primero.</p>';
+    }
+  });
 
   horaInicio.value = '';
   crearHoras(horaFin);
