@@ -414,10 +414,11 @@ function agregarHorario(){
     }
   });
 
-  if(horariosAgregados.length===1){
-    listaHorarios.innerHTML='';
-  }
-  listaHorarios.appendChild(card);
+  const mensajeInicial = listaHorarios.querySelector('.note');
+if(mensajeInicial && horariosAgregados.length === 1){
+  listaHorarios.innerHTML = '';
+}
+listaHorarios.appendChild(card);
   horaInicio.value='';
   crearHoras(horaFin);
 }
