@@ -1,1 +1,180 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrador | EXPLORA</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #24313d;
+    }
+    .layout { display: flex; min-height: 100vh; }
+    aside {
+      width: 245px;
+      background: #172b3a;
+      color: white;
+      padding: 28px 18px;
+    }
+    .logo { font-size: 25px; font-weight: bold; margin: 0 0 38px 10px; }
+    .menu-title {
+      color: #9eb0bd;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin: 25px 10px 12px;
+      letter-spacing: 1px;
+    }
+    nav a {
+      display: block;
+      color: #dce5eb;
+      text-decoration: none;
+      padding: 12px 10px;
+      border-radius: 7px;
+      margin: 4px 0;
+      font-size: 14px;
+    }
+    nav a.active, nav a:hover { background: #29485c; color: white; }
+    main { flex: 1; min-width: 0; }
+    header {
+      background: white;
+      padding: 20px 32px;
+      border-bottom: 1px solid #e5e9ed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header span { color: #74818c; font-size: 13px; }
+    .content { padding: 35px; }
+    h1 { font-size: 27px; margin: 0 0 9px; }
+    .intro { color: #71808c; margin-bottom: 30px; }
+    .welcome {
+      background: #fff;
+      padding: 28px;
+      border-radius: 12px;
+      border: 1px solid #e5e9ed;
+      margin-bottom: 25px;
+    }
+    .welcome h2 { margin: 0 0 10px; font-size: 20px; }
+    .welcome p { color: #71808c; margin: 0; line-height: 1.6; }
+    .section-title { font-size: 17px; margin: 30px 0 15px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e5e9ed;
+      border-radius: 10px;
+      padding: 22px;
+    }
+    .card .symbol { font-size: 23px; margin-bottom: 14px; }
+    .card h3 { margin: 0 0 8px; font-size: 16px; }
+    .card p { color: #71808c; font-size: 13px; line-height: 1.5; margin: 0; }
+    .status {
+      display: inline-block;
+      background: #edf2f5;
+      color: #526675;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-top: 18px;
+    }
+    @media (max-width: 800px) {
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      aside { width: 190px; }
+    }
+    @media (max-width: 560px) {
+      .layout { display: block; }
+      aside { width: 100%; }
+      .cards { grid-template-columns: 1fr; }
+      .content { padding: 22px 16px; }
+      header { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="logo">EXPLORA.</div>
+      <nav>
+        <div class="menu-title">Principal</div>
+        <a class="active" href="index.html">⌂ &nbsp; Inicio</a>
+        <div class="menu-title">Catálogo</div>
+        <a href="#">▣ &nbsp; Servicios</a>
+        <a href="#">⌖ &nbsp; Destinos</a>
+        <a href="#">▧ &nbsp; Galerías</a>
+        <a href="#">◷ &nbsp; Tarifas</a>
+        <a href="#">▦ &nbsp; Inventario</a>
+        <div class="menu-title">Operación</div>
+        <a href="#">▤ &nbsp; Reservaciones</a>
+        <a href="#">♙ &nbsp; Agencias</a>
+        <div class="menu-title">Sistema</div>
+        <a href="#">⚙ &nbsp; Configuración</a>
+      </nav>
+    </aside>
+
+    <main>
+      <header>
+        <strong>Panel de administración</strong>
+        <span>Versión inicial · Administrador</span>
+      </header>
+
+      <div class="content">
+        <h1>Bienvenido al administrador</h1>
+        <p class="intro">Desde aquí gestionaremos los servicios y la operación de la plataforma.</p>
+
+        <section class="welcome">
+          <h2>Tu plataforma comienza a tomar forma.</h2>
+          <p>Este será el espacio de trabajo para administrar hoteles, Day Pass, Tours, Actividades, tarifas, disponibilidad, agencias y reservaciones.</p>
+        </section>
+
+        <h2 class="section-title">Módulos principales</h2>
+        <div class="cards">
+          <div class="card">
+            <div class="symbol">▣</div>
+            <h3>Servicios</h3>
+            <p>Crear y administrar hoteles, Day Pass, Tours y Actividades.</p>
+            <span class="status">En construcción</span>
+          </div>
+          <div class="card">
+            <div class="symbol">▧</div>
+            <h3>Galerías</h3>
+            <p>Organizar fotografías, videos y contenido multimedia.</p>
+            <span class="status">En construcción</span>
+          </div>
+          <div class="card">
+            <div class="symbol">◷</div>
+            <h3>Tarifas</h3>
+            <p>Configurar precios públicos, netos, temporadas y comisiones.</p>
+            <span class="status">En construcción</span>
+          </div>
+          <div class="card">
+            <div class="symbol">▦</div>
+            <h3>Inventario</h3>
+            <p>Administrar capacidades, horarios y disponibilidad.</p>
+            <span class="status">En construcción</span>
+          </div>
+          <div class="card">
+            <div class="symbol">▤</div>
+            <h3>Reservaciones</h3>
+            <p>Consultar y gestionar las reservaciones de la plataforma.</p>
+            <span class="status">En construcción</span>
+          </div>
+          <div class="card">
+            <div class="symbol">♙</div>
+            <h3>Agencias</h3>
+            <p>Administrar agencias y sus condiciones comerciales.</p>
+            <span class="status">En construcción</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+
