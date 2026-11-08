@@ -491,6 +491,134 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
         Cada paquete tendrá sus propias tarifas, horarios, capacidad y disponibilidad. No duplicaremos la ficha del hotel para crear diferentes paquetes.
     </div>
 </div>
+    <!-- TARIFAS -->
+<div class="card">
+    <div class="section-head">
+        <h2>11. Tarifas por paquete</h2>
+        <span class="badge">Precios y comisiones</span>
+    </div>
+
+    <p>Las tarifas se configurarán por paquete y categoría de edad.</p>
+
+    <div class="field">
+        <label>Paquete al que corresponden estas tarifas</label>
+        <select>
+            <option>Seleccionar paquete</option>
+            <option>Day Pass Todo Incluido</option>
+        </select>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Precio público (MXN)</th>
+                    <th>Tarifa neta (MXN)</th>
+                    <th>Comisión (%)</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Adulto</td>
+                    <td><input type="number" min="0" placeholder="0.00"></td>
+                    <td><input type="number" min="0" placeholder="0.00"></td>
+                    <td><input type="number" min="0" max="100" placeholder="Automática"></td>
+                    <td>Activa</td>
+                </tr>
+                <tr>
+                    <td>Junior</td>
+                    <td><input type="number" min="0" placeholder="0.00"></td>
+                    <td><input type="number" min="0" placeholder="0.00"></td>
+                    <td><input type="number" min="0" max="100" placeholder="Automática"></td>
+                    <td>Activa</td>
+                </tr>
+                <tr>
+                    <td>Menor</td>
+                    <td><input type="number" min="0" placeholder="0.00"></td>
+                    <td><input type="number" min="0" placeholder="0.00"></td>
+                    <td><input type="number" min="0" max="100" placeholder="Automática"></td>
+                    <td>Activa</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="notice" style="margin-top:18px;margin-bottom:0">
+        La comisión podrá heredarse de la configuración comercial del servicio o definirse para una tarifa específica. La tarifa neta será la referencia de pago al proveedor.
+    </div>
+</div>
+
+<!-- DISPONIBILIDAD -->
+<div class="card">
+    <div class="section-head">
+        <h2>12. Disponibilidad e inventario</h2>
+        <span class="badge">Control de capacidad</span>
+    </div>
+
+    <div class="field">
+        <label>Paquete</label>
+        <select>
+            <option>Seleccionar paquete</option>
+            <option>Day Pass Todo Incluido</option>
+        </select>
+    </div>
+
+    <h3 style="margin-top:22px">Disponibilidad semanal</h3>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Disponible</th>
+                    <th>Capacidad diaria</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Lunes</td><td><input type="checkbox" checked></td><td><input type="number" min="0" placeholder="0"></td></tr>
+                <tr><td>Martes</td><td><input type="checkbox" checked></td><td><input type="number" min="0" placeholder="0"></td></tr>
+                <tr><td>Miércoles</td><td><input type="checkbox" checked></td><td><input type="number" min="0" placeholder="0"></td></tr>
+                <tr><td>Jueves</td><td><input type="checkbox" checked></td><td><input type="number" min="0" placeholder="0"></td></tr>
+                <tr><td>Viernes</td><td><input type="checkbox" checked></td><td><input type="number" min="0" placeholder="0"></td></tr>
+                <tr><td>Sábado</td><td><input type="checkbox" checked></td><td><input type="number" min="0" placeholder="0"></td></tr>
+                <tr><td>Domingo</td><td><input type="checkbox" checked></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 style="margin-top:24px">Excepciones por fecha</h3>
+
+    <div class="grid">
+        <div class="field">
+            <label>Fecha</label>
+            <input type="date">
+        </div>
+        <div class="field">
+            <label>Tipo de excepción</label>
+            <select>
+                <option>Seleccionar</option>
+                <option>Cerrar disponibilidad</option>
+                <option>Modificar capacidad</option>
+                <option>Abrir fecha especial</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Capacidad especial</label>
+            <input type="number" min="0" placeholder="Ej. 50">
+        </div>
+    </div>
+
+    <div class="field">
+        <label>Motivo u observaciones</label>
+        <input type="text" placeholder="Ej. Evento privado, mantenimiento o temporada especial">
+    </div>
+
+    <div class="notice" style="margin-top:18px;margin-bottom:0">
+        La disponibilidad será compartida entre la página pública y el portal de agencias. Las reservaciones confirmadas deberán descontar inventario para evitar sobreventas.
+    </div>
+</div>
 <div class="actions">
 <button class="secondary" onclick="showList()">Cancelar</button>
 <div class="actions-right">
