@@ -619,6 +619,91 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
         La disponibilidad será compartida entre la página pública y el portal de agencias. Las reservaciones confirmadas deberán descontar inventario para evitar sobreventas.
     </div>
 </div>
+    <!-- EQUIPO -->
+<div class="card">
+    <div class="section-head">
+        <h2>13. Equipo y permisos</h2>
+        <span class="badge">Administración</span>
+    </div>
+
+    <p>Usuarios internos autorizados para gestionar este servicio.</p>
+
+    <div class="grid">
+        <div class="field">
+            <label>Nombre del usuario</label>
+            <input type="text" placeholder="Nombre completo">
+        </div>
+        <div class="field">
+            <label>Correo electrónico</label>
+            <input type="email" placeholder="usuario@empresa.com">
+        </div>
+        <div class="field">
+            <label>Rol</label>
+            <select>
+                <option>Seleccionar rol</option>
+                <option>Administrador</option>
+                <option>Contenido</option>
+                <option>Operaciones</option>
+                <option>Finanzas</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="button" class="btn-secondary"
+        onclick="alert('La invitación de usuarios se habilitará al conectar la autenticación.')">
+        + Agregar usuario
+    </button>
+
+    <div class="notice" style="margin-top:18px;margin-bottom:0">
+        Los permisos reales se controlarán mediante cuentas individuales y roles de acceso. No se almacenarán contraseñas en esta ficha.
+    </div>
+</div>
+
+<!-- NOTAS INTERNAS -->
+<div class="card">
+    <div class="section-head">
+        <h2>14. Notas internas</h2>
+        <span class="badge">Solo equipo interno</span>
+    </div>
+
+    <div class="field">
+        <label>Observaciones del servicio</label>
+        <textarea rows="5" placeholder="Escribe aquí acuerdos comerciales, condiciones especiales, pendientes, incidencias u observaciones internas..."></textarea>
+    </div>
+
+    <div class="notice" style="margin-top:12px;margin-bottom:0">
+        Estas notas no aparecerán en la página pública ni serán visibles para las agencias.
+    </div>
+</div>
+
+<!-- HISTORIAL -->
+<div class="card">
+    <div class="section-head">
+        <h2>15. Historial y registro del servicio</h2>
+        <span class="badge">Control administrativo</span>
+    </div>
+
+    <div class="grid">
+        <div class="field">
+            <label>Fecha de creación</label>
+            <input type="text" value="Se asignará automáticamente" disabled>
+        </div>
+        <div class="field">
+            <label>Última actualización</label>
+            <input type="text" value="Se actualizará automáticamente" disabled>
+        </div>
+        <div class="field">
+            <label>Identificador del servicio</label>
+            <input type="text" value="Se generará automáticamente" disabled>
+        </div>
+    </div>
+
+    <h3 style="margin-top:22px">Historial de cambios</h3>
+
+    <div class="notice" style="margin-bottom:0">
+        Aquí se registrarán las modificaciones del servicio, el usuario responsable, la fecha y los valores anteriores y nuevos. El historial será automático y no editable.
+    </div>
+</div>
 <div class="actions">
 <button class="secondary" onclick="showList()">Cancelar</button>
 <div class="actions-right">
