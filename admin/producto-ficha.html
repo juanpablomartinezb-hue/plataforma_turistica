@@ -32,25 +32,56 @@ textarea{min-height:90px;resize:vertical}
 .actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
 button.primary{background:#173b66;color:white;border:0;padding:11px 18px;border-radius:6px;cursor:pointer}
 button.secondary{background:#e8edf3;color:#263445;border:0;padding:11px 18px;border-radius:6px;cursor:pointer}
+button.danger{background:#fee2e2;color:#991b1b;border:0;padding:9px 12px;border-radius:6px;cursor:pointer}
 table{width:100%;border-collapse:collapse;margin-top:12px}
-th,td{padding:10px;border-bottom:1px solid #e5eaf0;text-align:left;font-size:13px}
+th,td{padding:9px;border-bottom:1px solid #e5eaf0;text-align:left;font-size:13px}
 th{background:#f4f6f9}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.tabs button{flex:1 1 45%}}
+.horario-card{border:1px solid #d5dce5;border-radius:9px;padding:16px;margin:18px 0;background:#fff}
+.horario-cabecera{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.horario-cabecera h3{margin:0}
+.horario-card h4{font-size:14px;color:#334b68;margin:20px 0 8px}
+.horario-card textarea{min-height:65px}
+.tabla-tarifas input{min-width:85px}
+.oculto{display:none!important}
+@media(max-width:700px){
+.grid{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+.tabs button{flex:1 1 45%}
+.panel{padding:15px}
+}
 </style>
 </head>
 <body>
+
 <header>
 <h1>Ficha del producto</h1>
-<p>Administrador · Day Pass · Producto independiente asociado a un hotel</p>
+<p>Administrador · Day Pass · Tours · Actividades</p>
 </header>
+
 <main>
 <div class="panel">
 <h2>Identificación del producto</h2>
 <div class="grid">
-<div class="field"><label>Hotel / proveedor</label><select><option>Seleccionar hotel</option></select></div>
-<div class="field"><label>Tipo de producto</label><select><option>Day Pass</option><option>Tour</option><option>Actividad</option></select></div>
-<div class="field"><label>Nombre comercial en español</label><input placeholder="Ej. Day Pass Todo Incluido"></div>
-<div class="field"><label>Nombre comercial en inglés</label><input placeholder="Ej. All Inclusive Day Pass"></div>
+<div class="field">
+<label>Hotel / proveedor</label>
+<select><option>Seleccionar hotel o proveedor</option></select>
+</div>
+<div class="field">
+<label>Tipo de producto</label>
+<select id="tipoProducto" onchange="cambiarTipoProducto()">
+<option value="daypass">Day Pass</option>
+<option value="tour">Tour</option>
+<option value="actividad">Actividad</option>
+</select>
+</div>
+<div class="field">
+<label>Nombre comercial en español</label>
+<input placeholder="Ej. Day Pass Todo Incluido">
+</div>
+<div class="field">
+<label>Nombre comercial en inglés</label>
+<input placeholder="Ej. All Inclusive Day Pass">
+</div>
 </div>
 </div>
 
@@ -71,7 +102,7 @@ th{background:#f4f6f9}
 <div class="field full"><label>Texto corto para anuncio / listado</label><textarea placeholder="Descripción breve para presentar el producto"></textarea></div>
 <div class="field"><label>Descripción completa en español</label><textarea></textarea></div>
 <div class="field"><label>Descripción completa en inglés</label><textarea></textarea></div>
-<div class="field"><label>Destino</label><select><option>Seleccionar destino</option><option>Cancún</option><option>Playa del Carmen</option><option>Puerto Morelos</option><option>Riviera Maya</option><option>Tulum</option><option>Isla Mujeres</option></select></div>
+<div class="field"><label>Destino</label><select><option>Seleccionar destino</option><option>Cancún</option><option>Playa del Carmen</option><option>Puerto Morelos</option><option>Riviera Maya</option><option>Tulum</option><option>Isla Mujeres</option><option>Puerto Vallarta</option><option>Los Cabos</option></select></div>
 <div class="field"><label>Texto destacado para el anuncio</label><textarea placeholder="Ej. Incluye alimentos, bebidas y acceso a piscinas"></textarea></div>
 <div class="field"><label>Palabras clave SEO</label><input placeholder="Day Pass, hotel, destino..."></div>
 <div class="field"><label>Título SEO</label><input></div>
@@ -81,40 +112,54 @@ th{background:#f4f6f9}
 
 <section class="tab">
 <h2>2. Incluye y características</h2>
+<div class="note" id="notaIncluye">En Day Pass, las inclusiones pueden configurarse de forma independiente para cada horario. En Tours y Actividades, serán compartidas por todos los horarios.</div>
 <div class="grid">
-<div class="field"><label>Incluye (español)</label><textarea placeholder="Un servicio por línea"></textarea></div>
-<div class="field"><label>Incluye (inglés)</label><textarea></textarea></div>
-<div class="field"><label>No incluye (español)</label><textarea></textarea></div>
+<div class="field"><label>Incluye (español)</label><textarea id="incluyeComun" placeholder="Un servicio por línea"></textarea></div>
+<div class="field"><label>Incluye (inglés)</label><textarea placeholder="One service per line"></textarea></div>
+<div class="field"><label>No incluye (español)</label><textarea id="noIncluyeComun"></textarea></div>
 <div class="field"><label>No incluye (inglés)</label><textarea></textarea></div>
 </div>
 <h3>Servicios y características</h3>
 <div class="checks">
-<label><input type="checkbox"> Desayuno</label><label><input type="checkbox"> Comida</label>
-<label><input type="checkbox"> Cena</label><label><input type="checkbox"> Snacks</label>
-<label><input type="checkbox"> Bebidas</label><label><input type="checkbox"> Bebidas alcohólicas</label>
-<label><input type="checkbox"> Alberca</label><label><input type="checkbox"> Acceso a playa</label>
-<label><input type="checkbox"> Camastros</label><label><input type="checkbox"> Toallas</label>
-<label><input type="checkbox"> Spa</label><label><input type="checkbox"> Gimnasio</label>
-<label><input type="checkbox"> Actividades infantiles</label><label><input type="checkbox"> Wi-Fi</label>
-<label><input type="checkbox"> Estacionamiento</label><label><input type="checkbox"> Pet friendly</label>
+<label><input type="checkbox"> Desayuno</label>
+<label><input type="checkbox"> Comida</label>
+<label><input type="checkbox"> Cena</label>
+<label><input type="checkbox"> Snacks</label>
+<label><input type="checkbox"> Bebidas</label>
+<label><input type="checkbox"> Bebidas alcohólicas</label>
+<label><input type="checkbox"> Alberca</label>
+<label><input type="checkbox"> Acceso a playa</label>
+<label><input type="checkbox"> Camastros</label>
+<label><input type="checkbox"> Toallas</label>
+<label><input type="checkbox"> Spa</label>
+<label><input type="checkbox"> Gimnasio</label>
+<label><input type="checkbox"> Actividades infantiles</label>
+<label><input type="checkbox"> Wi-Fi</label>
+<label><input type="checkbox"> Estacionamiento</label>
+<label><input type="checkbox"> Pet friendly</label>
 </div>
 <h3>Etiquetas para filtros públicos</h3>
 <div class="checks">
-<label><input type="checkbox"> Familiar</label><label><input type="checkbox"> Solo adultos</label>
-<label><input type="checkbox"> Todo incluido</label><label><input type="checkbox"> Parejas</label>
-<label><input type="checkbox"> Lujo</label><label><input type="checkbox"> Relax</label>
-<label><input type="checkbox"> Fiesta</label><label><input type="checkbox"> Parque acuático</label>
+<label><input type="checkbox"> Familiar</label>
+<label><input type="checkbox"> Solo adultos</label>
+<label><input type="checkbox"> Todo incluido</label>
+<label><input type="checkbox"> Parejas</label>
+<label><input type="checkbox"> Lujo</label>
+<label><input type="checkbox"> Relax</label>
+<label><input type="checkbox"> Fiesta</label>
+<label><input type="checkbox"> Parque acuático</label>
 <label><input type="checkbox"> Crédito de consumo</label>
 </div>
 </section>
 
 <section class="tab">
 <h2>3. Horarios e inventario</h2>
-<div class="note">Cada horario puede tener su propio cupo. La disponibilidad se comparte entre ventas B2C y B2B.</div>
+<div class="note">La disponibilidad se comparte entre ventas B2C y B2B. Cada horario tiene su propio allotment por día de la semana.</div>
 <div class="grid">
 <div class="field"><label>Máximo de personas por reservación</label><input type="number" min="1" placeholder="Ej. 10"></div>
 <div class="field"><label>Tipo de confirmación</label><select><option>Inmediata</option><option>Bajo solicitud</option></select></div>
 </div>
+
 <h3>Categorías de pasajeros y edades</h3>
 <div class="note">Activa únicamente las categorías que maneje este producto. Los rangos de edad se configuran por proveedor y servicio.</div>
 <div class="grid">
@@ -124,43 +169,34 @@ th{background:#f4f6f9}
 <div class="field"><label><input type="checkbox"> Menores sin costo</label><input placeholder="Edad mínima y máxima"></div>
 </div>
 <div class="checks"><label><input type="checkbox"> Servicio exclusivo para adultos (Solo adultos)</label></div>
-<h3>Horarios de acceso</h3>
-<div class="note">Los horarios se seleccionan en intervalos de 30 minutos. Cada horario puede manejar cupo distinto.</div>
-<div class="grid">
-<div class="field"><label>Hora de inicio</label><select><option>Seleccionar</option></select></div>
-<div class="field"><label>Hora de término</label><select><option>Seleccionar</option></select></div>
-</div>
-<h3>Horarios de entrada e inventario</h3>
 
-<div class="note">
-Cada horario tendrá su propio cupo para cada día de la semana.
-</div>
-
+<h3>Configuración de horarios</h3>
+<div class="note" id="explicacionTipo">Day Pass: cada horario será independiente y podrá tener sus propias tarifas e inclusiones.</div>
 <div class="grid">
-  <div class="field">
-    <label>Nuevo horario de entrada</label>
-    <select id="nuevoHorario">
-      <option value="">Seleccionar horario</option>
-    </select>
-  </div>
-  <div class="field">
-    <label>Acción</label>
-    <button type="button" class="primary" onclick="agregarHorario()">
-      + Agregar horario
-    </button>
-  </div>
+<div class="field">
+<label>Hora de inicio / salida</label>
+<select id="horaNuevaInicio"></select>
+</div>
+<div class="field">
+<label>Hora de término / regreso</label>
+<select id="horaNuevaFin"></select>
+</div>
+<div class="field full">
+<button type="button" class="primary" onclick="agregarHorario()">+ Agregar horario</button>
+</div>
 </div>
 
 <div id="listaHorarios">
-  <p class="note">Todavía no hay horarios agregados.</p>
+<p class="note">Todavía no hay horarios agregados. Selecciona hora de inicio y término para agregar el primero.</p>
 </div>
-</table>
+
 <h3>Excepciones por fecha</h3>
 <div class="grid">
 <div class="field"><label>Fecha especial</label><input type="date"></div>
+<div class="field"><label>Horario al que aplica</label><select><option>Todos los horarios</option></select></div>
 <div class="field"><label>Acción</label><select><option>Cerrar</option><option>Abrir</option><option>Modificar cupo</option></select></div>
-<div class="field"><label>Nuevo cupo (si aplica)</label><input type="number"></div>
-<div class="field"><label>Motivo / nota interna</label><input></div>
+<div class="field"><label>Nuevo cupo (si aplica)</label><input type="number" min="0"></div>
+<div class="field full"><label>Motivo / nota interna</label><input></div>
 </div>
 </section>
 
@@ -177,13 +213,14 @@ Cada horario tendrá su propio cupo para cada día de la semana.
 <div class="field"><label>Moneda para mostrar en B2C</label><select><option>MXN</option><option>USD</option></select></div>
 <div class="field"><label>Moneda para mostrar en B2B</label><select><option>MXN</option><option>USD</option></select></div>
 </div>
-<h3>Tarifas por categoría de pasajero</h3>
+<h3>Tarifas comunes por categoría de pasajero</h3>
+<div class="note">En Tours y Actividades estas tarifas aplican a todos los horarios. En Day Pass, las tarifas se capturan dentro de cada horario.</div>
 <table>
 <thead><tr><th>Categoría</th><th>Tarifa pública</th><th>Tarifa neta</th><th>Moneda</th></tr></thead>
 <tbody>
-<tr><td>Adultos</td><td><input type="number"></td><td><input type="number"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
-<tr><td>Junior</td><td><input type="number"></td><td><input type="number"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
-<tr><td>Menores con costo</td><td><input type="number"></td><td><input type="number"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
+<tr><td>Adultos</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
+<tr><td>Junior</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
+<tr><td>Menores con costo</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
 <tr><td>Menores sin costo</td><td><input type="number" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
 </tbody>
 </table>
@@ -194,12 +231,12 @@ Cada horario tendrá su propio cupo para cada día de la semana.
 <div class="field"><label>Fecha inicial</label><input type="date"></div>
 <div class="field"><label>Fecha final</label><input type="date"></div>
 </div>
-<div class="note">La configuración de paquetes grupales y precios fijos por número de personas se desarrollará con las reglas comerciales que definamos para ese tipo de Day Pass.</div>
+<div class="note">La configuración de paquetes grupales y precios fijos por número de personas se desarrollará cuando definamos sus reglas comerciales.</div>
 </section>
 
 <section class="tab">
 <h2>5. Fotos y multimedia</h2>
-<div class="note">La galería del Day Pass es independiente de la galería general del hotel.</div>
+<div class="note">La galería del producto es independiente de la galería general del hotel o proveedor.</div>
 <div class="grid">
 <div class="field full"><label>Subir fotografías</label><input type="file" accept="image/*" multiple></div>
 <div class="field full"><label>Subir videos</label><input type="file" accept="video/*" multiple></div>
@@ -215,7 +252,7 @@ Cada horario tendrá su propio cupo para cada día de la semana.
 <div class="field"><label>Unidad de anticipación</label><select><option>Minutos</option><option>Horas</option><option>Días</option></select></div>
 <div class="field"><label>Política pública para el cliente (español)</label><textarea></textarea></div>
 <div class="field"><label>Public policy (English)</label><textarea></textarea></div>
-<div class="field"><label>Política interna / acuerdo con hotel</label><textarea></textarea></div>
+<div class="field"><label>Política interna / acuerdo con proveedor</label><textarea></textarea></div>
 <div class="field"><label>Correos para confirmaciones del proveedor</label><textarea placeholder="correo1@hotel.com, correo2@hotel.com"></textarea></div>
 </div>
 <div class="checks">
@@ -246,216 +283,145 @@ Cada horario tendrá su propio cupo para cada día de la semana.
 
 <script>
 let actual = 0;
-
 const pestanas = document.querySelectorAll('.tab');
 const botones = document.querySelectorAll('.tabs button');
 
-function mostrar(n) {
-  actual = n;
-  pestanas.forEach((p, i) => p.classList.toggle('active', i === n));
-  botones.forEach((b, i) => b.classList.toggle('active', i === n));
-}
-
-function mostrarAnterior() {
-  mostrar(Math.max(0, actual - 1));
-}
-
-function mostrarSiguiente() {
-  mostrar(Math.min(pestanas.length - 1, actual + 1));
-}
-
-// Selectores de inicio y término
-const seccionHorarios = pestanas[2];
-const selectoresHora = seccionHorarios.querySelectorAll('select');
-
-const horaInicio = selectoresHora[1];
-const horaFin = selectoresHora[2];
-
-function generarHoras(select) {
-  for (let h = 0; h < 24; h++) {
-    for (let m of [0, 30]) {
-      const hora = String(h).padStart(2, '0') + ':' +
-                   String(m).padStart(2, '0');
-      select.add(new Option(hora, hora));
-    }
-  }
-}
-
-function actualizarHorasFin() {
-  horaFin.innerHTML = '<option value="">Seleccionar</option>';
-
-  for (let h = 0; h < 24; h++) {
-    for (let m of [0, 30]) {
-      const hora = String(h).padStart(2, '0') + ':' +
-                   String(m).padStart(2, '0');
-
-      if (hora > horaInicio.value) {
-        horaFin.add(new Option(hora, hora));
-      }
-    }
-  }
-}
-
-generarHoras(horaInicio);
-actualizarHorasFin();
-horaInicio.addEventListener('change', actualizarHorasFin);
-
-// Horarios múltiples e inventario
-const selectorNuevoHorario = document.getElementById('nuevoHorario');
-const contenedorHorarios = document.getElementById('listaHorarios');
-const horariosAgregados = [];
-
-generarHoras(selectorNuevoHorario);
-
-function agregarHorario() {
-  const hora = selectorNuevoHorario.value;
-
-  if (!hora) {
-    alert('Selecciona un horario.');
-    return;
-  }
-
-  if (horariosAgregados.includes(hora)) {
-    alert('Este horario ya fue agregado.');
-    return;
-  }
-
-  horariosAgregados.push(hora);
-
-  const dias = [
-    'Lunes', 'Martes', 'Miércoles', 'Jueves',
-    'Viernes', 'Sábado', 'Domingo'
-  ];
-
-  const tabla = document.createElement('div');
-  tabla.style.marginTop = '20px';
-  tabla.style.border = '1px solid #d5dce5';
-  tabla.style.borderRadius = '8px';
-  tabla.style.padding = '12px';
-
-  tabla.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-      <h3>Horario de entrada: ${hora}</h3>
-      <button type="button" class="secondary">Eliminar horario</button>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Día</th>
-          <th>Disponible</th>
-          <th>Cupo asignado</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${dias.map(dia => `
-          <tr>
-            <td>${dia}</td>
-            <td><input type="checkbox" checked></td>
-            <td><input type="number" min="0" placeholder="Ej. 20"></td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-
-  tabla.querySelector('button').addEventListener('click', () => {
-    horariosAgregados.splice(horariosAgregados.indexOf(hora), 1);
-    tabla.remove();
-  });
-
-  contenedorHorarios.appendChild(tabla);
-  selectorNuevoHorario.value = '';
-}
-</script>
-let actual=0;
-const pestañas=document.querySelectorAll('.tab');
-const botones=document.querySelectorAll('.tabs button');
 function mostrar(n){
-actual=n;
-pestañas.forEach((p,i)=>p.classList.toggle('active',i===n));
-botones.forEach((b,i)=>b.classList.toggle('active',i===n));
+  actual = n;
+  pestanas.forEach((p,i)=>p.classList.toggle('active',i===n));
+  botones.forEach((b,i)=>b.classList.toggle('active',i===n));
 }
 function mostrarAnterior(){mostrar(Math.max(0,actual-1))}
-function mostrarSiguiente(){mostrar(Math.min(pestañas.length-1,actual+1))}
-// Configuración de horarios múltiples
-const selectorNuevoHorario = document.getElementById('nuevoHorario');
-const contenedorHorarios = document.getElementById('listaHorarios');
+function mostrarSiguiente(){mostrar(Math.min(pestanas.length-1,actual+1))}
 
+const tipoProducto = document.getElementById('tipoProducto');
+const horaInicio = document.getElementById('horaNuevaInicio');
+const horaFin = document.getElementById('horaNuevaFin');
+const listaHorarios = document.getElementById('listaHorarios');
 const horariosAgregados = [];
 
-if (selectorNuevoHorario) {
-  for (let h = 0; h < 24; h++) {
-    for (let m of [0, 30]) {
-      const hora = String(h).padStart(2, '0') + ':' +
-                   String(m).padStart(2, '0');
+const dias = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+const categorias = ['Adultos','Junior','Menores con costo','Menores sin costo'];
 
-      selectorNuevoHorario.add(new Option(hora, hora));
+function crearHoras(select){
+  select.innerHTML = '<option value="">Seleccionar</option>';
+  for(let h=0;h<24;h++){
+    for(let m of [0,30]){
+      const hora=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+      select.add(new Option(hora,hora));
     }
   }
 }
+crearHoras(horaInicio);
+crearHoras(horaFin);
 
-function agregarHorario() {
-  const hora = selectorNuevoHorario.value;
+horaInicio.addEventListener('change',()=>{
+  const inicio=horaInicio.value;
+  crearHoras(horaFin);
+  Array.from(horaFin.options).forEach(op=>{
+    if(op.value && op.value<=inicio) op.remove();
+  });
+});
 
-  if (!hora) {
-    alert('Selecciona un horario.');
+function esDayPass(){
+  return tipoProducto.value==='daypass';
+}
+
+function cambiarTipoProducto(){
+  const texto=document.getElementById('explicacionTipo');
+  const nota=document.getElementById('notaIncluye');
+  if(esDayPass()){
+    texto.textContent='Day Pass: cada horario será independiente y podrá tener sus propias tarifas, inclusiones y allotment.';
+    nota.textContent='En Day Pass, las inclusiones se configuran de forma independiente dentro de cada horario.';
+  }else{
+    texto.textContent='Tour / Actividad: todos los horarios compartirán las mismas tarifas e inclusiones. Cada salida tendrá su propio allotment.';
+    nota.textContent='En Tours y Actividades, las inclusiones y tarifas generales se comparten entre todos los horarios.';
+  }
+  listaHorarios.innerHTML='<p class="note">Si cambiaste el tipo de producto, revisa los horarios que agregues a continuación. Para evitar mezclar configuraciones, elimina los horarios anteriores antes de cambiar de modalidad.</p>';
+  horariosAgregados.length=0;
+}
+
+function agregarHorario(){
+  const inicio=horaInicio.value;
+  const fin=horaFin.value;
+
+  if(!inicio || !fin){
+    alert('Selecciona la hora de inicio y la hora de término.');
+    return;
+  }
+  if(fin<=inicio){
+    alert('La hora de término debe ser posterior a la hora de inicio.');
     return;
   }
 
-  if (horariosAgregados.includes(hora)) {
+  const clave=inicio+'-'+fin;
+  if(horariosAgregados.includes(clave)){
     alert('Este horario ya fue agregado.');
     return;
   }
+  horariosAgregados.push(clave);
 
-  horariosAgregados.push(hora);
+  const esDP=esDayPass();
+  const card=document.createElement('div');
+  card.className='horario-card';
 
-  const dias = [
-    'Lunes', 'Martes', 'Miércoles', 'Jueves',
-    'Viernes', 'Sábado', 'Domingo'
-  ];
+  let tarifas='';
+  let inclusiones='';
 
-  const tabla = document.createElement('div');
-  tabla.style.marginTop = '20px';
-  tabla.style.border = '1px solid #d5dce5';
-  tabla.style.borderRadius = '8px';
-  tabla.style.padding = '12px';
+  if(esDP){
+    tarifas=`
+      <h4>Tarifas propias de este horario</h4>
+      <table class="tabla-tarifas">
+        <thead><tr><th>Categoría</th><th>Tarifa pública MXN</th><th>Tarifa neta MXN</th></tr></thead>
+        <tbody>
+          ${categorias.map(c=>`<tr><td>${c}</td><td><input type="number" min="0" step="0.01" placeholder="0.00"></td><td><input type="number" min="0" step="0.01" placeholder="0.00"></td></tr>`).join('')}
+        </tbody>
+      </table>
+      <h4>Incluye en este horario (español)</h4>
+      <textarea placeholder="Describe lo que incluye este horario, un concepto por línea"></textarea>
+      <h4>No incluye en este horario (español)</h4>
+      <textarea placeholder="Describe lo que no incluye este horario"></textarea>
+    `;
+  }
 
-  tabla.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-      <h3>Horario de entrada: ${hora}</h3>
-      <button type="button" class="secondary">Eliminar horario</button>
+  card.innerHTML=`
+    <div class="horario-cabecera">
+      <h3>${esDP?'Horario independiente':'Salida del producto'}: ${inicio} – ${fin}</h3>
+      <button type="button" class="danger">Eliminar horario</button>
     </div>
-
+    ${esDP?tarifas:'<p class="note">Este horario comparte las tarifas e inclusiones generales del producto. Aquí solo se configura su disponibilidad.</p>'}
+    <h4>Allotment por día de la semana</h4>
     <table>
-      <thead>
-        <tr>
-          <th>Día</th>
-          <th>Disponible</th>
-          <th>Cupo asignado</th>
-        </tr>
-      </thead>
+      <thead><tr><th>Día</th><th>Disponible</th><th>Cupo asignado</th></tr></thead>
       <tbody>
-        ${dias.map(dia => `
+        ${dias.map(d=>`
           <tr>
-            <td>${dia}</td>
-            <td><input type="checkbox" checked></td>
-            <td><input type="number" min="0" placeholder="Ej. 20"></td>
+            <td>${d}</td>
+            <td><input type="checkbox" checked aria-label="Disponible ${d}"></td>
+            <td><input type="number" min="0" step="1" placeholder="Ej. 20" aria-label="Cupo ${d}"></td>
           </tr>
         `).join('')}
       </tbody>
     </table>
   `;
 
-  tabla.querySelector('button').addEventListener('click', () => {
-    horariosAgregados.splice(horariosAgregados.indexOf(hora), 1);
-    tabla.remove();
+  card.querySelector('button').addEventListener('click',()=>{
+    const i=horariosAgregados.indexOf(clave);
+    if(i>=0) horariosAgregados.splice(i,1);
+    card.remove();
+    if(horariosAgregados.length===0){
+      listaHorarios.innerHTML='<p class="note">Todavía no hay horarios agregados.</p>';
+    }
   });
 
-  contenedorHorarios.appendChild(tabla);
-
-  selectorNuevoHorario.value = '';
+  if(horariosAgregados.length===1){
+    listaHorarios.innerHTML='';
+  }
+  listaHorarios.appendChild(card);
+  horaInicio.value='';
+  crearHoras(horaFin);
 }
-  </script>
+</script>
+
 </body>
 </html>
-
