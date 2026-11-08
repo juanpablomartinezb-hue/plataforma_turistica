@@ -310,7 +310,78 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 </div>
 </div>
 </div>
+<!-- CONFIGURACION COMERCIAL -->
+<div class="card">
+    <div class="section-head">
+        <h2>7. Configuración comercial</h2>
+        <span class="badge">Condiciones del proveedor</span>
+    </div>
 
+    <div class="grid">
+        <div class="field">
+            <label>Comisión de la plataforma (%)</label>
+            <input type="number" min="0" max="100" step="0.01"
+                   placeholder="Usar comisión general">
+            <small>Si se deja vacío, se aplicará la comisión general configurada en la plataforma.</small>
+        </div>
+
+        <div class="field">
+            <label>Modalidad de pago</label>
+            <select>
+                <option value="">Seleccionar modalidad</option>
+                <option>Pago completo en línea</option>
+                <option>Pago completo en destino</option>
+                <option>Anticipo en línea y saldo en destino</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="notice" style="margin-top:18px;margin-bottom:0">
+        La comisión y las condiciones comerciales podrán configurarse de manera independiente para cada servicio. Las condiciones especiales para agencias se administrarán desde el módulo B2B.
+    </div>
+</div>
+
+<!-- GALERIA -->
+<div class="card">
+    <div class="section-head">
+        <h2>8. Fotografías y galería multimedia</h2>
+        <span class="badge">Contenido visual</span>
+    </div>
+
+    <div class="field">
+        <label>Fotografía principal / Portada</label>
+        <input type="file" accept="image/*">
+        <small>Será la imagen principal del servicio en los listados y en su página pública.</small>
+    </div>
+
+    <div class="field" style="margin-top:22px">
+        <label>Galería general de fotografías y videos</label>
+        <input type="file" accept="image/*,video/mp4,video/webm,video/quicktime" multiple>
+        <small>Podremos cargar varias fotografías y videos. Más adelante incluiremos ordenamiento, selección de portada, títulos, textos alternativos y enlaces de YouTube o Vimeo.</small>
+    </div>
+
+    <div class="field" style="margin-top:22px">
+        <label>Flyers y material promocional</label>
+        <div class="grid three">
+            <div>
+                <label>Flyer 1</label>
+                <input type="file" accept="image/*">
+            </div>
+            <div>
+                <label>Flyer 2</label>
+                <input type="file" accept="image/*">
+            </div>
+            <div>
+                <label>Flyer 3</label>
+                <input type="file" accept="image/*">
+            </div>
+        </div>
+    </div>
+
+    <div class="notice" style="margin-top:20px;margin-bottom:0">
+        Las imágenes se optimizarán automáticamente para web, con formatos modernos, nombres adecuados para SEO y carga optimizada. No utilizaremos las fotografías originales pesadas directamente en la página pública.
+    </div>
+</div>
 <div class="actions">
 <button class="secondary" onclick="showList()">Cancelar</button>
 <div class="actions-right">
