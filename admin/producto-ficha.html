@@ -130,18 +130,30 @@ th{background:#f4f6f9}
 <div class="field"><label>Hora de inicio</label><select><option>Seleccionar</option></select></div>
 <div class="field"><label>Hora de término</label><select><option>Seleccionar</option></select></div>
 </div>
-<h3>Cupo por día de la semana</h3>
-<table>
-<thead><tr><th>Día</th><th>Disponible</th><th>Cupo</th></tr></thead>
-<tbody>
-<tr><td>Lunes</td><td><input type="checkbox"></td><td><input type="number" placeholder="0"></td></tr>
-<tr><td>Martes</td><td><input type="checkbox"></td><td><input type="number" placeholder="0"></td></tr>
-<tr><td>Miércoles</td><td><input type="checkbox"></td><td><input type="number" placeholder="0"></td></tr>
-<tr><td>Jueves</td><td><input type="checkbox"></td><td><input type="number" placeholder="0"></td></tr>
-<tr><td>Viernes</td><td><input type="checkbox"></td><td><input type="number" placeholder="0"></td></tr>
-<tr><td>Sábado</td><td><input type="checkbox"></td><td><input type="number" placeholder="0"></td></tr>
-<tr><td>Domingo</td><td><input type="checkbox"></td><td><input type="number" placeholder="0"></td></tr>
-</tbody>
+<h3>Horarios de entrada e inventario</h3>
+
+<div class="note">
+Cada horario tendrá su propio cupo para cada día de la semana.
+</div>
+
+<div class="grid">
+  <div class="field">
+    <label>Nuevo horario de entrada</label>
+    <select id="nuevoHorario">
+      <option value="">Seleccionar horario</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Acción</label>
+    <button type="button" class="primary" onclick="agregarHorario()">
+      + Agregar horario
+    </button>
+  </div>
+</div>
+
+<div id="listaHorarios">
+  <p class="note">Todavía no hay horarios agregados.</p>
+</div>
 </table>
 <h3>Excepciones por fecha</h3>
 <div class="grid">
