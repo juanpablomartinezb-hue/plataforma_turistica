@@ -342,59 +342,76 @@ function cambiarTipoProducto(){
 }
 
 function agregarHorario(){
-  const inicio=horaInicio.value;
-  const fin=horaFin.value;
+  const inicio = horaInicio.value;
+  const fin = horaFin.value;
 
   if(!inicio || !fin){
     alert('Selecciona la hora de inicio y la hora de término.');
     return;
   }
-  if(fin<=inicio){
+
+  if(fin <= inicio){
     alert('La hora de término debe ser posterior a la hora de inicio.');
     return;
   }
 
-  const clave=inicio+'-'+fin;
+  const clave = inicio + '-' + fin;
+
   if(horariosAgregados.includes(clave)){
     alert('Este horario ya fue agregado.');
     return;
   }
-  horariosAgregados.push(clave);
 
-  const esDP=esDayPass();
-  const card=document.createElement('div');
-  card.className='horario-card';
+  const esDP = esDayPass();
+  const card = document.createElement('div');
+  card.className = 'horario-card';
+  card.dataset.clave = clave;
 
-  let tarifas='';
-  let inclusiones='';
+  let tarifas = '';
 
   if(esDP){
-    tarifas=`
+    tarifas = `
       <h4>Tarifas propias de este horario</h4>
       <table class="tabla-tarifas">
-        <thead><tr><th>Categoría</th><th>Tarifa pública MXN</th><th>Tarifa neta MXN</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>Tarifa pública MXN</th>
+            <th>Tarifa neta MXN</th>
+          </tr>
+        </thead>
         <tbody>
-          ${categorias.map(c=>`<tr><td>${c}</td><td><input type="number" min="0" step="0.01" placeholder="0.00"></td><td><input type="number" min="0" step="0.01" placeholder="0.00"></td></tr>`).join('')}
+          ${categorias.map(c => `
+            <tr>
+              <td>${c}</td>
+              <td><input type="number" min="0" step="0.01" placeholder="0.00"></td>
+              <td><input type="number" min="0" step="0.01" placeholder="0.00"></td>
+            </tr>
+          `).join('')}
         </tbody>
       </table>
       <h4>Incluye en este horario (español)</h4>
-      <textarea placeholder="Describe lo que incluye este horario, un concepto por línea"></textarea>
+      <textarea placeholder="Describe lo que incluye este horario"></textarea>
       <h4>No incluye en este horario (español)</h4>
       <textarea placeholder="Describe lo que no incluye este horario"></textarea>
     `;
   }
 
-  card.innerHTML=`
+  card.innerHTML = `
     <div class="horario-cabecera">
-      <h3>${esDP?'Horario independiente':'Salida del producto'}: ${inicio} – ${fin}</h3>
+      <h3>${esDP ? 'Horario independiente' : 'Salida del producto'}: ${inicio} – ${fin}</h3>
       <button type="button" class="danger">Eliminar horario</button>
     </div>
-    ${esDP?tarifas:'<p class="note">Este horario comparte las tarifas e inclusiones generales del producto. Aquí solo se configura su disponibilidad.</p>'}
+
+    ${tarifas || '<p class="note">Este horario comparte las tarifas e inclusiones generales del producto.</p>'}
+
     <h4>Allotment por día de la semana</h4>
     <table>
-      <thead><tr><th>Día</th><th>Disponible</th><th>Cupo asignado</th></tr></thead>
+      <thead>
+        <tr><th>Día</th><th>Disponible</th><th>Cupo asignado</th></tr>
+      </thead>
       <tbody>
-        ${dias.map(d=>`
+        ${dias.map(d => `
           <tr>
             <td>${d}</td>
             <td><input type="checkbox" checked aria-label="Disponible ${d}"></td>
@@ -405,21 +422,27 @@ function agregarHorario(){
     </table>
   `;
 
-  card.querySelector('button').addEventListener('click',()=>{
-    const i=horariosAgregados.indexOf(clave);
-    if(i>=0) horariosAgregados.splice(i,1);
+  card.querySelector('button').addEventListener('click', () => {
     card.remove();
-    if(horariosAgregados.length===0){
-      listaHorarios.innerHTML='<p class="note">Todavía no hay horarios agregados.</p>';
+
+    const indice = horariosAgregados.indexOf(clave);
+    if(indice !== -1){
+      horariosAgregados.splice(indice, 1);
+    }
+
+    if(horariosAgregados.length === 0){
+      listaHorarios.innerHTML = '<p class="note">Todavía no hay horarios agregados.</p>';
     }
   });
 
-  const mensajeInicial = listaHorarios.querySelector('.note');
-if(mensajeInicial && horariosAgregados.length === 1){
-  listaHorarios.innerHTML = '';
-}
-listaHorarios.appendChild(card);
-  horaInicio.value='';
+  if(horariosAgregados.length === 0){
+    listaHorarios.innerHTML = '';
+  }
+
+  horariosAgregados.push(clave);
+  listaHorarios.appendChild(card);
+
+  horaInicio.value = '';
   crearHoras(horaFin);
 }
 </script>
