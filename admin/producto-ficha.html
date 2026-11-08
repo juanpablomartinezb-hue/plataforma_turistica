@@ -248,8 +248,8 @@ function mostrarSiguiente(){mostrar(Math.min(pestañas.length-1,actual+1))}
 // Generar horarios cada 30 minutos
 const seccionHorarios = document.querySelectorAll('.tab')[2];
 const selectoresHora = seccionHorarios.querySelectorAll('select');
-const horaInicio = selectoresHora[0];
-const horaFin = selectoresHora[1];
+const horaInicio = selectoresHora[1];
+const horaFin = selectoresHora[2];
 
 function generarHoras() {
   for (let h = 0; h < 24; h++) {
