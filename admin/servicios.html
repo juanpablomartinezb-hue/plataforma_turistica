@@ -1,1 +1,123 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servicios | EXPLORA</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#24313d}
+.layout{display:flex;min-height:100vh}
+aside{width:245px;background:#172b3a;color:white;padding:28px 18px;flex-shrink:0}
+.logo{font-size:25px;font-weight:bold;margin:0 0 38px 10px}
+.menu-title{color:#9eb0bd;font-size:11px;text-transform:uppercase;margin:25px 10px 12px;letter-spacing:1px}
+nav a{display:block;color:#dce5eb;text-decoration:none;padding:12px 10px;border-radius:7px;margin:4px 0;font-size:14px}
+nav a.active,nav a:hover{background:#29485c;color:white}
+main{flex:1;min-width:0}
+header{background:white;padding:20px 32px;border-bottom:1px solid #e5e9ed;display:flex;justify-content:space-between}
+header span{color:#74818c;font-size:13px}
+.content{padding:35px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+h1{font-size:27px;margin:0 0 9px}
+.intro{color:#71808c;margin:0 0 28px}
+.primary{background:#1d526e;color:white;border:0;border-radius:7px;padding:13px 19px;font-size:14px;cursor:pointer}
+.primary:hover{background:#163e54}
+.filters{background:white;padding:18px;border:1px solid #e5e9ed;border-radius:10px;display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+input,select{padding:12px;border:1px solid #dce2e7;border-radius:7px;font-size:14px;background:white}
+input{flex:1;min-width:200px}
+.table-wrap{background:white;border:1px solid #e5e9ed;border-radius:10px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{text-align:left;padding:17px 19px;border-bottom:1px solid #edf0f2;font-size:13px}
+th{color:#71808c;background:#fafbfc;font-weight:600}
+.empty{text-align:center;padding:55px 20px;color:#71808c;line-height:1.7}
+.empty strong{display:block;color:#344653;font-size:17px;margin-bottom:8px}
+.note{font-size:12px;color:#84919a;margin-top:15px}
+@media(max-width:700px){.layout{display:block}aside{width:100%}.content{padding:22px 16px}header{padding:18px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+<div class="logo">EXPLORA.</div>
+<nav>
+<div class="menu-title">Principal</div>
+<a href="index.html">⌂ &nbsp; Inicio</a>
+<div class="menu-title">Catálogo</div>
+<a class="active" href="servicios.html">▣ &nbsp; Servicios</a>
+<a href="#">⌖ &nbsp; Destinos</a>
+<a href="#">▧ &nbsp; Galerías</a>
+<a href="#">◷ &nbsp; Tarifas</a>
+<a href="#">▦ &nbsp; Inventario</a>
+<div class="menu-title">Operación</div>
+<a href="#">▤ &nbsp; Reservaciones</a>
+<a href="#">♙ &nbsp; Agencias</a>
+<div class="menu-title">Sistema</div>
+<a href="#">⚙ &nbsp; Configuración</a>
+</nav>
+</aside>
+
+<main>
+<header>
+<strong>Panel de administración</strong>
+<span>Catálogo de servicios</span>
+</header>
+
+<div class="content">
+<div class="top">
+<div>
+<h1>Servicios</h1>
+<p class="intro">Administra todos los servicios turísticos de la plataforma.</p>
+</div>
+<button class="primary" onclick="alert('En el siguiente paso construiremos el formulario para crear servicios.')">+ Nuevo servicio</button>
+</div>
+
+<div class="filters">
+<input type="search" placeholder="Buscar por nombre de servicio...">
+<select>
+<option>Todos los tipos</option>
+<option>Day Pass</option>
+<option>Tour</option>
+<option>Actividad</option>
+</select>
+<select>
+<option>Todos los estados</option>
+<option>Borrador</option>
+<option>Activo</option>
+<option>Oculto</option>
+<option>Pausado</option>
+<option>Archivado</option>
+</select>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Tipo</th>
+<th>Destino</th>
+<th>Estado</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="5">
+<div class="empty">
+<strong>Tu catálogo está listo para comenzar</strong>
+Aquí aparecerán los servicios que registremos en la plataforma.
+<br>No hay información de prueba ni registros ficticios.
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="note">Esta es la primera versión visual del módulo. La información se conectará a Supabase en la siguiente etapa.</p>
+</div>
+</main>
+</div>
+</body>
+</html>
+
