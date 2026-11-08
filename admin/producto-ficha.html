@@ -299,7 +299,85 @@ botones.forEach((b,i)=>b.classList.toggle('active',i===n));
 }
 function mostrarAnterior(){mostrar(Math.max(0,actual-1))}
 function mostrarSiguiente(){mostrar(Math.min(pestañas.length-1,actual+1))}
-</script>
+// Configuración de horarios múltiples
+const selectorNuevoHorario = document.getElementById('nuevoHorario');
+const contenedorHorarios = document.getElementById('listaHorarios');
+
+const horariosAgregados = [];
+
+if (selectorNuevoHorario) {
+  for (let h = 0; h < 24; h++) {
+    for (let m of [0, 30]) {
+      const hora = String(h).padStart(2, '0') + ':' +
+                   String(m).padStart(2, '0');
+
+      selectorNuevoHorario.add(new Option(hora, hora));
+    }
+  }
+}
+
+function agregarHorario() {
+  const hora = selectorNuevoHorario.value;
+
+  if (!hora) {
+    alert('Selecciona un horario.');
+    return;
+  }
+
+  if (horariosAgregados.includes(hora)) {
+    alert('Este horario ya fue agregado.');
+    return;
+  }
+
+  horariosAgregados.push(hora);
+
+  const dias = [
+    'Lunes', 'Martes', 'Miércoles', 'Jueves',
+    'Viernes', 'Sábado', 'Domingo'
+  ];
+
+  const tabla = document.createElement('div');
+  tabla.style.marginTop = '20px';
+  tabla.style.border = '1px solid #d5dce5';
+  tabla.style.borderRadius = '8px';
+  tabla.style.padding = '12px';
+
+  tabla.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h3>Horario de entrada: ${hora}</h3>
+      <button type="button" class="secondary">Eliminar horario</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Día</th>
+          <th>Disponible</th>
+          <th>Cupo asignado</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${dias.map(dia => `
+          <tr>
+            <td>${dia}</td>
+            <td><input type="checkbox" checked></td>
+            <td><input type="number" min="0" placeholder="Ej. 20"></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+
+  tabla.querySelector('button').addEventListener('click', () => {
+    horariosAgregados.splice(horariosAgregados.indexOf(hora), 1);
+    tabla.remove();
+  });
+
+  contenedorHorarios.appendChild(tabla);
+
+  selectorNuevoHorario.value = '';
+}
+  </script>
 </body>
 </html>
 
