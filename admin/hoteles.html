@@ -1,1 +1,207 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administración de hoteles</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fa;color:#263247;font-family:Arial,sans-serif}
+header{background:#172b4d;color:white;padding:22px 35px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold;letter-spacing:2px}
+header span{font-size:13px;color:#cbd5e1}
+main{max-width:1250px;margin:30px auto;padding:0 22px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+h1{font-size:25px;margin:0 0 7px}
+.sub{color:#778397;font-size:14px}
+button{border:0;border-radius:7px;padding:12px 18px;cursor:pointer;font-weight:bold}
+.primary{background:#1769aa;color:white}
+.secondary{background:#e9eef5;color:#34445d}
+.card{background:white;border:1px solid #e2e7ef;border-radius:11px;padding:23px;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:22px}
+.stat{background:white;border:1px solid #e2e7ef;border-radius:10px;padding:18px}
+.stat strong{display:block;font-size:25px;margin-bottom:5px}
+.stat span{font-size:13px;color:#778397}
+.section-title{font-size:17px;font-weight:bold;margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid #edf0f4}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+label{font-size:13px;font-weight:bold;color:#46546a}
+input,select,textarea{width:100%;padding:11px;border:1px solid #d7deea;border-radius:6px;background:white;font:14px Arial;color:#263247}
+textarea{min-height:85px;resize:vertical}
+small{font-size:12px;color:#8591a3}
+.checks{display:flex;gap:22px;flex-wrap:wrap}
+.checks label{font-weight:normal;display:flex;align-items:center;gap:7px}
+.checks input{width:auto}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:14px 12px;border-bottom:1px solid #edf0f4;white-space:nowrap}
+th{color:#718096;font-size:12px}
+.status{background:#e5f5ec;color:#247346;padding:5px 10px;border-radius:20px;font-size:12px}
+.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+#hotelForm{display:none}
+.note{background:#f1f6fc;border-radius:7px;padding:13px;color:#53647c;font-size:13px;line-height:1.5;margin-bottom:18px}
+@media(max-width:700px){.grid,.stats{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}header{padding:18px}.card{padding:16px}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">EXPLORA.</div>
+ <span>Panel de administración · Hoteles</span>
+</header>
+
+<main>
+ <div class="top">
+  <div>
+   <h1>Administración de hoteles</h1>
+   <div class="sub">Gestiona los proveedores y su información general.</div>
+  </div>
+  <button class="primary" onclick="mostrarFormulario()">+ Registrar hotel</button>
+ </div>
+
+ <div class="stats">
+  <div class="stat"><strong>0</strong><span>Hoteles registrados</span></div>
+  <div class="stat"><strong>0</strong><span>Hoteles activos</span></div>
+  <div class="stat"><strong>0</strong><span>Hoteles pausados</span></div>
+ </div>
+
+ <section class="card" id="hotelList">
+  <h2 class="section-title">Hoteles registrados</h2>
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr><th>HOTEL</th><th>DESTINO</th><th>ESTADO</th><th>VISIBILIDAD</th><th>ACCIONES</th></tr>
+    </thead>
+    <tbody id="hotelRows">
+     <tr><td colspan="5" style="text-align:center;color:#8994a5;padding:30px">Todavía no hay hoteles registrados.</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </section>
+
+ <section class="card" id="hotelForm">
+  <h2 class="section-title">Ficha general del hotel</h2>
+  <div class="note">Esta ficha contiene la información general del proveedor. Los Day Pass, Tours y Actividades se registrarán por separado y quedarán asociados a este hotel.</div>
+
+  <h3 class="section-title">1. Identidad y clasificación</h3>
+  <div class="grid">
+   <div class="field"><label>Nombre comercial del hotel *</label><input id="nombre" placeholder="Nombre del hotel"></div>
+   <div class="field"><label>Razón social</label><input placeholder="Razón social"></div>
+   <div class="field"><label>Identificador / URL (slug)</label><input placeholder="nombre-del-hotel"></div>
+   <div class="field"><label>Cadena hotelera</label><input placeholder="Cadena o grupo hotelero"></div>
+   <div class="field"><label>Destino principal *</label><select><option value="">Seleccionar destino</option><option>Cancún</option><option>Playa del Carmen</option><option>Puerto Morelos</option><option>Riviera Maya</option><option>Tulum</option><option>Isla Mujeres</option><option>Los Cabos</option><option>Puerto Vallarta</option><option>Otro</option></select></div>
+   <div class="field"><label>Destino secundario</label><input placeholder="Opcional"></div>
+   <div class="field"><label>Clasificación por estrellas</label><select><option>Sin especificar</option><option>3 estrellas</option><option>4 estrellas</option><option>5 estrellas</option></select></div>
+   <div class="field"><label>Tipo de establecimiento</label><select><option>Seleccionar</option><option>Hotel</option><option>Resort</option><option>Hotel boutique</option><option>Club de playa</option><option>Otro</option></select></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">2. Descripción y contenido</h3>
+  <div class="grid">
+   <div class="field full"><label>Descripción breve (español)</label><textarea placeholder="Descripción corta del hotel"></textarea></div>
+   <div class="field full"><label>Descripción completa (español)</label><textarea placeholder="Información general del establecimiento"></textarea></div>
+   <div class="field full"><label>Descripción breve (inglés)</label><textarea placeholder="Short hotel description"></textarea></div>
+   <div class="field full"><label>Descripción completa (inglés)</label><textarea placeholder="Full hotel description"></textarea></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">3. SEO del hotel</h3>
+  <div class="grid">
+   <div class="field"><label>Título SEO (español)</label><input placeholder="Título para buscadores"></div>
+   <div class="field"><label>Título SEO (inglés)</label><input placeholder="SEO title"></div>
+   <div class="field"><label>Descripción SEO (español)</label><textarea></textarea></div>
+   <div class="field"><label>Descripción SEO (inglés)</label><textarea></textarea></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">4. Contacto general</h3>
+  <div class="grid">
+   <div class="field"><label>Correo principal</label><input type="email" placeholder="correo@hotel.com"></div>
+   <div class="field"><label>Teléfono principal</label><input placeholder="Teléfono"></div>
+   <div class="field"><label>WhatsApp principal</label><input placeholder="Número con código de país"></div>
+   <div class="field"><label>Correo alternativo</label><input type="email" placeholder="Correo adicional"></div>
+   <div class="field full"><label>Correos adicionales para notificaciones</label><textarea placeholder="Un correo por línea"></textarea></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">5. Ubicación geográfica</h3>
+  <div class="grid">
+   <div class="field full"><label>Dirección completa</label><input placeholder="Calle, número, zona, ciudad y código postal"></div>
+   <div class="field"><label>Latitud</label><input placeholder="Coordenada de latitud"></div>
+   <div class="field"><label>Longitud</label><input placeholder="Coordenada de longitud"></div>
+   <div class="field full"><label>Enlace de ubicación en mapa</label><input placeholder="Enlace de Google Maps"></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">6. Estado y visibilidad</h3>
+  <div class="grid">
+   <div class="field"><label>Estado del hotel</label><select><option>Activo</option><option>Pausado</option><option>En revisión</option><option>Inactivo</option></select></div>
+   <div class="field"><label>Motivo de pausa (si aplica)</label><input placeholder="Motivo interno"></div>
+   <div class="field full"><label>Canales de publicación</label>
+    <div class="checks">
+     <label><input type="checkbox" checked> Página pública B2C</label>
+     <label><input type="checkbox" checked> Portal de agencias B2B</label>
+    </div>
+   </div>
+  </div>
+
+  <br>
+  <h3 class="section-title">7. Configuración comercial</h3>
+  <div class="grid">
+   <div class="field"><label>Comisión acordada (%)</label><input type="number" min="0" max="100" placeholder="Porcentaje"></div>
+   <div class="field"><label>Forma de pago al proveedor</label><select><option>Seleccionar</option><option>Por reservación</option><option>Corte periódico</option><option>Otra condición</option></select></div>
+   <div class="field"><label>Condiciones comerciales internas</label><textarea placeholder="Acuerdos con el proveedor"></textarea></div>
+   <div class="field"><label>Observaciones comerciales</label><textarea placeholder="Notas internas"></textarea></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">8. Galería general del hotel</h3>
+  <div class="grid">
+   <div class="field full"><label>Fotografías generales</label><input type="file" accept="image/*" multiple><small>Galería de instalaciones, albercas, restaurantes, playa y áreas comunes.</small></div>
+   <div class="field full"><label>Videos o enlaces multimedia</label><textarea placeholder="Pegar enlaces de YouTube o Vimeo, uno por línea"></textarea></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">9. Equipo y permisos del proveedor</h3>
+  <div class="note">Los usuarios del proveedor tendrán acceso a su propio panel. Sus permisos y acciones quedarán sujetos a las reglas de seguridad de la plataforma.</div>
+  <div class="grid">
+   <div class="field"><label>Responsable principal</label><input placeholder="Nombre del contacto"></div>
+   <div class="field"><label>Correo del responsable</label><input type="email" placeholder="Correo"></div>
+  </div>
+
+  <br>
+  <h3 class="section-title">10. Notas internas y registro</h3>
+  <div class="grid">
+   <div class="field full"><label>Notas internas del administrador</label><textarea placeholder="Información que solamente verá nuestro equipo"></textarea></div>
+   <div class="field"><label>Fecha de registro</label><input type="text" value="Se asignará automáticamente" disabled></div>
+   <div class="field"><label>Última actualización</label><input type="text" value="Se actualizará automáticamente" disabled></div>
+  </div>
+
+  <div class="actions">
+   <button class="secondary" onclick="ocultarFormulario()">Cancelar</button>
+   <button class="primary" onclick="guardarDemo()">Guardar hotel (demostración)</button>
+  </div>
+ </section>
+</main>
+
+<script>
+function mostrarFormulario(){
+ document.getElementById("hotelForm").style.display="block";
+ document.getElementById("hotelList").style.display="none";
+ window.scrollTo(0,0);
+}
+function ocultarFormulario(){
+ document.getElementById("hotelForm").style.display="none";
+ document.getElementById("hotelList").style.display="block";
+}
+function guardarDemo(){
+ const nombre=document.getElementById("nombre").value.trim();
+ if(!nombre){alert("Escribe el nombre comercial del hotel.");return;}
+ alert("La pantalla es todavía una demostración. La conexión para guardar hoteles se realizará posteriormente.");
+}
+</script>
+</body>
+</html>
+
