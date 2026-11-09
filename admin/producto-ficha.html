@@ -450,9 +450,19 @@ function cambiarTipoProducto(){
 }
 
 
+
 function agregarHorario(){
   const inicio = horaInicio.value;
   const fin = horaFin.value;
+  const esDP = esDayPass();
+  const campoNombre = document.getElementById('nombrePaqueteHorario');
+  const nombrePaquete = campoNombre ? campoNombre.value.trim() : '';
+
+  if(esDP && !nombrePaquete){
+    alert('Escribe el nombre del paquete o modalidad del Day Pass.');
+    campoNombre.focus();
+    return;
+  }
 
   if(!inicio || !fin){
     alert('Selecciona la hora de inicio y la hora de término.');
@@ -471,22 +481,24 @@ function agregarHorario(){
     return;
   }
 
-  const esDP = esDayPass();
   const card = document.createElement('div');
   card.className = 'horario-card';
   card.dataset.clave = clave;
+  card.dataset.nombrePaquete = esDP ? nombrePaquete : '';
 
   let tarifas = '';
 
   if(esDP){
     tarifas = `
-      <h4>Tarifas propias de este horario</h4>
+      <h4>Tarifas propias de: ${nombrePaquete}</h4>
       <table class="tabla-tarifas">
         <thead>
           <tr>
             <th>Categoría</th>
-            <th>Tarifa pública MXN</th>
-            <th>Tarifa neta MXN</th>
+            <th>Pública MXN</th>
+            <th>Neta MXN</th>
+            <th>Pública USD</th>
+            <th>Neta USD</th>
           </tr>
         </thead>
         <tbody>
@@ -495,20 +507,24 @@ function agregarHorario(){
               <td>${c}</td>
               <td><input type="number" min="0" step="0.01" placeholder="0.00"></td>
               <td><input type="number" min="0" step="0.01" placeholder="0.00"></td>
+              <td><input type="number" min="0" step="0.01" placeholder="0.00"></td>
+              <td><input type="number" min="0" step="0.01" placeholder="0.00"></td>
             </tr>
           `).join('')}
         </tbody>
       </table>
-      <h4>Incluye en este horario (español)</h4>
-      <textarea placeholder="Describe lo que incluye este horario"></textarea>
-      <h4>No incluye en este horario (español)</h4>
-      <textarea placeholder="Describe lo que no incluye este horario"></textarea>
+
+      <h4>Incluye en este paquete (español)</h4>
+      <textarea placeholder="Describe lo que incluye este paquete"></textarea>
+
+      <h4>No incluye en este paquete (español)</h4>
+      <textarea placeholder="Describe lo que no incluye este paquete"></textarea>
     `;
   }
 
   card.innerHTML = `
     <div class="horario-cabecera">
-      <h3>${esDP ? 'Horario independiente' : 'Salida del producto'}: ${inicio} – ${fin}</h3>
+      <h3>${esDP ? nombrePaquete : 'Salida del producto'}: ${inicio} – ${fin}</h3>
       <button type="button" class="danger">Eliminar horario</button>
     </div>
 
@@ -551,6 +567,10 @@ function agregarHorario(){
       listaHorarios.innerHTML = '<p class="note">Todavía no hay horarios agregados. Selecciona hora de inicio y término para agregar el primero.</p>';
     }
   });
+
+  if(campoNombre){
+    campoNombre.value = '';
+  }
 
   horaInicio.value = '';
   crearHoras(horaFin);
