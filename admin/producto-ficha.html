@@ -172,18 +172,31 @@ th{background:#f4f6f9}
 
 <h3>Configuración de horarios</h3>
 <div class="note" id="explicacionTipo">Day Pass: cada horario será independiente y podrá tener sus propias tarifas e inclusiones.</div>
+
 <div class="grid">
-<div class="field">
-<label>Hora de inicio / salida</label>
-<select id="horaNuevaInicio"></select>
-</div>
-<div class="field">
-<label>Hora de término / regreso</label>
-<select id="horaNuevaFin"></select>
-</div>
-<div class="field full">
-<button type="button" class="primary" onclick="agregarHorario()">+ Agregar horario</button>
-</div>
+  <div class="field" id="campoNombrePaquete">
+    <label>Nombre del paquete / modalidad</label>
+    <input
+      type="text"
+      id="nombrePaqueteHorario"
+      placeholder="Ej. Day Pass Todo Incluido"
+    >
+  </div>
+  <div class="field">
+    <label>Hora de inicio / salida</label>
+    <select id="horaNuevaInicio"></select>
+  </div>
+
+  <div class="field">
+    <label>Hora de término / regreso</label>
+    <select id="horaNuevaFin"></select>
+  </div>
+
+  <div class="field full">
+    <button type="button" class="primary" onclick="agregarHorario()">
+      + Agregar horario
+    </button>
+  </div>
 </div>
 
 <div id="listaHorarios">
