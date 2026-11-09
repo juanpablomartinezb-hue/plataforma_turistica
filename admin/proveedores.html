@@ -1,1 +1,567 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proveedores | EXPLORA</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    color: #263445;
+}
+
+header {
+    background: #152b40;
+    color: white;
+    padding: 22px 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #c6d2df;
+}
+
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+button {
+    border: 0;
+    border-radius: 7px;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-principal {
+    background: #087e8b;
+    color: white;
+}
+
+.btn-secundario {
+    background: #e7edf2;
+    color: #263445;
+}
+
+.panel {
+    background: white;
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.filtros {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #d6dde5;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.campo {
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 19px;
+    margin-top: 0;
+}
+
+h3 {
+    font-size: 16px;
+    border-bottom: 1px solid #e4e9ee;
+    padding-bottom: 10px;
+    margin-top: 25px;
+}
+
+.formulario {
+    display: none;
+}
+
+.formulario.visible {
+    display: block;
+}
+
+.grid-campos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 18px;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th, td {
+    text-align: left;
+    padding: 13px 10px;
+    border-bottom: 1px solid #e8edf1;
+    font-size: 13px;
+}
+
+th {
+    color: #637386;
+    background: #f8fafc;
+}
+
+.vacio {
+    text-align: center;
+    color: #7b8794;
+    padding: 35px;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.nota {
+    color: #6b7a89;
+    font-size: 12px;
+}
+
+@media(max-width:700px) {
+    .filtros, .grid-campos {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    main {
+        padding: 0 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>EXPLORA.</h1>
+    <p>Administración de proveedores</p>
+</header>
+
+<main>
+
+    <div class="barra-superior">
+        <div>
+            <h2>Proveedores</h2>
+            <div class="nota">Expedientes generales de hoteles, operadores y prestadores de servicios.</div>
+        </div>
+
+        <button class="btn-principal" onclick="mostrarFormulario()">
+            + Registrar proveedor
+        </button>
+    </div>
+
+    <section class="panel">
+        <h2>Directorio de proveedores</h2>
+
+        <div class="filtros">
+            <input
+                type="search"
+                id="buscar"
+                placeholder="Buscar por nombre o razón social..."
+                oninput="filtrarProveedores()"
+            >
+
+            <select id="filtroTipo" onchange="filtrarProveedores()">
+                <option value="">Todos los tipos</option>
+                <option value="hotel">Hotel</option>
+                <option value="operador_tours">Operador de tours</option>
+                <option value="club_playa">Club de playa</option>
+                <option value="empresa_actividades">Empresa de actividades</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <select id="filtroEstado" onchange="filtrarProveedores()">
+                <option value="">Todos los estados</option>
+                <option value="active">Activo</option>
+                <option value="under_review">En revisión</option>
+                <option value="paused">Pausado</option>
+                <option value="inactive">Inactivo</option>
+            </select>
+        </div>
+
+        <div style="margin-top:20px" class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Proveedor</th>
+                        <th>Tipo</th>
+                        <th>Ciudad</th>
+                        <th>Estado</th>
+                        <th>Servicios</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaProveedores">
+                    <tr>
+                        <td colspan="6" class="vacio">
+                            Todavía no hay proveedores registrados.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel formulario" id="formularioProveedor">
+
+        <h2>Registrar nuevo proveedor</h2>
+        <p class="nota">Los campos marcados con * son obligatorios.</p>
+
+        <form id="formProveedor">
+
+            <h3>1. Identidad del proveedor</h3>
+
+            <div class="grid-campos">
+                <div class="campo">
+                    <label>Nombre comercial *</label>
+                    <input id="nombreComercial" required>
+                </div>
+
+                <div class="campo">
+                    <label>Razón social</label>
+                    <input id="razonSocial">
+                </div>
+
+                <div class="campo">
+                    <label>Tipo de proveedor *</label>
+                    <select id="tipoProveedor" required>
+                        <option value="">Seleccionar</option>
+                        <option value="hotel">Hotel</option>
+                        <option value="operador_tours">Operador de tours</option>
+                        <option value="club_playa">Club de playa</option>
+                        <option value="empresa_actividades">Empresa de actividades</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label>Sitio web</label>
+                    <input id="sitioWeb" type="url" placeholder="https://">
+                </div>
+            </div>
+
+            <h3>2. Contacto general</h3>
+
+            <div class="grid-campos">
+                <div class="campo">
+                    <label>Teléfono</label>
+                    <input id="telefono">
+                </div>
+
+                <div class="campo">
+                    <label>WhatsApp</label>
+                    <input id="whatsapp">
+                </div>
+
+                <div class="campo">
+                    <label>Correo principal</label>
+                    <input id="correo" type="email">
+                </div>
+
+                <div class="campo">
+                    <label>Correo alternativo</label>
+                    <input id="correoAlternativo" type="email">
+                </div>
+            </div>
+
+            <h3>3. Ubicación principal</h3>
+
+            <div class="grid-campos">
+                <div class="campo">
+                    <label>Dirección</label>
+                    <input id="direccion">
+                </div>
+
+                <div class="campo">
+                    <label>Colonia / Zona</label>
+                    <input id="colonia">
+                </div>
+
+                <div class="campo">
+                    <label>Ciudad</label>
+                    <input id="ciudad">
+                </div>
+
+                <div class="campo">
+                    <label>Estado</label>
+                    <input id="estado">
+                </div>
+
+                <div class="campo">
+                    <label>País</label>
+                    <input id="pais" value="México">
+                </div>
+
+                <div class="campo">
+                    <label>Código postal</label>
+                    <input id="codigoPostal">
+                </div>
+
+                <div class="campo">
+                    <label>Latitud</label>
+                    <input id="latitud" type="number" step="any">
+                </div>
+
+                <div class="campo">
+                    <label>Longitud</label>
+                    <input id="longitud" type="number" step="any">
+                </div>
+
+                <div class="campo">
+                    <label>Enlace de Google Maps</label>
+                    <input id="googleMaps" type="url">
+                </div>
+            </div>
+
+            <h3>4. Responsable comercial</h3>
+
+            <div class="grid-campos">
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input id="responsableComercial">
+                </div>
+
+                <div class="campo">
+                    <label>Correo</label>
+                    <input id="correoComercial" type="email">
+                </div>
+
+                <div class="campo">
+                    <label>Teléfono</label>
+                    <input id="telefonoComercial">
+                </div>
+            </div>
+
+            <h3>5. Responsable operativo</h3>
+
+            <div class="grid-campos">
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input id="responsableOperativo">
+                </div>
+
+                <div class="campo">
+                    <label>Correo</label>
+                    <input id="correoOperativo" type="email">
+                </div>
+
+                <div class="campo">
+                    <label>Teléfono</label>
+                    <input id="telefonoOperativo">
+                </div>
+            </div>
+
+            <h3>6. Administración interna</h3>
+
+            <div class="campo">
+                <label>Estado del proveedor</label>
+                <select id="estadoProveedor">
+                    <option value="under_review">En revisión</option>
+                    <option value="active">Activo</option>
+                    <option value="paused">Pausado</option>
+                    <option value="inactive">Inactivo</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Notas internas</label>
+                <textarea id="notasInternas" rows="4"></textarea>
+            </div>
+
+            <div class="acciones">
+                <button type="submit" class="btn-principal">
+                    Guardar proveedor
+                </button>
+
+                <button type="button" class="btn-secundario" onclick="ocultarFormulario()">
+                    Cancelar
+                </button>
+            </div>
+
+            <p class="nota">
+                Esta primera versión es una demostración visual. Todavía no guarda información en la base de datos.
+            </p>
+
+        </form>
+    </section>
+
+</main>
+
+<script>
+let proveedores = [];
+
+const nombresTipo = {
+    hotel: "Hotel",
+    operador_tours: "Operador de tours",
+    club_playa: "Club de playa",
+    empresa_actividades: "Empresa de actividades",
+    otro: "Otro"
+};
+
+const nombresEstado = {
+    active: "Activo",
+    under_review: "En revisión",
+    paused: "Pausado",
+    inactive: "Inactivo"
+};
+
+function mostrarFormulario() {
+    document.getElementById("formularioProveedor").classList.add("visible");
+    document.getElementById("nombreComercial").focus();
+}
+
+function ocultarFormulario() {
+    document.getElementById("formularioProveedor").classList.remove("visible");
+}
+
+document.getElementById("formProveedor").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const proveedor = {
+        nombre: document.getElementById("nombreComercial").value.trim(),
+        razonSocial: document.getElementById("razonSocial").value.trim(),
+        tipo: document.getElementById("tipoProveedor").value,
+        ciudad: document.getElementById("ciudad").value.trim(),
+        estado: document.getElementById("estadoProveedor").value
+    };
+
+    proveedores.push(proveedor);
+
+    this.reset();
+    document.getElementById("pais").value = "México";
+
+    ocultarFormulario();
+    renderizarProveedores();
+
+    alert("Proveedor agregado a la demostración. Todavía no se ha guardado en Supabase.");
+});
+
+function renderizarProveedores() {
+    const tbody = document.getElementById("listaProveedores");
+    tbody.innerHTML = "";
+
+    if (proveedores.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6" class="vacio">
+                    Todavía no hay proveedores registrados.
+                </td>
+            </tr>`;
+        return;
+    }
+
+    proveedores.forEach((p, index) => {
+        const fila = document.createElement("tr");
+
+        [
+            p.nombre,
+            nombresTipo[p.tipo] || p.tipo,
+            p.ciudad || "—",
+            nombresEstado[p.estado] || p.estado,
+            "0",
+            ""
+        ].forEach((valor) => {
+            const celda = document.createElement("td");
+            celda.textContent = valor;
+            fila.appendChild(celda);
+        });
+
+        const celdaAcciones = fila.lastElementChild;
+        const boton = document.createElement("button");
+        boton.type = "button";
+        boton.className = "btn-secundario";
+        boton.textContent = "Ver";
+        boton.addEventListener("click", () => {
+            alert(
+                "Proveedor: " + p.nombre +
+                "\nRazón social: " + (p.razonSocial || "No capturada")
+            );
+        });
+
+        celdaAcciones.appendChild(boton);
+        tbody.appendChild(fila);
+    });
+
+    filtrarProveedores();
+}
+
+function filtrarProveedores() {
+    const texto = document.getElementById("buscar").value.toLowerCase();
+    const tipo = document.getElementById("filtroTipo").value;
+    const estado = document.getElementById("filtroEstado").value;
+
+    document.querySelectorAll("#listaProveedores tr").forEach((fila) => {
+        const indice = Array.from(fila.parentNode.children).indexOf(fila);
+        const p = proveedores[indice];
+
+        if (!p) return;
+
+        const coincideTexto =
+            p.nombre.toLowerCase().includes(texto) ||
+            p.razonSocial.toLowerCase().includes(texto);
+
+        const coincideTipo = !tipo || p.tipo === tipo;
+        const coincideEstado = !estado || p.estado === estado;
+
+        fila.style.display =
+            coincideTexto && coincideTipo && coincideEstado ? "" : "none";
+    });
+}
+</script>
+
+</body>
+</html>
+
