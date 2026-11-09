@@ -200,38 +200,133 @@ th{background:#f4f6f9}
 </div>
 </section>
 
+
 <section class="tab">
 <h2>4. Tarifas y promociones</h2>
-<div class="note">Las tarifas públicas y netas son independientes por producto. Los importes en USD son opcionales.</div>
-<div class="grid">
-<div class="field"><label>Moneda de origen de la tarifa</label><select><option>MXN - Peso mexicano</option><option>USD - Dólar estadounidense</option><option>MXN y USD</option></select></div>
-<div class="field"><label>Tipo de cambio USD / MXN</label><input type="number" step="0.0001" placeholder="Ej. 18.5000"></div>
-<div class="field"><label>Tarifa pública MXN</label><input type="number" step="0.01"></div>
-<div class="field"><label>Tarifa neta MXN</label><input type="number" step="0.01"></div>
-<div class="field"><label>Tarifa pública USD (opcional)</label><input type="number" step="0.01"></div>
-<div class="field"><label>Tarifa neta USD (opcional)</label><input type="number" step="0.01"></div>
-<div class="field"><label>Moneda para mostrar en B2C</label><select><option>MXN</option><option>USD</option></select></div>
-<div class="field"><label>Moneda para mostrar en B2B</label><select><option>MXN</option><option>USD</option></select></div>
+
+<div class="note">
+Configura la moneda de origen, el tipo de cambio y las monedas de visualización. Las tarifas se capturan por categoría de pasajero.
 </div>
-<h3>Tarifas comunes por categoría de pasajero</h3>
-<div class="note">En Tours y Actividades estas tarifas aplican a todos los horarios. En Day Pass, las tarifas se capturan dentro de cada horario.</div>
+
+<h3>Configuración de monedas y tipo de cambio</h3>
+<div class="grid">
+  <div class="field">
+    <label>Moneda de origen de la tarifa</label>
+    <select>
+      <option>MXN - Peso mexicano</option>
+      <option>USD - Dólar estadounidense</option>
+      <option>MXN y USD</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Tipo de cambio USD / MXN</label>
+    <input type="number" step="0.0001" placeholder="Ej. 18.5000">
+  </div>
+
+  <div class="field">
+    <label>Fecha de vigencia del tipo de cambio</label>
+    <input type="date">
+  </div>
+
+  <div class="field">
+    <label>Moneda para mostrar en B2C</label>
+    <select>
+      <option>MXN</option>
+      <option>USD</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Moneda para mostrar en B2B</label>
+    <select>
+      <option>MXN</option>
+      <option>USD</option>
+    </select>
+  </div>
+</div>
+
+<div class="note">
+El sistema deberá registrar cada modificación del tipo de cambio con su valor anterior, valor nuevo, fecha de vigencia, fecha y hora del cambio y usuario administrador. Este historial se guardará en Supabase.
+</div>
+
+<h3>Tarifas por categoría de pasajero</h3>
+
+<div class="note">
+En Tours y Actividades estas tarifas aplican a todos los horarios. En Day Pass, cada horario tendrá sus propias tarifas independientes.
+</div>
+
 <table>
-<thead><tr><th>Categoría</th><th>Tarifa pública</th><th>Tarifa neta</th><th>Moneda</th></tr></thead>
+<thead>
+<tr>
+  <th>Categoría</th>
+  <th>Pública MXN</th>
+  <th>Neta MXN</th>
+  <th>Pública USD</th>
+  <th>Neta USD</th>
+</tr>
+</thead>
 <tbody>
-<tr><td>Adultos</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
-<tr><td>Junior</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
-<tr><td>Menores con costo</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
-<tr><td>Menores sin costo</td><td><input type="number" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><select><option>MXN</option><option>USD</option></select></td></tr>
+<tr>
+  <td>Adultos</td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+</tr>
+<tr>
+  <td>Junior</td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+</tr>
+<tr>
+  <td>Menores con costo</td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+  <td><input type="number" step="0.01"></td>
+</tr>
+<tr>
+  <td>Menores sin costo</td>
+  <td><input type="number" step="0.01" placeholder="0"></td>
+  <td><input type="number" step="0.01" placeholder="0"></td>
+  <td><input type="number" step="0.01" placeholder="0"></td>
+  <td><input type="number" step="0.01" placeholder="0"></td>
+</tr>
 </tbody>
 </table>
+
 <h3>Promociones y temporadas</h3>
 <div class="grid">
-<div class="field"><label>Nombre de promoción o temporada</label><input></div>
-<div class="field"><label>Tipo</label><select><option>Promoción</option><option>Temporada</option></select></div>
-<div class="field"><label>Fecha inicial</label><input type="date"></div>
-<div class="field"><label>Fecha final</label><input type="date"></div>
+  <div class="field">
+    <label>Nombre de promoción o temporada</label>
+    <input>
+  </div>
+
+  <div class="field">
+    <label>Tipo</label>
+    <select>
+      <option>Promoción</option>
+      <option>Temporada</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Fecha inicial</label>
+    <input type="date">
+  </div>
+
+  <div class="field">
+    <label>Fecha final</label>
+    <input type="date">
+  </div>
 </div>
-<div class="note">La configuración de paquetes grupales y precios fijos por número de personas se desarrollará cuando definamos sus reglas comerciales.</div>
+
+<div class="note">
+La configuración de paquetes grupales y precios fijos por número de personas se desarrollará cuando definamos sus reglas comerciales.
+</div>
 </section>
 
 <section class="tab">
