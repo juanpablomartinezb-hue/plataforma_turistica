@@ -2,566 +2,834 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proveedores | EXPLORA</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración de proveedores | EXPLORA</title>
 
-<style>
-* {
-    box-sizing: border-box;
-}
+  <style>
+    :root {
+      --primary: #173b57;
+      --primary-light: #eaf1f6;
+      --accent: #d69b45;
+      --background: #f5f7fa;
+      --surface: #ffffff;
+      --text: #243342;
+      --muted: #718096;
+      --border: #e1e7ed;
+      --success: #21845b;
+      --warning: #a66a16;
+      --danger: #b74646;
+    }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    color: #263445;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-header {
-    background: #152b40;
-    color: white;
-    padding: 22px 30px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 25px;
-}
-
-header p {
-    margin: 7px 0 0;
-    color: #c6d2df;
-}
-
-main {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.barra-superior {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 22px;
-}
-
-button {
-    border: 0;
-    border-radius: 7px;
-    padding: 12px 18px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.btn-principal {
-    background: #087e8b;
-    color: white;
-}
-
-.btn-secundario {
-    background: #e7edf2;
-    color: #263445;
-}
-
-.panel {
-    background: white;
-    border-radius: 10px;
-    padding: 22px;
-    margin-bottom: 22px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.05);
-}
-
-.filtros {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 12px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #d6dde5;
-    border-radius: 6px;
-    font-size: 14px;
-    background: white;
-}
-
-label {
-    display: block;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-
-.campo {
-    margin-bottom: 16px;
-}
-
-h2 {
-    font-size: 19px;
-    margin-top: 0;
-}
-
-h3 {
-    font-size: 16px;
-    border-bottom: 1px solid #e4e9ee;
-    padding-bottom: 10px;
-    margin-top: 25px;
-}
-
-.formulario {
-    display: none;
-}
-
-.formulario.visible {
-    display: block;
-}
-
-.grid-campos {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 18px;
-}
-
-.tabla-contenedor {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 650px;
-}
-
-th, td {
-    text-align: left;
-    padding: 13px 10px;
-    border-bottom: 1px solid #e8edf1;
-    font-size: 13px;
-}
-
-th {
-    color: #637386;
-    background: #f8fafc;
-}
-
-.vacio {
-    text-align: center;
-    color: #7b8794;
-    padding: 35px;
-}
-
-.acciones {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.nota {
-    color: #6b7a89;
-    font-size: 12px;
-}
-
-@media(max-width:700px) {
-    .filtros, .grid-campos {
-        grid-template-columns: 1fr;
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
     }
 
     header {
-        padding: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .header-text {
+      font-size: 13px;
+      opacity: .85;
     }
 
     main {
-        padding: 0 12px;
+      max-width: 1400px;
+      margin: 30px auto;
+      padding: 0 22px;
     }
-}
-</style>
+
+    .page-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 27px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    button {
+      border: none;
+      border-radius: 7px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #245675;
+    }
+
+    .btn-secondary {
+      background: #edf1f5;
+      color: var(--text);
+    }
+
+    .btn-danger {
+      background: #faeaea;
+      color: var(--danger);
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 12px rgba(20, 40, 60, .035);
+    }
+
+    .panel h2 {
+      margin: 0 0 20px;
+      font-size: 19px;
+    }
+
+    .section-title {
+      margin: 28px 0 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #d5dde5;
+      border-radius: 7px;
+      background: white;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid #c4d8e8;
+      border-color: var(--primary);
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+    }
+
+    th,
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: #f7f9fb;
+      color: #596b7c;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status.active {
+      color: var(--success);
+      background: #e5f5ed;
+    }
+
+    .status.review {
+      color: var(--warning);
+      background: #fff3df;
+    }
+
+    .status.paused {
+      color: #64748b;
+      background: #edf1f5;
+    }
+
+    .status.inactive {
+      color: var(--danger);
+      background: #faeaea;
+    }
+
+    .btn-small {
+      padding: 7px 11px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 35px 15px;
+      color: var(--muted);
+    }
+
+    .notice {
+      background: #fff8e9;
+      border: 1px solid #f0dfb9;
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: #79591e;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 850px) {
+      .form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .filters {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filters input {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 16px;
+      }
+
+      main {
+        padding: 0 13px;
+        margin-top: 20px;
+      }
+
+      .panel {
+        padding: 17px;
+      }
+
+      .form-grid,
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full,
+      .filters input {
+        grid-column: auto;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-    <h1>EXPLORA.</h1>
-    <p>Administración de proveedores</p>
+  <div class="logo">EXPLORA.</div>
+  <div class="header-text">Panel de administración</div>
 </header>
 
 <main>
 
-    <div class="barra-superior">
-        <div>
-            <h2>Proveedores</h2>
-            <div class="nota">Expedientes generales de hoteles, operadores y prestadores de servicios.</div>
-        </div>
-
-        <button class="btn-principal" onclick="mostrarFormulario()">
-            + Registrar proveedor
-        </button>
+  <div class="page-heading">
+    <div>
+      <h1>Administración de proveedores</h1>
+      <p class="subtitle">
+        Registra y administra los proveedores de servicios turísticos.
+      </p>
     </div>
 
-    <section class="panel">
-        <h2>Directorio de proveedores</h2>
+    <button class="btn-primary" id="btnNuevo">
+      + Registrar proveedor
+    </button>
+  </div>
 
-        <div class="filtros">
-            <input
-                type="search"
-                id="buscar"
-                placeholder="Buscar por nombre o razón social..."
-                oninput="filtrarProveedores()"
-            >
+  <div class="notice">
+    Versión de demostración: los registros todavía no se guardan en
+    Supabase. La conexión a la base de datos se realizará posteriormente.
+  </div>
 
-            <select id="filtroTipo" onchange="filtrarProveedores()">
-                <option value="">Todos los tipos</option>
-                <option value="hotel">Hotel</option>
-                <option value="operador_tours">Operador de tours</option>
-                <option value="club_playa">Club de playa</option>
-                <option value="empresa_actividades">Empresa de actividades</option>
-                <option value="otro">Otro</option>
-            </select>
+  <section class="panel hidden" id="formularioPanel">
 
-            <select id="filtroEstado" onchange="filtrarProveedores()">
-                <option value="">Todos los estados</option>
-                <option value="active">Activo</option>
-                <option value="under_review">En revisión</option>
-                <option value="paused">Pausado</option>
-                <option value="inactive">Inactivo</option>
-            </select>
+    <h2 id="tituloFormulario">Registrar nuevo proveedor</h2>
+
+    <form id="formProveedor">
+
+      <input type="hidden" id="proveedorId">
+
+      <div class="section-title">1. Identidad del proveedor</div>
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label for="nombreComercial">
+            Nombre comercial <span class="required">*</span>
+          </label>
+          <input id="nombreComercial" type="text" required
+            placeholder="Nombre con el que se identifica">
         </div>
 
-        <div style="margin-top:20px" class="tabla-contenedor">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Proveedor</th>
-                        <th>Tipo</th>
-                        <th>Ciudad</th>
-                        <th>Estado</th>
-                        <th>Servicios</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-
-                <tbody id="listaProveedores">
-                    <tr>
-                        <td colspan="6" class="vacio">
-                            Todavía no hay proveedores registrados.
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="field">
+          <label for="razonSocial">Razón social</label>
+          <input id="razonSocial" type="text"
+            placeholder="Razón social o nombre fiscal">
         </div>
-    </section>
 
-    <section class="panel formulario" id="formularioProveedor">
+        <div class="field">
+          <label for="tipoProveedor">
+            Tipo de proveedor <span class="required">*</span>
+          </label>
+          <select id="tipoProveedor" required>
+            <option value="">Seleccionar tipo</option>
+            <option value="hotel">Hotel</option>
+            <option value="operador_tours">Operador de tours</option>
+            <option value="club_playa">Club de playa</option>
+            <option value="empresa_actividades">Empresa de actividades</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
 
-        <h2>Registrar nuevo proveedor</h2>
-        <p class="nota">Los campos marcados con * son obligatorios.</p>
+        <div class="field">
+          <label for="sitioWeb">Sitio web</label>
+          <input id="sitioWeb" type="url"
+            placeholder="https://www.ejemplo.com">
+        </div>
 
-        <form id="formProveedor">
+      </div>
 
-            <h3>1. Identidad del proveedor</h3>
+      <div class="section-title">2. Contacto general</div>
 
-            <div class="grid-campos">
-                <div class="campo">
-                    <label>Nombre comercial *</label>
-                    <input id="nombreComercial" required>
-                </div>
+      <div class="form-grid">
 
-                <div class="campo">
-                    <label>Razón social</label>
-                    <input id="razonSocial">
-                </div>
+        <div class="field">
+          <label for="telefono">Teléfono</label>
+          <input id="telefono" type="tel">
+        </div>
 
-                <div class="campo">
-                    <label>Tipo de proveedor *</label>
-                    <select id="tipoProveedor" required>
-                        <option value="">Seleccionar</option>
-                        <option value="hotel">Hotel</option>
-                        <option value="operador_tours">Operador de tours</option>
-                        <option value="club_playa">Club de playa</option>
-                        <option value="empresa_actividades">Empresa de actividades</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
+        <div class="field">
+          <label for="whatsapp">WhatsApp</label>
+          <input id="whatsapp" type="tel">
+        </div>
 
-                <div class="campo">
-                    <label>Sitio web</label>
-                    <input id="sitioWeb" type="url" placeholder="https://">
-                </div>
-            </div>
+        <div class="field">
+          <label for="correo">Correo electrónico</label>
+          <input id="correo" type="email">
+        </div>
 
-            <h3>2. Contacto general</h3>
+        <div class="field">
+          <label for="correoAlternativo">Correo alternativo</label>
+          <input id="correoAlternativo" type="email">
+        </div>
 
-            <div class="grid-campos">
-                <div class="campo">
-                    <label>Teléfono</label>
-                    <input id="telefono">
-                </div>
+      </div>
 
-                <div class="campo">
-                    <label>WhatsApp</label>
-                    <input id="whatsapp">
-                </div>
+      <div class="section-title">3. Ubicación del proveedor</div>
 
-                <div class="campo">
-                    <label>Correo principal</label>
-                    <input id="correo" type="email">
-                </div>
+      <div class="form-grid">
 
-                <div class="campo">
-                    <label>Correo alternativo</label>
-                    <input id="correoAlternativo" type="email">
-                </div>
-            </div>
+        <div class="field full">
+          <label for="direccion">Dirección</label>
+          <input id="direccion" type="text">
+        </div>
 
-            <h3>3. Ubicación principal</h3>
+        <div class="field">
+          <label for="colonia">Colonia</label>
+          <input id="colonia" type="text">
+        </div>
 
-            <div class="grid-campos">
-                <div class="campo">
-                    <label>Dirección</label>
-                    <input id="direccion">
-                </div>
+        <div class="field">
+          <label for="ciudad">Ciudad</label>
+          <input id="ciudad" type="text">
+        </div>
 
-                <div class="campo">
-                    <label>Colonia / Zona</label>
-                    <input id="colonia">
-                </div>
+        <div class="field">
+          <label for="estado">Estado</label>
+          <input id="estado" type="text">
+        </div>
 
-                <div class="campo">
-                    <label>Ciudad</label>
-                    <input id="ciudad">
-                </div>
+        <div class="field">
+          <label for="pais">País</label>
+          <input id="pais" type="text" value="México">
+        </div>
 
-                <div class="campo">
-                    <label>Estado</label>
-                    <input id="estado">
-                </div>
+        <div class="field">
+          <label for="codigoPostal">Código postal</label>
+          <input id="codigoPostal" type="text">
+        </div>
 
-                <div class="campo">
-                    <label>País</label>
-                    <input id="pais" value="México">
-                </div>
+        <div class="field">
+          <label for="latitud">Latitud</label>
+          <input id="latitud" type="number" step="any">
+        </div>
 
-                <div class="campo">
-                    <label>Código postal</label>
-                    <input id="codigoPostal">
-                </div>
+        <div class="field">
+          <label for="longitud">Longitud</label>
+          <input id="longitud" type="number" step="any">
+        </div>
 
-                <div class="campo">
-                    <label>Latitud</label>
-                    <input id="latitud" type="number" step="any">
-                </div>
+        <div class="field full">
+          <label for="googleMaps">Enlace de Google Maps</label>
+          <input id="googleMaps" type="url"
+            placeholder="https://maps.google.com/...">
+        </div>
 
-                <div class="campo">
-                    <label>Longitud</label>
-                    <input id="longitud" type="number" step="any">
-                </div>
+      </div>
 
-                <div class="campo">
-                    <label>Enlace de Google Maps</label>
-                    <input id="googleMaps" type="url">
-                </div>
-            </div>
+      <div class="section-title">4. Responsable comercial</div>
 
-            <h3>4. Responsable comercial</h3>
+      <div class="form-grid">
 
-            <div class="grid-campos">
-                <div class="campo">
-                    <label>Nombre</label>
-                    <input id="responsableComercial">
-                </div>
+        <div class="field">
+          <label for="comercialNombre">Nombre</label>
+          <input id="comercialNombre" type="text">
+        </div>
 
-                <div class="campo">
-                    <label>Correo</label>
-                    <input id="correoComercial" type="email">
-                </div>
+        <div class="field">
+          <label for="comercialCorreo">Correo electrónico</label>
+          <input id="comercialCorreo" type="email">
+        </div>
 
-                <div class="campo">
-                    <label>Teléfono</label>
-                    <input id="telefonoComercial">
-                </div>
-            </div>
+        <div class="field">
+          <label for="comercialTelefono">Teléfono</label>
+          <input id="comercialTelefono" type="tel">
+        </div>
 
-            <h3>5. Responsable operativo</h3>
+      </div>
 
-            <div class="grid-campos">
-                <div class="campo">
-                    <label>Nombre</label>
-                    <input id="responsableOperativo">
-                </div>
+      <div class="section-title">5. Responsable operativo</div>
 
-                <div class="campo">
-                    <label>Correo</label>
-                    <input id="correoOperativo" type="email">
-                </div>
+      <div class="form-grid">
 
-                <div class="campo">
-                    <label>Teléfono</label>
-                    <input id="telefonoOperativo">
-                </div>
-            </div>
+        <div class="field">
+          <label for="operativoNombre">Nombre</label>
+          <input id="operativoNombre" type="text">
+        </div>
 
-            <h3>6. Administración interna</h3>
+        <div class="field">
+          <label for="operativoCorreo">Correo electrónico</label>
+          <input id="operativoCorreo" type="email">
+        </div>
 
-            <div class="campo">
-                <label>Estado del proveedor</label>
-                <select id="estadoProveedor">
-                    <option value="under_review">En revisión</option>
-                    <option value="active">Activo</option>
-                    <option value="paused">Pausado</option>
-                    <option value="inactive">Inactivo</option>
-                </select>
-            </div>
+        <div class="field">
+          <label for="operativoTelefono">Teléfono</label>
+          <input id="operativoTelefono" type="tel">
+        </div>
 
-            <div class="campo">
-                <label>Notas internas</label>
-                <textarea id="notasInternas" rows="4"></textarea>
-            </div>
+      </div>
 
-            <div class="acciones">
-                <button type="submit" class="btn-principal">
-                    Guardar proveedor
-                </button>
+      <div class="section-title">6. Administración interna</div>
 
-                <button type="button" class="btn-secundario" onclick="ocultarFormulario()">
-                    Cancelar
-                </button>
-            </div>
+      <div class="form-grid">
 
-            <p class="nota">
-                Esta primera versión es una demostración visual. Todavía no guarda información en la base de datos.
-            </p>
+        <div class="field">
+          <label for="estadoProveedor">Estado del proveedor</label>
+          <select id="estadoProveedor">
+            <option value="under_review">En revisión</option>
+            <option value="active">Activo</option>
+            <option value="paused">Pausado</option>
+            <option value="inactive">Inactivo</option>
+          </select>
+        </div>
 
-        </form>
-    </section>
+        <div class="field full">
+          <label for="notas">Notas internas</label>
+          <textarea id="notas"
+            placeholder="Información interna del proveedor..."></textarea>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" id="btnCancelar">
+          Cancelar
+        </button>
+
+        <button type="submit" class="btn-primary">
+          Guardar proveedor
+        </button>
+      </div>
+
+    </form>
+
+  </section>
+
+  <section class="panel">
+
+    <h2>Directorio de proveedores</h2>
+
+    <div class="filters">
+
+      <input id="busqueda" type="search"
+        placeholder="Buscar por nombre, ciudad o correo...">
+
+      <select id="filtroTipo">
+        <option value="">Todos los tipos</option>
+        <option value="hotel">Hotel</option>
+        <option value="operador_tours">Operador de tours</option>
+        <option value="club_playa">Club de playa</option>
+        <option value="empresa_actividades">Empresa de actividades</option>
+        <option value="otro">Otro</option>
+      </select>
+
+      <select id="filtroEstado">
+        <option value="">Todos los estados</option>
+        <option value="under_review">En revisión</option>
+        <option value="active">Activo</option>
+        <option value="paused">Pausado</option>
+        <option value="inactive">Inactivo</option>
+      </select>
+
+    </div>
+
+    <div class="table-container">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Proveedor</th>
+            <th>Tipo</th>
+            <th>Ciudad</th>
+            <th>Correo</th>
+            <th>Estado</th>
+            <th>Servicios</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody id="tablaProveedores"></tbody>
+      </table>
+
+      <div class="empty-state" id="mensajeVacio">
+        Todavía no hay proveedores registrados en esta demostración.
+      </div>
+
+    </div>
+
+  </section>
 
 </main>
 
 <script>
-let proveedores = [];
+  // Datos temporales de demostración.
+  // Posteriormente se conectarán con Supabase.
 
-const nombresTipo = {
+  let proveedores = [];
+  let siguienteId = 1;
+
+  const formularioPanel = document.getElementById("formularioPanel");
+  const formulario = document.getElementById("formProveedor");
+  const tabla = document.getElementById("tablaProveedores");
+  const mensajeVacio = document.getElementById("mensajeVacio");
+
+  const campos = [
+    "nombreComercial",
+    "razonSocial",
+    "tipoProveedor",
+    "sitioWeb",
+    "telefono",
+    "whatsapp",
+    "correo",
+    "correoAlternativo",
+    "direccion",
+    "colonia",
+    "ciudad",
+    "estado",
+    "pais",
+    "codigoPostal",
+    "latitud",
+    "longitud",
+    "googleMaps",
+    "comercialNombre",
+    "comercialCorreo",
+    "comercialTelefono",
+    "operativoNombre",
+    "operativoCorreo",
+    "operativoTelefono",
+    "estadoProveedor",
+    "notas"
+  ];
+
+  const nombresTipo = {
     hotel: "Hotel",
     operador_tours: "Operador de tours",
     club_playa: "Club de playa",
     empresa_actividades: "Empresa de actividades",
     otro: "Otro"
-};
+  };
 
-const nombresEstado = {
-    active: "Activo",
+  const nombresEstado = {
     under_review: "En revisión",
+    active: "Activo",
     paused: "Pausado",
     inactive: "Inactivo"
-};
+  };
 
-function mostrarFormulario() {
-    document.getElementById("formularioProveedor").classList.add("visible");
-    document.getElementById("nombreComercial").focus();
-}
-
-function ocultarFormulario() {
-    document.getElementById("formularioProveedor").classList.remove("visible");
-}
-
-document.getElementById("formProveedor").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const proveedor = {
-        nombre: document.getElementById("nombreComercial").value.trim(),
-        razonSocial: document.getElementById("razonSocial").value.trim(),
-        tipo: document.getElementById("tipoProveedor").value,
-        ciudad: document.getElementById("ciudad").value.trim(),
-        estado: document.getElementById("estadoProveedor").value
-    };
-
-    proveedores.push(proveedor);
-
-    this.reset();
+  function abrirFormulario() {
+    formulario.reset();
+    document.getElementById("proveedorId").value = "";
     document.getElementById("pais").value = "México";
+    document.getElementById("tituloFormulario").textContent =
+      "Registrar nuevo proveedor";
 
-    ocultarFormulario();
-    renderizarProveedores();
+    formularioPanel.classList.remove("hidden");
+    formularioPanel.scrollIntoView({ behavior: "smooth" });
+  }
 
-    alert("Proveedor agregado a la demostración. Todavía no se ha guardado en Supabase.");
-});
+  function cerrarFormulario() {
+    formularioPanel.classList.add("hidden");
+    formulario.reset();
+  }
 
-function renderizarProveedores() {
-    const tbody = document.getElementById("listaProveedores");
-    tbody.innerHTML = "";
+  function obtenerDatosFormulario() {
+    const datos = {};
 
-    if (proveedores.length === 0) {
-        tbody.innerHTML = `
-            <tr>
-                <td colspan="6" class="vacio">
-                    Todavía no hay proveedores registrados.
-                </td>
-            </tr>`;
-        return;
-    }
-
-    proveedores.forEach((p, index) => {
-        const fila = document.createElement("tr");
-
-        [
-            p.nombre,
-            nombresTipo[p.tipo] || p.tipo,
-            p.ciudad || "—",
-            nombresEstado[p.estado] || p.estado,
-            "0",
-            ""
-        ].forEach((valor) => {
-            const celda = document.createElement("td");
-            celda.textContent = valor;
-            fila.appendChild(celda);
-        });
-
-        const celdaAcciones = fila.lastElementChild;
-        const boton = document.createElement("button");
-        boton.type = "button";
-        boton.className = "btn-secundario";
-        boton.textContent = "Ver";
-        boton.addEventListener("click", () => {
-            alert(
-                "Proveedor: " + p.nombre +
-                "\nRazón social: " + (p.razonSocial || "No capturada")
-            );
-        });
-
-        celdaAcciones.appendChild(boton);
-        tbody.appendChild(fila);
+    campos.forEach(campo => {
+      datos[campo] = document.getElementById(campo).value.trim();
     });
 
-    filtrarProveedores();
-}
+    return datos;
+  }
 
-function filtrarProveedores() {
-    const texto = document.getElementById("buscar").value.toLowerCase();
+  function cargarDatosFormulario(proveedor) {
+    campos.forEach(campo => {
+      document.getElementById(campo).value =
+        proveedor[campo] || "";
+    });
+
+    document.getElementById("proveedorId").value = proveedor.id;
+    document.getElementById("tituloFormulario").textContent =
+      "Editar proveedor";
+    formularioPanel.classList.remove("hidden");
+    formularioPanel.scrollIntoView({ behavior: "smooth" });
+  }
+
+  formulario.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const datos = obtenerDatosFormulario();
+    const id = document.getElementById("proveedorId").value;
+
+    if (id) {
+      const indice = proveedores.findIndex(p => p.id === Number(id));
+
+      if (indice !== -1) {
+        proveedores[indice] = {
+          ...proveedores[indice],
+          ...datos
+        };
+      }
+    } else {
+      proveedores.push({
+        id: siguienteId++,
+        ...datos,
+        servicios: 0
+      });
+    }
+
+    renderizarProveedores();
+    cerrarFormulario();
+
+    alert(
+      "Proveedor agregado a la demostración. " +
+      "Todavía no se ha guardado en Supabase."
+    );
+  });
+
+  function renderizarProveedores() {
+    const busqueda = document.getElementById("busqueda")
+      .value.toLowerCase().trim();
+
     const tipo = document.getElementById("filtroTipo").value;
     const estado = document.getElementById("filtroEstado").value;
 
-    document.querySelectorAll("#listaProveedores tr").forEach((fila) => {
-        const indice = Array.from(fila.parentNode.children).indexOf(fila);
-        const p = proveedores[indice];
+    const filtrados = proveedores.filter(proveedor => {
+      const coincideBusqueda = [
+        proveedor.nombreComercial,
+        proveedor.razonSocial,
+        proveedor.ciudad,
+        proveedor.correo
+      ].some(valor => (valor || "").toLowerCase().includes(busqueda));
 
-        if (!p) return;
+      const coincideTipo = !tipo || proveedor.tipoProveedor === tipo;
+      const coincideEstado = !estado || proveedor.estadoProveedor === estado;
 
-        const coincideTexto =
-            p.nombre.toLowerCase().includes(texto) ||
-            p.razonSocial.toLowerCase().includes(texto);
-
-        const coincideTipo = !tipo || p.tipo === tipo;
-        const coincideEstado = !estado || p.estado === estado;
-
-        fila.style.display =
-            coincideTexto && coincideTipo && coincideEstado ? "" : "none";
+      return coincideBusqueda && coincideTipo && coincideEstado;
     });
-}
+
+    tabla.innerHTML = "";
+
+    filtrados.forEach(proveedor => {
+      const fila = document.createElement("tr");
+
+      const estadoClase = {
+        active: "active",
+        under_review: "review",
+        paused: "paused",
+        inactive: "inactive"
+      }[proveedor.estadoProveedor] || "review";
+
+      const celdas = [
+        proveedor.nombreComercial,
+        nombresTipo[proveedor.tipoProveedor] || "Otro",
+        proveedor.ciudad || "—",
+        proveedor.correo || "—",
+        nombresEstado[proveedor.estadoProveedor] || "En revisión",
+        String(proveedor.servicios ?? 0)
+      ];
+
+      celdas.forEach((valor, indice) => {
+        const celda = document.createElement("td");
+
+        if (indice === 4) {
+          const etiqueta = document.createElement("span");
+          etiqueta.className = "status " + estadoClase;
+          etiqueta.textContent = valor;
+          celda.appendChild(etiqueta);
+        } else {
+          celda.textContent = valor;
+        }
+
+        fila.appendChild(celda);
+      });
+
+      const acciones = document.createElement("td");
+      const boton = document.createElement("button");
+
+      boton.type = "button";
+      boton.className = "btn-small";
+      boton.textContent = "Ver / Editar";
+      boton.addEventListener("click", () => {
+        cargarDatosFormulario(proveedor);
+      });
+
+      acciones.appendChild(boton);
+      fila.appendChild(acciones);
+      tabla.appendChild(fila);
+    });
+
+    mensajeVacio.style.display =
+      filtrados.length === 0 ? "block" : "none";
+
+    mensajeVacio.textContent = proveedores.length === 0
+      ? "Todavía no hay proveedores registrados en esta demostración."
+      : "No se encontraron proveedores con esos filtros.";
+  }
+
+  document.getElementById("btnNuevo")
+    .addEventListener("click", abrirFormulario);
+
+  document.getElementById("btnCancelar")
+    .addEventListener("click", cerrarFormulario);
+
+  document.getElementById("busqueda")
+    .addEventListener("input", renderizarProveedores);
+
+  document.getElementById("filtroTipo")
+    .addEventListener("change", renderizarProveedores);
+
+  document.getElementById("filtroEstado")
+    .addEventListener("change", renderizarProveedores);
+
+  renderizarProveedores();
 </script>
 
 </body>
 </html>
-
