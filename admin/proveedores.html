@@ -345,8 +345,7 @@
   </div>
 
   <div class="notice">
-    Versión de demostración: los registros todavía no se guardan en
-    Supabase. La conexión a la base de datos se realizará posteriormente.
+    Los proveedores se consultan y guardan directamente en la base de datos.
   </div>
 
   <section class="panel hidden" id="formularioPanel">
@@ -612,7 +611,11 @@
 
 </main>
 <script>
-  // Inicializar Supabase
+  <script>
+  // ==========================================
+  // 1. CONEXIÓN CON SUPABASE
+  // ==========================================
+
   window.supabaseClient = window.supabase.createClient(
     window.SUPABASE_URL,
     window.SUPABASE_PUBLISHABLE_KEY
@@ -620,7 +623,374 @@
 
   console.log("Conexión de Supabase inicializada correctamente.");
 
-  // Proteger el acceso al administrador
+  // ==========================================
+  // 2. ELEMENTOS DEL DIRECTORIO
+  // ==========================================
+
+  let proveedores = [];
+
+  const formularioPanel = document.getElementById("formularioPanel");
+  const formulario = document.getElementById("formProveedor");
+  const tabla = document.getElementById("tablaProveedores");
+  const mensajeVacio = document.getElementById("mensajeVacio");
+
+  const campos = [
+    "nombreComercial",
+    "razonSocial",
+    "tipoProveedor",
+    "sitioWeb",
+    "telefono",
+    "whatsapp",
+    "correo",
+    "correoAlternativo",
+    "direccion",
+    "colonia",
+    "ciudad",
+    "estado",
+    "pais",
+    "codigoPostal",
+    "latitud",
+    "longitud",
+    "googleMaps",
+    "comercialNombre",
+    "comercialCorreo",
+    "comercialTelefono",
+    "operativoNombre",
+    "operativoCorreo",
+    "operativoTelefono",
+    "estadoProveedor",
+    "notas"
+  ];
+
+  const equivalencias = {
+    nombreComercial: "commercial_name",
+    razonSocial: "legal_name",
+    tipoProveedor: "provider_type",
+    sitioWeb: "website",
+    telefono: "phone",
+    whatsapp: "whatsapp",
+    correo: "email",
+    correoAlternativo: "alternate_email",
+    direccion: "address",
+    colonia: "neighborhood",
+    ciudad: "city",
+    estado: "state",
+    pais: "country",
+    codigoPostal: "postal_code",
+    latitud: "latitude",
+    longitud: "longitude",
+    googleMaps: "google_maps_url",
+    comercialNombre: "commercial_contact_name",
+    comercialCorreo: "commercial_contact_email",
+    comercialTelefono: "commercial_contact_phone",
+    operativoNombre: "operational_contact_name",
+    operativoCorreo: "operational_contact_email",
+    operativoTelefono: "operational_contact_phone",
+    estadoProveedor: "status",
+    notas: "internal_notes"
+  };
+
+  const nombresTipo = {
+    hotel: "Hotel",
+    operador_tours: "Operador de tours",
+    club_playa: "Club de playa",
+    empresa_actividades: "Empresa de actividades",
+    otro: "Otro"
+  };
+
+  const nombresEstado = {
+    under_review: "En revisión",
+    active: "Activo",
+    paused: "Pausado",
+    inactive: "Inactivo"
+  };
+
+  // ==========================================
+  // 3. ABRIR Y CERRAR EL FORMULARIO
+  // ==========================================
+
+  function abrirFormulario() {
+    formulario.reset();
+
+    document.getElementById("proveedorId").value = "";
+    document.getElementById("pais").value = "México";
+    document.getElementById("estadoProveedor").value = "under_review";
+
+    document.getElementById("tituloFormulario").textContent =
+      "Registrar nuevo proveedor";
+
+    formularioPanel.classList.remove("hidden");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function cerrarFormulario() {
+    formulario.reset();
+
+    document.getElementById("proveedorId").value = "";
+
+    formularioPanel.classList.add("hidden");
+  }
+
+  document.getElementById("btnNuevo")
+    .addEventListener("click", abrirFormulario);
+
+  document.getElementById("btnCancelar")
+    .addEventListener("click", cerrarFormulario);
+
+  document.getElementById("btnVolver")
+    .addEventListener("click", cerrarFormulario);
+
+  // ==========================================
+  // 4. OBTENER LOS DATOS DEL FORMULARIO
+  // ==========================================
+
+  function obtenerDatosFormulario() {
+    const datos = {};
+
+    campos.forEach(campo => {
+      const elemento = document.getElementById(campo);
+      let valor = elemento.value.trim();
+
+      const columna = equivalencias[campo];
+
+      if (campo === "latitud" || campo === "longitud") {
+        valor = valor === "" ? null : Number(valor);
+      } else {
+        valor = valor === "" ? null : valor;
+      }
+
+      datos[columna] = valor;
+    });
+
+    return datos;
+  }
+
+  // ==========================================
+  // 5. CARGAR DATOS PARA EDITAR
+  // ==========================================
+
+  function cargarDatosFormulario(proveedor) {
+    campos.forEach(campo => {
+      const columna = equivalencias[campo];
+
+      document.getElementById(campo).value =
+        proveedor[columna] ?? "";
+    });
+
+    document.getElementById("proveedorId").value = proveedor.id;
+
+    document.getElementById("tituloFormulario").textContent =
+      "Editar proveedor";
+
+    formularioPanel.classList.remove("hidden");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  // ==========================================
+  // 6. CONSULTAR PROVEEDORES EN SUPABASE
+  // ==========================================
+
+  async function cargarProveedores() {
+    const { data, error } = await window.supabaseClient
+      .from("providers")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      throw error;
+    }
+
+    proveedores = data || [];
+
+    renderizarProveedores();
+  }
+
+  // ==========================================
+  // 7. MOSTRAR EL DIRECTORIO
+  // ==========================================
+
+  function renderizarProveedores() {
+    const busqueda = document.getElementById("busqueda")
+      .value.trim().toLowerCase();
+
+    const filtroTipo = document.getElementById("filtroTipo").value;
+
+    const filtroEstado = document.getElementById("filtroEstado").value;
+
+    const resultados = proveedores.filter(proveedor => {
+      const coincideBusqueda =
+        (proveedor.commercial_name || "").toLowerCase().includes(busqueda) ||
+        (proveedor.city || "").toLowerCase().includes(busqueda) ||
+        (proveedor.email || "").toLowerCase().includes(busqueda);
+
+      const coincideTipo =
+        !filtroTipo || proveedor.provider_type === filtroTipo;
+
+      const coincideEstado =
+        !filtroEstado || proveedor.status === filtroEstado;
+
+      return coincideBusqueda && coincideTipo && coincideEstado;
+    });
+
+    tabla.innerHTML = "";
+
+    mensajeVacio.style.display =
+      resultados.length === 0 ? "block" : "none";
+
+    mensajeVacio.textContent =
+      proveedores.length === 0
+        ? "Todavía no hay proveedores registrados."
+        : "No se encontraron proveedores con esos filtros.";
+
+    resultados.forEach(proveedor => {
+      const fila = document.createElement("tr");
+
+      const tipo = nombresTipo[proveedor.provider_type] ||
+        proveedor.provider_type || "—";
+
+      const estado = nombresEstado[proveedor.status] ||
+        proveedor.status || "—";
+
+      let claseEstado = "review";
+
+      if (proveedor.status === "active") {
+        claseEstado = "active";
+      } else if (proveedor.status === "paused") {
+        claseEstado = "paused";
+      } else if (proveedor.status === "inactive") {
+        claseEstado = "inactive";
+      }
+
+      const datos = [
+        proveedor.commercial_name || "—",
+        tipo,
+        proveedor.city || "—",
+        proveedor.email || "—",
+        estado,
+        "0"
+      ];
+
+      datos.forEach((valor, indice) => {
+        const celda = document.createElement("td");
+
+        if (indice === 4) {
+          const etiqueta = document.createElement("span");
+          etiqueta.className = "status " + claseEstado;
+          etiqueta.textContent = valor;
+          celda.appendChild(etiqueta);
+        } else {
+          celda.textContent = valor;
+        }
+
+        fila.appendChild(celda);
+      });
+
+      const celdaAcciones = document.createElement("td");
+
+      const botonEditar = document.createElement("button");
+
+      botonEditar.type = "button";
+      botonEditar.className = "btn-small";
+      botonEditar.textContent = "Editar";
+
+      botonEditar.addEventListener("click", () => {
+        cargarDatosFormulario(proveedor);
+      });
+
+      celdaAcciones.appendChild(botonEditar);
+      fila.appendChild(celdaAcciones);
+
+      tabla.appendChild(fila);
+    });
+  }
+
+  // ==========================================
+  // 8. GUARDAR O ACTUALIZAR PROVEEDOR
+  // ==========================================
+
+  formulario.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const botonGuardar = formulario.querySelector(
+      'button[type="submit"]'
+    );
+
+    const id = document.getElementById("proveedorId").value;
+
+    const datos = obtenerDatosFormulario();
+
+    botonGuardar.disabled = true;
+    botonGuardar.textContent = "Guardando...";
+
+    try {
+      let resultado;
+
+      if (id) {
+        resultado = await window.supabaseClient
+          .from("providers")
+          .update({
+            ...datos,
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", id);
+      } else {
+        resultado = await window.supabaseClient
+          .from("providers")
+          .insert([datos]);
+      }
+
+      if (resultado.error) {
+        throw resultado.error;
+      }
+
+      await cargarProveedores();
+
+      cerrarFormulario();
+
+      alert(
+        id
+          ? "Proveedor actualizado correctamente."
+          : "Proveedor registrado correctamente."
+      );
+
+    } catch (error) {
+      console.error("Error al guardar proveedor:", error);
+
+      alert(
+        "No se pudo guardar el proveedor. Revisa la consola para conocer el error."
+      );
+
+    } finally {
+      botonGuardar.disabled = false;
+      botonGuardar.textContent = "Guardar proveedor";
+    }
+  });
+
+  // ==========================================
+  // 9. BUSCADOR Y FILTROS
+  // ==========================================
+
+  document.getElementById("busqueda")
+    .addEventListener("input", renderizarProveedores);
+
+  document.getElementById("filtroTipo")
+    .addEventListener("change", renderizarProveedores);
+
+  document.getElementById("filtroEstado")
+    .addEventListener("change", renderizarProveedores);
+
+  // ==========================================
+  // 10. PROTEGER EL ACCESO AL ADMINISTRADOR
+  // ==========================================
+
   document.body.style.visibility = "hidden";
 
   async function protegerAdministrador() {
@@ -651,6 +1021,20 @@
 
       console.log("Administrador autenticado correctamente.");
 
+      try {
+        await cargarProveedores();
+
+        document.querySelector(".notice").textContent =
+          "Los proveedores se consultan y guardan directamente en la base de datos.";
+
+      } catch (errorCarga) {
+        console.error("Error al cargar proveedores:", errorCarga);
+
+        alert(
+          "Tu acceso es correcto, pero no se pudieron cargar los proveedores. Revisa la conexión y los permisos de Supabase."
+        );
+      }
+
     } catch (error) {
       console.error("Error al verificar el administrador:", error);
       window.location.replace("./login.html");
@@ -658,6 +1042,7 @@
   }
 
   protegerAdministrador();
+
 </script>
 </body>
 </html>
