@@ -837,6 +837,60 @@
 
   renderizarProveedores();
 </script>
+  <script>
+  document.body.style.visibility = "hidden";
+
+  if (
+    window.supabase &&
+    window.SUPABASE_URL &&
+    window.SUPABASE_PUBLISHABLE_KEY
+  ) {
+    window.supabaseClient = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_PUBLISHABLE_KEY
+    );
+
+    async function protegerAdministrador() {
+      try {
+        const { data, error } =
+          await window.supabaseClient.auth.getUser();
+
+        if (error || !data.user) {
+          window.location.replace("./login.html");
+          return;
+        }
+
+        const { data: roles, error: errorRoles } =
+          await window.supabaseClient
+            .from("platform_user_roles")
+            .select("role, is_active")
+            .eq("user_id", data.user.id)
+            .eq("role", "platform_admin")
+            .eq("is_active", true);
+
+        if (errorRoles || !roles || roles.length === 0) {
+          await window.supabaseClient.auth.signOut();
+          window.location.replace("./login.html");
+          return;
+        }
+
+        document.body.style.visibility = "visible";
+
+        console.log("Administrador autenticado correctamente.");
+
+      } catch (error) {
+        console.error("Error al verificar el administrador:", error);
+        window.location.replace("./login.html");
+      }
+    }
+
+    protegerAdministrador();
+
+  } else {
+    console.error("No se pudo inicializar Supabase.");
+    window.location.replace("./login.html");
+  }
+</script>
 <script>
   if (
     window.supabase &&
