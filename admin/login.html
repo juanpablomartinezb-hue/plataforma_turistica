@@ -151,35 +151,7 @@
         "No se pudo cargar la conexión con Supabase.";
       boton.disabled = true;
     }
-document.getElementById("btnRecuperar").addEventListener("click", async (event) => {
-  event.preventDefault();
-
-  if (!cliente) return;
-
-  const correo = document.getElementById("correo").value.trim();
-
-  if (!correo) {
-    mensaje.textContent = "Escribe tu correo electrónico para recuperar tu contraseña.";
-    document.getElementById("correo").focus();
-    return;
-  }
-
-  mensaje.textContent = "Enviando solicitud de recuperación...";
-
-  try {
-    const { error } = await cliente.auth.resetPasswordForEmail(correo, {
-      redirectTo: "https://plataformaturistica.vercel.app/admin/restablecer-password.html"
-    });
-
-    if (error) throw error;
-
-    mensaje.textContent = "Solicitud enviada. Revisa tu correo y la carpeta de spam.";
-
-  } catch (error) {
-    mensaje.textContent = "No se pudo enviar el correo: " + error.message;
-  }
-});
-    formulario.addEventListener("submit", async (event) => {
+      formulario.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!cliente) return;
