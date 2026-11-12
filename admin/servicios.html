@@ -721,6 +721,18 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 </div>
 
 <script>
+    
+  // ==========================================
+  // CONEXIÓN CON SUPABASE
+  // ==========================================
+
+  window.supabaseClient = window.supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_PUBLISHABLE_KEY
+  );
+
+  console.log("Conexión de Supabase inicializada correctamente.");
+
 function showForm(){
  document.getElementById('list-view').classList.remove('active');
  document.getElementById('form-view').classList.add('active');
