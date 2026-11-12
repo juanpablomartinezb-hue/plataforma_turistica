@@ -150,12 +150,18 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 <div class="section-head"><h2>1. Identidad y clasificación</h2><span class="badge">Información general</span></div>
 <div class="grid">
 <div class="field">
-<label>Nombre del servicio <span class="required">*</span></label>
-<input id="nombre" placeholder="Nombre comercial">
-</div>
+
 <div class="field">
-<label>Nombre legal / Razón social</label>
-<input placeholder="Razón social del proveedor">
+  <label>Proveedor asociado <span class="required">*</span></label>
+  <select id="proveedor_id" required>
+    <option value="">Cargando proveedores...</option>
+  </select>
+  <small>Selecciona el proveedor al que pertenece este servicio.</small>
+</div>
+
+<div class="field">
+  <label>Nombre del servicio <span class="required">*</span></label>
+  <input id="nombre" placeholder="Nombre comercial" required>
 </div>
 <div class="field">
 <label>Tipo de servicio <span class="required">*</span></label>
