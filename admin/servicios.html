@@ -164,18 +164,13 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
   <input id="nombre" placeholder="Nombre comercial" required>
 </div>
 <div class="field">
-<label>Tipo de servicio <span class="required">*</span></label>
-<select id="tipo">
-<option value="">Seleccionar tipo</option>
-<option>Hotel</option>
-<option>Beach Club</option>
-<option>Day Pass</option>
-<option>Tour</option>
-<option>Actividad</option>
-</select>
-<small>Determina la naturaleza del proveedor o servicio.</small>
+  <label>Tipo de servicio <span class="required">*</span></label>
+  <select id="tipo" required>
+    <option value="">Cargando tipos de servicio...</option>
+  </select>
+  <small>Indica el tipo de establecimiento o proveedor al que pertenece el servicio.</small>
 </div>
-<div class="field">
+    <div class="field">
 <label>Categoría comercial</label>
 <select>
 <option value="">Seleccionar categoría</option>
