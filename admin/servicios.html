@@ -734,42 +734,44 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 
   console.log("Conexión de Supabase inicializada correctamente.");
     
-async function cargarProveedores() {
-  const selector = document.getElementById("proveedor_id");
 
+async function cargarTiposServicio() {
+  const selector = document.getElementById("tipo");
   if (!selector) return;
 
-  selector.innerHTML = '<option value="">Cargando proveedores...</option>';
+  selector.innerHTML = '<option value="">Cargando tipos de servicio...</option>';
 
   const { data, error } = await window.supabaseClient
-    .from("providers")
-    .select("id, commercial_name")
-    .order("commercial_name");
+    .from("service_types")
+    .select("id, name")
+    .eq("is_active", true)
+    .order("name");
 
   if (error) {
-    console.error("Error al cargar proveedores:", error);
-    selector.innerHTML = '<option value="">Error al cargar proveedores</option>';
+    console.error("Error al cargar tipos de servicio:", error);
+    selector.innerHTML = '<option value="">Error al cargar tipos de servicio</option>';
     return;
   }
 
-  selector.innerHTML = '<option value="">Seleccionar proveedor</option>';
+  selector.innerHTML = '<option value="">Seleccionar tipo de servicio</option>';
 
   if (!data || data.length === 0) {
-    selector.innerHTML = '<option value="">No hay proveedores registrados</option>';
+    selector.innerHTML = '<option value="">No hay tipos de servicio activos</option>';
     return;
   }
 
-  data.forEach(proveedor => {
+  data.forEach(tipo => {
     const opcion = document.createElement("option");
-    opcion.value = proveedor.id;
-    opcion.textContent = proveedor.commercial_name;
+    opcion.value = tipo.id;
+    opcion.textContent = tipo.name;
     selector.appendChild(opcion);
   });
 
-  console.log("Proveedores cargados:", data.length);
+  console.log("Tipos de servicio cargados:", data.length);
 }
 
 cargarProveedores();
+    cargarTiposServicio();
 
 function showForm(){
  document.getElementById('list-view').classList.remove('active');
