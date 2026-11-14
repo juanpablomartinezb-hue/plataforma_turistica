@@ -734,6 +734,41 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 
   console.log("Conexión de Supabase inicializada correctamente.");
     
+async function cargarProveedores() {
+  const selector = document.getElementById("proveedor_id");
+  if (!selector) return;
+
+  selector.innerHTML = '<option value="">Cargando proveedores...</option>';
+
+  const { data, error } = await window.supabaseClient
+    .from("providers")
+    .select("id, commercial_name")
+    .order("commercial_name");
+
+  if (error) {
+    console.error("Error al cargar proveedores:", error);
+    selector.innerHTML = '<option value="">Error al cargar proveedores</option>';
+    return;
+  }
+
+  selector.innerHTML = '<option value="">Seleccionar proveedor</option>';
+
+  if (!data || data.length === 0) {
+    selector.innerHTML = '<option value="">No hay proveedores registrados</option>';
+    return;
+  }
+
+  data.forEach(proveedor => {
+    const opcion = document.createElement("option");
+    opcion.value = proveedor.id;
+    opcion.textContent = proveedor.commercial_name;
+    selector.appendChild(opcion);
+  });
+
+  console.log("Proveedores cargados:", data.length);
+}
+
+    
 
 async function cargarTiposServicio() {
   const selector = document.getElementById("tipo");
