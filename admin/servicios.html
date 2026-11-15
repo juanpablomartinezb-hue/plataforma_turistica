@@ -691,13 +691,11 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
     <div class="notice" style="margin-bottom:0">
         Aquí se registrarán las modificaciones del servicio, el usuario responsable, la fecha y los valores anteriores y nuevos. El historial será automático y no editable.
     </div>
-</div>
 <div class="actions">
 <button class="secondary" onclick="showList()">Cancelar</button>
 <div class="actions-right">
-<button class="secondary" onclick="alert('La función de guardar borrador se conectará a Supabase.')">Guardar borrador</button>
-<button class="primary" onclick="alert('La conexión de guardado se implementará en la siguiente etapa.')">Guardar servicio</button>
-</div>
+<button class="secondary" onclick="guardarServicio('draft')">Guardar borrador</button>
+<button class="primary" onclick="guardarServicio('active')">Guardar servicio</button>
 </div>
 </section>
 </div>
@@ -731,7 +729,71 @@ if (campoNombre && campoSlug) {
     campoNombre.addEventListener("input", function () {
         campoSlug.value = generarSlug(campoNombre.value);
     });
-}    
+async function guardarServicio(estado) {
+    const obtenerValor = (id) => {
+        const campo = document.getElementById(id);
+        return campo ? campo.value.trim() : "";
+    };
+
+    const proveedor = obtenerValor("proveedor_id");
+    const nombre = obtenerValor("nombre");
+    const tipo = obtenerValor("tipo");
+    const categoria = obtenerValor("categoria_id");
+    const destino = obtenerValor("destino_id");
+    const slug = obtenerValor("slug");
+
+    if (!proveedor || !nombre || !tipo || !categoria || !destino) {
+        alert("Completa todos los campos obligatorios: proveedor, nombre, tipo, categoría y destino.");
+        return;
+    }
+
+    if (!slug) {
+        alert("No se ha generado el identificador URL del servicio.");
+        return;
+    }
+
+    const usuario = await window.supabaseClient.auth.getUser();
+
+    if (usuario.error || !usuario.data.user) {
+        alert("Tu sesión no está activa. Inicia sesión nuevamente.");
+        return;
+    }
+
+    const estrellas = obtenerValor("estrellas");
+
+    const servicio = {
+        provider_id: proveedor,
+        name: nombre,
+        slug: slug,
+        category_id: categoria,
+        service_type_id: tipo,
+        destination_id: destino,
+        secondary_destination_id: obtenerValor("destino_secundario_id") || null,
+        chain_or_independent: obtenerValor("cadena") || null,
+        stars: estrellas ? Number(estrellas) : null,
+        short_description: obtenerValor("descripcion_corta") || null,
+        description: obtenerValor("descripcion") || null,
+        seo_title: obtenerValor("seo_title") || null,
+        seo_description: obtenerValor("seo_description") || null,
+        status: estado,
+        b2c_visible: document.getElementById("visibleB2C").checked,
+        b2b_visible: document.getElementById("visibleB2B").checked
+    };
+
+    const { data, error } = await window.supabaseClient
+        .from("services")
+        .insert([servicio])
+        .select()
+        .single();
+
+    if (error) {
+        console.error("Error al guardar el servicio:", error);
+        alert("No se pudo guardar el servicio: " + error.message);
+        return;
+    }
+
+    alert("¡Servicio guardado correctamente! ID: " + data.id);
+}   
 async function cargarProveedores() {
   const selector = document.getElementById("proveedor_id");
   if (!selector) return;
