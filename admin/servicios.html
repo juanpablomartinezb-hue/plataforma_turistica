@@ -1060,6 +1060,53 @@ fila.appendChild(acciones);
         tbody.appendChild(fila);
     });
 }
+    async function editarServicio(id) {
+
+    const { data: servicio, error } = await window.supabaseClient
+        .from("services")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        console.error("Error al consultar el servicio:", error);
+        alert("No se pudo cargar el servicio: " + error.message);
+        return;
+    }
+
+    await Promise.all([
+        cargarProveedores(),
+        cargarTiposServicio(),
+        cargarCategorias(),
+        cargarDestinos()
+    ]);
+
+    servicioEditandoId = servicio.id;
+
+    document.getElementById("proveedor_id").value = servicio.provider_id || "";
+    document.getElementById("nombre").value = servicio.name || "";
+    document.getElementById("tipo").value = servicio.service_type_id || "";
+    document.getElementById("categoria_id").value = servicio.category_id || "";
+    document.getElementById("destino_id").value = servicio.destination_id || "";
+    document.getElementById("destino_secundario_id").value = servicio.secondary_destination_id || "";
+    document.getElementById("cadena").value = servicio.chain_or_independent || "";
+    document.getElementById("estrellas").value = servicio.stars ?? "";
+    document.getElementById("slug").value = servicio.slug || "";
+
+    document.getElementById("descripcion_corta").value = servicio.short_description || "";
+    document.getElementById("descripcion").value = servicio.description || "";
+
+    document.getElementById("seo_title").value = servicio.seo_title || "";
+    document.getElementById("seo_description").value = servicio.seo_description || "";
+
+    document.getElementById("visibleB2C").checked = servicio.b2c_visible;
+    document.getElementById("visibleB2B").checked = servicio.b2b_visible;
+
+    document.getElementById("form-title").textContent = "Editar servicio";
+    document.getElementById("header-label").textContent = "Editar servicio";
+
+    showForm();
+}
 cargarProveedores();
 cargarTiposServicio();
 cargarCategorias();
