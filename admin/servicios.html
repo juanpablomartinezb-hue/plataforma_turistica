@@ -816,8 +816,11 @@ const { data, error } = resultado;
         return;
     }
 
-    alert("¡Servicio guardado correctamente! ID: " + data.id);
-    await cargarServicios();
+alert("¡Servicio guardado correctamente! ID: " + data.id);
+
+servicioEditandoId = null;
+
+await cargarServicios();
 showList();
 }   
 async function cargarProveedores() {
