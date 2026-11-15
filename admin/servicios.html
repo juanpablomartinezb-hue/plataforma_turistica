@@ -739,6 +739,8 @@ if (campoNombre && campoSlug) {
         campoSlug.value = generarSlug(campoNombre.value);
     });
 }
+let servicioEditandoId = null;
+    
 async function guardarServicio(estado) {
     const obtenerValor = (id) => {
         const campo = document.getElementById(id);
@@ -790,12 +792,24 @@ async function guardarServicio(estado) {
         b2b_visible: document.getElementById("visibleB2B").checked
     };
 
-    const { data, error } = await window.supabaseClient
+    let resultado;
+
+if (servicioEditandoId) {
+    resultado = await window.supabaseClient
+        .from("services")
+        .update(servicio)
+        .eq("id", servicioEditandoId)
+        .select()
+        .single();
+} else {
+    resultado = await window.supabaseClient
         .from("services")
         .insert([servicio])
         .select()
         .single();
+}
 
+const { data, error } = resultado;
     if (error) {
         console.error("Error al guardar el servicio:", error);
         alert("No se pudo guardar el servicio: " + error.message);
