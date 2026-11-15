@@ -803,6 +803,8 @@ async function guardarServicio(estado) {
     }
 
     alert("¡Servicio guardado correctamente! ID: " + data.id);
+    await cargarServicios();
+showList();
 }   
 async function cargarProveedores() {
   const selector = document.getElementById("proveedor_id");
