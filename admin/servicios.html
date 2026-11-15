@@ -1045,9 +1045,17 @@ async function cargarDestinos() {
             fila.appendChild(celda);
         });
 
-        const acciones = document.createElement("td");
-        acciones.textContent = "—";
-        fila.appendChild(acciones);
+const acciones = document.createElement("td");
+
+const botonEditar = document.createElement("button");
+botonEditar.type = "button";
+botonEditar.className = "secondary";
+botonEditar.textContent = "Editar";
+
+botonEditar.addEventListener("click", () => editarServicio(servicio.id));
+
+acciones.appendChild(botonEditar);
+fila.appendChild(acciones);
 
         tbody.appendChild(fila);
     });
