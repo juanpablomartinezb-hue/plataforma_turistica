@@ -729,6 +729,7 @@ if (campoNombre && campoSlug) {
     campoNombre.addEventListener("input", function () {
         campoSlug.value = generarSlug(campoNombre.value);
     });
+}
 async function guardarServicio(estado) {
     const obtenerValor = (id) => {
         const campo = document.getElementById(id);
