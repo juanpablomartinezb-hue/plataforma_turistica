@@ -172,43 +172,20 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 </div>
     <div class="field">
 <label>Categoría comercial</label>
-<select>
-<option value="">Seleccionar categoría</option>
-<option>Day Pass</option>
-<option>Tours</option>
-<option>Actividades</option>
+<select id="categoria_id" required>
+    <option value="">Cargando categorías...</option>
 </select>
 </div>
 <div class="field">
 <label>Destino principal <span class="required">*</span></label>
-<select>
-<option value="">Seleccionar destino</option>
-<option>Cancún</option>
-<option>Playa del Carmen</option>
-<option>Puerto Morelos</option>
-<option>Riviera Maya</option>
-<option>Tulum</option>
-<option>Isla Mujeres</option>
-<option>Puerto Vallarta</option>
-<option>Riviera Nayarit</option>
-<option>Punta Mita</option>
-<option>Los Cabos</option>
+    <select id="destino_id" required>
+    <option value="">Cargando destinos...</option>
 </select>
 </div>
 <div class="field">
 <label>Segundo destino (opcional)</label>
-<select>
-<option value="">Sin segundo destino</option>
-<option>Cancún</option>
-<option>Playa del Carmen</option>
-<option>Puerto Morelos</option>
-<option>Riviera Maya</option>
-<option>Tulum</option>
-<option>Isla Mujeres</option>
-<option>Puerto Vallarta</option>
-<option>Riviera Nayarit</option>
-<option>Punta Mita</option>
-<option>Los Cabos</option>
+<select id="destino_secundario_id">
+    <option value="">Sin destino secundario</option>
 </select>
 </div>
 <div class="field">
@@ -804,9 +781,83 @@ async function cargarTiposServicio() {
 
   console.log("Tipos de servicio cargados:", data.length);
 }
+// ==========================================
+// CARGAR CATEGORÍAS COMERCIALES
+// ==========================================
 
+async function cargarCategorias() {
+    const selector = document.getElementById("categoria_id");
+    if (!selector) return;
+
+    const { data, error } = await window.supabaseClient
+        .from("commercial_categories")
+        .select("id, name")
+        .eq("is_active", true)
+        .order("name");
+
+    if (error) {
+        console.error("Error al cargar categorías:", error);
+        selector.innerHTML = '<option value="">Error al cargar categorías</option>';
+        return;
+    }
+
+    selector.innerHTML = '<option value="">Seleccionar categoría</option>';
+
+    data.forEach(categoria => {
+        const opcion = document.createElement("option");
+        opcion.value = categoria.id;
+        opcion.textContent = categoria.name;
+        selector.appendChild(opcion);
+    });
+
+    console.log("Categorías cargadas:", data.length);
+}
+
+
+// ==========================================
+// CARGAR DESTINOS
+// ==========================================
+
+async function cargarDestinos() {
+    const destinoPrincipal = document.getElementById("destino_id");
+    const destinoSecundario = document.getElementById("destino_secundario_id");
+
+    if (!destinoPrincipal || !destinoSecundario) return;
+
+    const { data, error } = await window.supabaseClient
+        .from("destinations")
+        .select("id, name")
+        .eq("is_active", true)
+        .order("name");
+
+    if (error) {
+        console.error("Error al cargar destinos:", error);
+        destinoPrincipal.innerHTML = '<option value="">Error al cargar destinos</option>';
+        destinoSecundario.innerHTML = '<option value="">Error al cargar destinos</option>';
+        return;
+    }
+
+    destinoPrincipal.innerHTML = '<option value="">Seleccionar destino</option>';
+    destinoSecundario.innerHTML = '<option value="">Sin destino secundario</option>';
+
+    data.forEach(destino => {
+        const opcionPrincipal = document.createElement("option");
+        opcionPrincipal.value = destino.id;
+        opcionPrincipal.textContent = destino.name;
+        destinoPrincipal.appendChild(opcionPrincipal);
+
+        const opcionSecundaria = document.createElement("option");
+        opcionSecundaria.value = destino.id;
+        opcionSecundaria.textContent = destino.name;
+        destinoSecundario.appendChild(opcionSecundaria);
+    });
+
+    console.log("Destinos cargados:", data.length);
+}
 cargarProveedores();
-    cargarTiposServicio();
+cargarTiposServicio();
+cargarCategorias();
+cargarDestinos();
 
 function showForm(){
  document.getElementById('list-view').classList.remove('active');
