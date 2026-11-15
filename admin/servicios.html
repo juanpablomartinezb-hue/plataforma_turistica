@@ -219,7 +219,7 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 <div class="grid">
 <div class="field">
 <label>Descripción corta (máximo 500 caracteres)</label>
-<textarea maxlength="500" placeholder="Texto breve para tarjetas y listados públicos..."></textarea>
+<textarea id="descripcion_corta" maxlength="500" placeholder="Texto breve para tarjetas y listados públicos..."></textarea>
 </div>
 <div class="field">
 <label>Descripción corta (inglés)</label>
@@ -228,7 +228,7 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 </div>
 <div class="field">
 <label>Descripción larga (español)</label>
-<textarea style="min-height:180px" placeholder="Describe el servicio, instalaciones, características y lo que encontrará el visitante..."></textarea>
+<textarea id="descripcion" style="min-height:180px" placeholder="Describe el servicio, instalaciones, características y lo que encontrará el visitante..."></textarea>
 </div>
 <div class="field">
 <label>Descripción larga (inglés)</label>
@@ -241,9 +241,15 @@ Esta ficha será la base de hoteles, clubes de playa, Day Pass, Tours y Activida
 <div class="card">
 <div class="section-head"><h2>3. Posicionamiento SEO</h2></div>
 <div class="grid">
-<div class="field"><label>SEO Title (español)</label><input placeholder="Título para buscadores"></div>
-<div class="field"><label>SEO Description (español)</label><textarea placeholder="Descripción para resultados de búsqueda..."></textarea></div>
-<div class="field"><label>SEO Title (inglés)</label><input placeholder="Page title in English"></div>
+<<div class="field">
+    <label>SEO Title (español)</label>
+    <input id="seo_title" placeholder="Título para buscadores">
+</div>
+
+<div class="field">
+    <label>SEO Description (español)</label>
+    <textarea id="seo_description" placeholder="Descripción para resultados de búsqueda..."></textarea>
+    <div class="field"><label>SEO Title (inglés)</label><input placeholder="Page title in English"></div>
 <div class="field"><label>SEO Description (inglés)</label><textarea placeholder="Search engine description in English..."></textarea></div>
 </div>
 </div>
