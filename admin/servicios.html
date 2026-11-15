@@ -741,7 +741,7 @@ async function cargarProveedores() {
   selector.innerHTML = '<option value="">Cargando proveedores...</option>';
 
   const { data, error } = await window.supabaseClient
-    .from("providers")
+    .from("providers_selector")
     .select("id, commercial_name")
     .order("commercial_name");
 
