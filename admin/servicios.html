@@ -717,6 +717,14 @@ function generarSlug(texto) {
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-+|-+$/g, "");
+} 
+const campoNombre = document.getElementById("nombre");
+const campoSlug = document.getElementById("slug");
+
+if (campoNombre && campoSlug) {
+    campoNombre.addEventListener("input", function () {
+        campoSlug.value = generarSlug(campoNombre.value);
+    });
 }    
 async function cargarProveedores() {
   const selector = document.getElementById("proveedor_id");
