@@ -947,6 +947,92 @@ async function cargarDestinos() {
 
     console.log("Destinos cargados:", data.length);
 }
+    async function cargarServicios() {
+    const tbody = document.getElementById("lista-servicios");
+
+    if (!tbody) return;
+
+    tbody.innerHTML = `
+        <tr>
+            <td colspan="5">Cargando servicios...</td>
+        </tr>
+    `;
+
+    const { data: servicios, error } = await window.supabaseClient
+        .from("services")
+        .select("id, name, status, service_type_id, destination_id")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Error al cargar servicios:", error);
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5">Error al cargar los servicios.</td>
+            </tr>
+        `;
+        return;
+    }
+
+    if (!servicios || servicios.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    <div class="empty">
+                        <strong>No hay servicios registrados</strong>
+                        Aquí aparecerán los servicios que registremos.
+                    </div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    const [{ data: tipos }, { data: destinos }] = await Promise.all([
+        window.supabaseClient.from("service_types").select("id, name"),
+        window.supabaseClient.from("destinations").select("id, name")
+    ]);
+
+    const tiposPorId = Object.fromEntries(
+        (tipos || []).map(tipo => [tipo.id, tipo.name])
+    );
+
+    const destinosPorId = Object.fromEntries(
+        (destinos || []).map(destino => [destino.id, destino.name])
+    );
+
+    const estados = {
+        draft: "Borrador",
+        active: "Activo",
+        hidden: "Oculto",
+        paused: "Pausado",
+        archived: "Archivado"
+    };
+
+    tbody.innerHTML = "";
+
+    servicios.forEach(servicio => {
+        const fila = document.createElement("tr");
+
+        const valores = [
+            servicio.name,
+            tiposPorId[servicio.service_type_id] || "—",
+            destinosPorId[servicio.destination_id] || "—",
+            estados[servicio.status] || servicio.status
+        ];
+
+        valores.forEach(valor => {
+            const celda = document.createElement("td");
+            celda.textContent = valor;
+            fila.appendChild(celda);
+        });
+
+        const acciones = document.createElement("td");
+        acciones.textContent = "—";
+        fila.appendChild(acciones);
+
+        tbody.appendChild(fila);
+    });
+}
 cargarProveedores();
 cargarTiposServicio();
 cargarCategorias();
