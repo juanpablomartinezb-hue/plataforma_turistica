@@ -1144,9 +1144,13 @@ function showForm(){
  window.scrollTo(0,0);
 }
 function showList(){
+
+ servicioEditandoId = null;
+
  document.getElementById('form-view').classList.remove('active');
  document.getElementById('list-view').classList.add('active');
  document.getElementById('header-label').textContent='Catálogo de servicios';
+
  window.scrollTo(0,0);
 }
 </script>
