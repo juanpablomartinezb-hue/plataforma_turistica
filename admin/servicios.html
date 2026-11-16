@@ -1116,21 +1116,34 @@ cargarTiposServicio();
 cargarCategorias();
 cargarDestinos();
 cargarServicios();
-document.getElementById("buscar-servicio").addEventListener("input", function () {
+function aplicarFiltros() {
 
-    const busqueda = this.value.toLowerCase().trim();
+    const busqueda = document.getElementById("buscar-servicio").value
+        .toLowerCase()
+        .trim();
+
+    const tipoSeleccionado = document.getElementById("filtro-tipo").value;
 
     const filas = document.querySelectorAll("#lista-servicios tr");
 
     filas.forEach(fila => {
 
         const nombreServicio = fila.cells[0]?.textContent.toLowerCase() || "";
+        const tipoServicio = fila.cells[1]?.textContent || "";
 
-        fila.style.display = nombreServicio.includes(busqueda) ? "" : "none";
+        const coincideNombre = nombreServicio.includes(busqueda);
+
+        const coincideTipo = !tipoSeleccionado ||
+            tipoServicio === tipoSeleccionado;
+
+        fila.style.display = coincideNombre && coincideTipo ? "" : "none";
 
     });
+}
 
-});
+document.getElementById("buscar-servicio").addEventListener("input", aplicarFiltros);
+
+document.getElementById("filtro-tipo").addEventListener("change", aplicarFiltros);
 function nuevoServicio() {
 
     // Desactivar el modo de edición
