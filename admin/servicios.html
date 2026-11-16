@@ -1116,6 +1116,21 @@ cargarTiposServicio();
 cargarCategorias();
 cargarDestinos();
 cargarServicios();
+document.getElementById("buscar-servicio").addEventListener("input", function () {
+
+    const busqueda = this.value.toLowerCase().trim();
+
+    const filas = document.querySelectorAll("#lista-servicios tr");
+
+    filas.forEach(fila => {
+
+        const nombreServicio = fila.cells[0]?.textContent.toLowerCase() || "";
+
+        fila.style.display = nombreServicio.includes(busqueda) ? "" : "none";
+
+    });
+
+});
 function nuevoServicio() {
 
     // Desactivar el modo de edición
