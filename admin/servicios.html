@@ -1069,6 +1069,27 @@ opcionesEstado.forEach(opcion => {
 });
 
 selectorEstado.value = servicio.status;
+selectorEstado.addEventListener("change", async function () {
+
+    const nuevoEstado = this.value;
+
+    const { error } = await window.supabaseClient
+        .from("services")
+        .update({ status: nuevoEstado })
+        .eq("id", servicio.id);
+
+    if (error) {
+        console.error("Error al actualizar el estado:", error);
+        alert("No se pudo actualizar el estado: " + error.message);
+
+        this.value = servicio.status;
+        return;
+    }
+
+    servicio.status = nuevoEstado;
+
+    alert("Estado actualizado correctamente.");
+});
 celdaEstado.appendChild(selectorEstado);
 fila.appendChild(celdaEstado);
 const acciones = document.createElement("td");
