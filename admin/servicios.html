@@ -1091,6 +1091,16 @@ selectorEstado.addEventListener("change", async function () {
 
     servicio.status = nuevoEstado;
     aplicarFiltros();
+    const avisoEstado = document.getElementById("aviso-estado");
+
+if (avisoEstado) {
+    avisoEstado.textContent = "Estado actualizado correctamente.";
+    avisoEstado.style.display = "block";
+
+    setTimeout(() => {
+        avisoEstado.style.display = "none";
+    }, 3000);
+}
 
 });
 celdaEstado.appendChild(selectorEstado);
