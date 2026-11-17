@@ -1037,18 +1037,40 @@ async function cargarDestinos() {
         const fila = document.createElement("tr");
 
         const valores = [
-            servicio.name,
-            tiposPorId[servicio.service_type_id] || "—",
-            destinosPorId[servicio.destination_id] || "—",
-            estados[servicio.status] || servicio.status
-        ];
+    servicio.name,
+    tiposPorId[servicio.service_type_id] || "—",
+    destinosPorId[servicio.destination_id] || "—"
+];
 
-        valores.forEach(valor => {
-            const celda = document.createElement("td");
-            celda.textContent = valor;
-            fila.appendChild(celda);
-        });
+valores.forEach(valor => {
+    const celda = document.createElement("td");
+    celda.textContent = valor;
+    fila.appendChild(celda);
+});
 
+// Columna de estado
+const celdaEstado = document.createElement("td");
+
+const selectorEstado = document.createElement("select");
+
+const opcionesEstado = [
+    { value: "draft", label: "Borrador" },
+    { value: "active", label: "Activo" },
+    { value: "hidden", label: "Oculto" },
+    { value: "paused", label: "Pausado" },
+    { value: "archived", label: "Archivado" }
+];
+
+opcionesEstado.forEach(opcion => {
+    const elemento = document.createElement("option");
+    elemento.value = opcion.value;
+    elemento.textContent = opcion.label;
+    selectorEstado.appendChild(elemento);
+});
+
+selectorEstado.value = servicio.status;
+celdaEstado.appendChild(selectorEstado);
+fila.appendChild(celdaEstado);
 const acciones = document.createElement("td");
 
 const botonEditar = document.createElement("button");
