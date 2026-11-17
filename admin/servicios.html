@@ -1124,23 +1124,35 @@ function aplicarFiltros() {
 
     const tipoSeleccionado = document.getElementById("filtro-tipo").value;
 
+    const estadoSeleccionado = document.getElementById("filtro-estado").value;
+
     const filas = document.querySelectorAll("#lista-servicios tr");
 
     filas.forEach(fila => {
 
         const nombreServicio = fila.cells[0]?.textContent.toLowerCase() || "";
         const tipoServicio = fila.cells[1]?.textContent || "";
+        const estadoServicio = fila.cells[3]?.textContent || "";
 
         const coincideNombre = nombreServicio.includes(busqueda);
 
         const coincideTipo = !tipoSeleccionado ||
             tipoServicio === tipoSeleccionado;
 
-        fila.style.display = coincideNombre && coincideTipo ? "" : "none";
+        const coincideEstado = !estadoSeleccionado ||
+            estadoServicio === ({
+                draft: "Borrador",
+                active: "Activo",
+                hidden: "Oculto",
+                paused: "Pausado",
+                archived: "Archivado"
+            })[estadoSeleccionado];
+
+        fila.style.display =
+            coincideNombre && coincideTipo && coincideEstado ? "" : "none";
 
     });
 }
-
 document.getElementById("buscar-servicio").addEventListener("input", aplicarFiltros);
 
 document.getElementById("filtro-tipo").addEventListener("change", aplicarFiltros);
