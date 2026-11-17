@@ -1154,8 +1154,9 @@ function aplicarFiltros() {
     });
 }
 document.getElementById("buscar-servicio").addEventListener("input", aplicarFiltros);
-
 document.getElementById("filtro-tipo").addEventListener("change", aplicarFiltros);
+document.getElementById("filtro-estado").addEventListener("change", aplicarFiltros);
+    
 function nuevoServicio() {
 
     // Desactivar el modo de edición
